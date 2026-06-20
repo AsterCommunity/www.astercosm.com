@@ -1,26 +1,126 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fbfbf8;
+  --foreground: #151515;
+  --aster-paper: #fbfbf8;
+  --aster-surface: #ffffff;
+  --aster-muted-bg: #f3f2ec;
+  --aster-ink: #151515;
+  --aster-code: #24231f;
+  --aster-muted: #62635d;
+  --aster-subtle: #8b8a81;
+  --aster-border: #e1ded3;
+  --aster-yellow: #ffd93d;
+  --aster-yellow-strong: #a87900;
+  --aster-rose: #ff69b4;
+  --aster-rose-strong: #c72f82;
+  --aster-blue: #4da6ff;
+  --aster-blue-strong: #176fbd;
+  --aster-green: #5a9f8b;
+  --aster-green-strong: #287463;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-aster-paper: var(--aster-paper);
+  --color-aster-surface: var(--aster-surface);
+  --color-aster-muted-bg: var(--aster-muted-bg);
+  --color-aster-ink: var(--aster-ink);
+  --color-aster-code: var(--aster-code);
+  --color-aster-muted: var(--aster-muted);
+  --color-aster-subtle: var(--aster-subtle);
+  --color-aster-border: var(--aster-border);
+  --color-aster-yellow: var(--aster-yellow);
+  --color-aster-yellow-strong: var(--aster-yellow-strong);
+  --color-aster-rose: var(--aster-rose);
+  --color-aster-rose-strong: var(--aster-rose-strong);
+  --color-aster-blue: var(--aster-blue);
+  --color-aster-blue-strong: var(--aster-blue-strong);
+  --color-aster-green: var(--aster-green);
+  --color-aster-green-strong: var(--aster-green-strong);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--aster-paper);
+  color: var(--aster-ink);
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+  background:
+    radial-gradient(
+      circle at 12% 14%,
+      rgba(216, 184, 74, 0.045),
+      transparent 28rem
+    ),
+    radial-gradient(
+      circle at 86% 18%,
+      rgba(79, 145, 201, 0.045),
+      transparent 30rem
+    ),
+    var(--aster-paper);
+  color: var(--aster-ink);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+::selection {
+  background: rgba(79, 145, 201, 0.22);
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+.radix-themes {
+  --default-font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  --code-font-family:
+    var(--font-geist-mono), "SFMono-Regular", Consolas, monospace;
+}
+
+.scroll-panel {
+  scroll-margin-top: 4rem;
+}
+
+.scroll-viewport {
+  scrollbar-gutter: stable;
+}
+
+@media (max-width: 767px) {
+  .snap-y {
+    scroll-snap-type: y proximity;
+  }
+
+  .scroll-panel {
+    min-height: auto;
+  }
+
+  .scroll-panel > div {
+    position: relative;
+    top: auto;
+    height: auto;
+    min-height: calc(100svh - 4rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .scroll-viewport {
+    scroll-behavior: auto;
+  }
 }
