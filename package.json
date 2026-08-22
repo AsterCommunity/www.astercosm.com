@@ -11,7 +11,8 @@
 		"preview": "astro preview",
 		"check": "biome check . && astro check",
 		"check:fix": "biome check --write .",
-		"format": "biome format --write ."
+		"format": "biome format --write .",
+		"generate:assets": "bun run scripts/generate-assets.mts"
 	},
 	"dependencies": {
 		"@astrojs/sitemap": "^3.7.3",

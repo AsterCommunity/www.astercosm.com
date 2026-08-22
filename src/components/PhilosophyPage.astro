@@ -1,0 +1,99 @@
+---
+import { type Lang, t } from "@/i18n/ui";
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const m = t(lang);
+const p = m.philosophy;
+
+const principleAccents = [
+	"text-esap-yellow-strong",
+	"text-esap-pink-strong",
+	"text-esap-blue-strong",
+] as const;
+---
+
+<section class="mx-auto max-w-6xl px-6 pt-20 lg:pt-24">
+	<header class="max-w-3xl">
+		<p class="font-mono text-sm text-esap-blue-strong">{p.kicker}</p>
+		<h1 class="mt-4 text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
+			{p.title}
+		</h1>
+		<p class="mt-5 text-base leading-relaxed text-muted-foreground sm:text-lg">{p.intro}</p>
+	</header>
+
+	{/* 01 / Systems */}
+	<section data-reveal class="grid gap-10 py-24 lg:grid-cols-2">
+		<div>
+			<p class="font-mono text-sm text-esap-blue-strong">{p.systems.kicker}</p>
+			<h2 class="mt-4 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+				{p.systems.title}
+			</h2>
+			<p class="mt-5 text-base leading-relaxed text-muted-foreground">
+				{p.systems.description}
+			</p>
+		</div>
+		<ul class="space-y-3 self-center">
+			{
+				p.systems.points.map((point) => (
+					<li class="border-l-2 border-esap-blue pl-4 text-sm font-medium">{point}</li>
+				))
+			}
+		</ul>
+	</section>
+</section>
+
+{/* 02 / Infrastructure：frameless 色阶分区 */}
+<section class="bg-surface-2">
+	<div class="mx-auto grid max-w-6xl gap-14 px-6 py-24 lg:grid-cols-2" data-reveal>
+		<div>
+			<p class="font-mono text-sm text-esap-yellow-strong">{p.infrastructure.kicker}</p>
+			<h2 class="mt-4 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+				{p.infrastructure.title}
+			</h2>
+			<p class="mt-5 text-base leading-relaxed text-muted-foreground">
+				{p.infrastructure.description}
+			</p>
+		</div>
+		<div class="space-y-8">
+			{
+				p.infrastructure.points.map((point, i) => (
+					<div class="border-l-2 border-esap-yellow pl-5">
+						<p class="font-mono text-xs text-muted-foreground">
+							{String(i + 1).padStart(2, "0")}
+						</p>
+						<h3 class="mt-2 text-base font-medium">{point.title}</h3>
+						<p class="mt-2 text-sm leading-relaxed text-muted-foreground">{point.body}</p>
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>
+
+{/* 03 / Operating principles */}
+<section class="mx-auto max-w-6xl px-6 py-24" data-reveal>
+	<p class="font-mono text-sm text-muted-foreground">{p.principles.kicker}</p>
+	<h2 class="mt-4 max-w-2xl text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+		{p.principles.title}
+	</h2>
+	<p class="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground">
+		{p.principles.description}
+	</p>
+	<div class="mt-14 grid gap-12 md:grid-cols-3">
+		{
+			p.principles.items.map((item, i) => (
+				<div>
+					<span class={`font-mono text-sm ${principleAccents[i]}`}>
+						{String(i + 1).padStart(2, "0")}
+					</span>
+					<h3 class="mt-3 text-lg font-medium">{item.title}</h3>
+					<p class="mt-3 text-sm leading-relaxed text-muted-foreground">{item.body}</p>
+				</div>
+			))
+		}
+	</div>
+</section>

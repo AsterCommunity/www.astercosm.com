@@ -1,0 +1,45 @@
+---
+import { type Lang, navPath, t } from "@/i18n/ui";
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const m = t(lang);
+---
+
+<section data-reveal class="mx-auto max-w-6xl px-6 pb-24">
+	<p class="font-mono text-sm text-muted-foreground">{m.home.entries.kicker}</p>
+	<div class="mt-6 grid gap-px overflow-hidden rounded-2xl bg-border sm:grid-cols-3">
+		{
+			m.home.entries.cards.map((card) => (
+				<a
+					href={navPath(lang, card.page)}
+					class="group flex flex-col bg-surface-3 p-7 transition-colors hover:bg-surface-2"
+				>
+					<h2 class="text-lg font-semibold tracking-tight">{card.title}</h2>
+					<p class="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{card.body}</p>
+					<span class="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-esap-blue-strong">
+						{card.cta}
+						<svg
+							width="14"
+							height="14"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							aria-hidden="true"
+							class="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+						>
+							<path d="M7 17 17 7" />
+							<path d="M7 7h10v10" />
+						</svg>
+					</span>
+				</a>
+			))
+		}
+	</div>
+</section>

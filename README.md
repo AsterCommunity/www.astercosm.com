@@ -7,10 +7,20 @@ AsterCosmos 的组织门面落地页 —— [www.astercosm.com](https://www.aste
 
 ```bash
 bun install
-bun run dev      # 本地开发
-bun run build    # 构建到 dist/
-bun run check    # biome check + astro check（必须全绿才算完）
+bun run dev              # 本地开发
+bun run build            # 构建到 dist/
+bun run check            # biome check + astro check（必须全绿才算完）
+bun run generate:assets  # 重新生成 og.png / apple-touch-icon.png（scripts/generate-assets.mts）
 ```
+
+## 页面结构
+
+- `/` — 枢纽：品牌主张 + 精选系统（AsterDrive）+ 子站入口卡
+- `/projects/` — 项目索引（策展视图，完整列表在 GitHub org）
+- `/philosophy/` — 工程文化：系统观、基础设施、工作原则
+- `/archive/` — AsterCosmos 与 ESAP 的对照关系与站点入口
+
+均为双语：`/` 英文（默认）+ `/zh/` 中文前缀。
 
 ## 工程要点
 
@@ -26,6 +36,7 @@ bun run check    # biome check + astro check（必须全绿才算完）
 | 本站路径 | 来源 |
 | --- | --- |
 | `src/assets/scenes/` | AsterDriveLanding `apps/web/src/assets/scenes/`（由其截图管线 `capture-scenes.mts` 产出，AsterDrive 前端 UI 更新后需重跑并重新复制） |
+| `public/og.png` / `public/apple-touch-icon.png` | 本仓库 `scripts/generate-assets.mts` 生成（品牌 asterisk 自绘，改版后重跑 `bun run generate:assets`） |
 
 ## 部署
 

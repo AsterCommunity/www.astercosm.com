@@ -1,11 +1,12 @@
 ---
 import {
-	DRIVE_GITHUB_URL,
+	DRIVE_DOCS_URL,
 	DRIVE_URL,
 	ESAP_STORY_URL,
 	ESAP_URL,
 	GITHUB_ORG_URL,
 	type Lang,
+	navPath,
 	SOURCE_URL,
 	t,
 } from "@/i18n/ui";
@@ -19,43 +20,54 @@ const m = t(lang);
 
 const columns = [
 	{
-		heading: m.footer.columns.projects,
+		heading: m.footer.columns.site,
 		links: [
-			{ label: m.footer.links.driveSite, href: DRIVE_URL },
-			{ label: m.footer.links.driveRepo, href: DRIVE_GITHUB_URL },
+			{
+				label: m.footer.links.home,
+				href: navPath(lang, "home"),
+				external: false,
+			},
+			{
+				label: m.nav.projects,
+				href: navPath(lang, "projects"),
+				external: false,
+			},
+			{
+				label: m.footer.links.philosophy,
+				href: navPath(lang, "philosophy"),
+				external: false,
+			},
+			{
+				label: m.footer.links.archive,
+				href: navPath(lang, "archive"),
+				external: false,
+			},
 		],
 	},
 	{
-		heading: m.footer.columns.community,
+		heading: m.footer.columns.projects,
 		links: [
-			{ label: m.footer.links.github, href: GITHUB_ORG_URL },
-			{ label: m.footer.links.source, href: SOURCE_URL },
+			{ label: m.footer.links.driveSite, href: DRIVE_URL, external: true },
+			{ label: m.footer.links.driveDocs, href: DRIVE_DOCS_URL, external: true },
+			{ label: m.footer.links.github, href: GITHUB_ORG_URL, external: true },
+			{ label: m.footer.links.source, href: SOURCE_URL, external: true },
 		],
 	},
 	{
 		heading: m.footer.columns.esap,
 		links: [
-			{ label: m.footer.links.characterArchive, href: ESAP_URL },
-			{ label: m.footer.links.stories, href: ESAP_STORY_URL },
+			{
+				label: m.footer.links.characterArchive,
+				href: ESAP_URL,
+				external: true,
+			},
+			{ label: m.footer.links.stories, href: ESAP_STORY_URL, external: true },
 		],
 	},
 ];
 ---
 
 <footer>
-	{/* 06 / Entry points：页面叙事的收尾 CTA */}
-	<div class="mx-auto max-w-6xl px-6 pt-24 pb-20">
-		<div data-reveal class="max-w-3xl">
-			<p class="font-mono text-sm text-muted-foreground">{m.entry.kicker}</p>
-			<h2 class="mt-4 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
-				{m.entry.title}
-			</h2>
-			<p class="mt-5 text-base leading-relaxed text-muted-foreground">
-				{m.entry.description}
-			</p>
-		</div>
-	</div>
-
 	{/* 三色 hairline：品牌 accent，与首屏呼应 */}
 	<div
 		aria-hidden="true"
@@ -88,8 +100,8 @@ const columns = [
 									<li>
 										<a
 											href={link.href}
-											target="_blank"
-											rel="noopener noreferrer"
+											target={link.external ? "_blank" : undefined}
+											rel={link.external ? "noopener noreferrer" : undefined}
 											class="text-sm text-muted-foreground transition-colors hover:text-foreground"
 										>
 											{link.label}

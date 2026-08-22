@@ -12,12 +12,13 @@ AsterCosmos 的落地页 —— [www.astercosm.com](https://www.astercosm.com)�
 ## 结构与命令
 
 ```text
-src/pages/           路由入口（index.astro=en，zh/index.astro=中文，404.astro 双语并列）
-src/components/      Landing 组装 + Nav/Hero/Systems/Infrastructure/Archive/Principles/Footer
-src/i18n/ui.ts       双语唯一事实源（t(lang)，结构对齐 typeof en）
+src/pages/           路由入口（双语各四页：index / projects / philosophy / archive + 404 双语并列）
+src/components/      PageShell 组装器 + Nav/Footer + 各页内容组件（home/ 为首页三件套）
+src/i18n/ui.ts       双语唯一事实源（t(lang)，结构对齐 typeof en；navPath() 生成双语页面路径）
 src/styles/tokens.css  视觉 token 唯一事实源（见文件头注释）
 src/styles/global.css  Tailwind 映射与全局样式
 src/assets/scenes/   产品真实截图（素材同步见 README）
+scripts/generate-assets.mts  og.png / apple-touch-icon 生成管线
 ```
 
 ```bash
@@ -42,7 +43,7 @@ bun run check      # biome check + astro check（必须全绿才算完）
 2. **物料必须产品原生**。只用真实 UI 截图、真实命令与自绘品牌元素（三色 asterisk、hairline、色点）。**禁止示意图/拓扑图**、stock 插画、AI 生成配图、渐变 mesh、玻璃拟态、假 dashboard mockup、假社交证明。截图一律来自 AsterDriveLanding 截图管线的产物，不手工伪造。
 3. **动效只润色不遮羞**。reduced-motion 必须完整降级；无 JS 时全部内容可见可用；首屏 JS 保持 ≈0KB。禁止全屏滚动劫持（snap 容器、scroll jacking），hero 标题不加打字机。
 4. **视觉 token 的事实源**：骨架是 AsterDrive D9 体系（经 AsterDriveLanding `packages/tokens/base.css` 同步），accent 是 WeAreESAP 的 ESAP 三色；`src/styles/tokens.css` 只做语义映射与裁剪，色值不发明。
-5. **双语**：`/` 英文（默认）+ `/zh/` 中文，文案唯一事实源 `src/i18n/ui.ts`；语言切换写 `localStorage.lang`，根页仅对未选择过的访客按浏览器语言跳一次。
+5. **双语**：`/` 英文（默认）+ `/zh/` 中文前缀，四页结构双语一一对应；文案唯一事实源 `src/i18n/ui.ts`；语言切换保持当前页并写 `localStorage.lang`，根页仅对未选择过的访客按浏览器语言跳一次。`/projects/` 是策展视图（完整列表在 GitHub org），收录标准是有公开故事可讲；`AsterFlux` 这类无描述仓库不收录，补了描述再说。
 
 ## 素材同步
 

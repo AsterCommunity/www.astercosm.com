@@ -4,15 +4,24 @@ import { defaultLang, type Lang, localizedPath, t } from "@/i18n/ui";
 
 interface Props {
 	lang: Lang;
+	/** 子页覆盖默认 meta（如 projects/philosophy/archive 各自的 title/description） */
+	title?: string | undefined;
+	description?: string | undefined;
 }
 
-const { lang } = Astro.props;
+const {
+	lang,
+	title: titleOverride,
+	description: descriptionOverride,
+} = Astro.props;
 const messages = t(lang);
-const { title, description } = messages.meta;
+const title = titleOverride ?? messages.meta.title;
+const description = descriptionOverride ?? messages.meta.description;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const enUrl = new URL(localizedPath("en"), Astro.site);
 const zhUrl = new URL(localizedPath("zh"), Astro.site);
+const ogImage = new URL("/og.png", Astro.site);
 
 const jsonLd = {
 	"@context": "https://schema.org",
@@ -42,6 +51,7 @@ const jsonLd = {
 		<link rel="alternate" hreflang="x-default" href={enUrl} />
 
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 		<meta name="theme-color" media="(prefers-color-scheme: light)" content="#faf9fb" />
 		<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1a1815" />
 
@@ -50,7 +60,9 @@ const jsonLd = {
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:url" content={canonical} />
+		<meta property="og:image" content={ogImage} />
 		<meta property="og:locale" content={lang === "zh" ? "zh_CN" : "en_US"} />
+		<meta name="twitter:card" content="summary_large_image" />
 
 		<script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
 

@@ -1,0 +1,11 @@
+---
+import ArchivePage from "@/components/ArchivePage.astro";
+import PageShell from "@/components/PageShell.astro";
+import { t } from "@/i18n/ui";
+
+const m = t("zh");
+---
+
+<PageShell lang="zh" page="archive" title={m.archive.meta.title} description={m.archive.meta.description}>
+	<ArchivePage lang="zh" />
+</PageShell>

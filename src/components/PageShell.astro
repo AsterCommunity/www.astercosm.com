@@ -1,0 +1,23 @@
+---
+import Footer from "@/components/Footer.astro";
+import Nav from "@/components/Nav.astro";
+import type { Lang, PageId } from "@/i18n/ui";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+interface Props {
+	lang: Lang;
+	page: PageId;
+	title?: string | undefined;
+	description?: string | undefined;
+}
+
+const { lang, page, title, description } = Astro.props;
+---
+
+<BaseLayout lang={lang} title={title} description={description}>
+	<Nav lang={lang} page={page} />
+	<main id="main">
+		<slot />
+	</main>
+	<Footer lang={lang} />
+</BaseLayout>

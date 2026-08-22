@@ -1,5 +1,5 @@
 ---
-import { GITHUB_ORG_URL, type Lang, t } from "@/i18n/ui";
+import { GITHUB_ORG_URL, type Lang, pagePath, t } from "@/i18n/ui";
 
 interface Props {
 	lang: Lang;
@@ -9,32 +9,32 @@ const { lang } = Astro.props;
 const m = t(lang);
 ---
 
-<section class="mx-auto max-w-6xl px-6 pt-24 pb-20 lg:pt-32 lg:pb-24">
+<section class="mx-auto max-w-6xl px-6 pt-24 pb-16 lg:pt-32 lg:pb-20">
 	<div class="mx-auto max-w-3xl text-center">
 		{/* 三色 asterisk 点题：品牌元素，不是插画 */}
 		<p class="flex items-center justify-center gap-2 font-mono text-sm text-muted-foreground">
 			<span class="inline-block size-1.5 rounded-full bg-esap-yellow" aria-hidden="true"></span>
 			<span class="inline-block size-1.5 rounded-full bg-esap-pink" aria-hidden="true"></span>
 			<span class="inline-block size-1.5 rounded-full bg-esap-blue" aria-hidden="true"></span>
-			<span class="ml-2">{m.hero.kicker}</span>
+			<span class="ml-2">{m.home.hero.kicker}</span>
 		</p>
 		<h1
 			class="mt-6 text-5xl leading-[1.02] font-semibold tracking-tight text-balance sm:text-6xl lg:text-7xl"
 		>
-			{m.hero.title}
+			{m.home.hero.title}
 		</h1>
 		<p class="mt-6 text-xl leading-relaxed text-balance sm:text-2xl">
-			{m.hero.subtitle}
+			{m.home.hero.subtitle}
 		</p>
 		<p class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-			{m.hero.description}
+			{m.home.hero.description}
 		</p>
 		<div class="mt-9 flex flex-wrap items-center justify-center gap-3">
 			<a
-				href="#systems"
+				href={pagePath(lang, "projects")}
 				class="inline-flex h-11 items-center rounded-lg bg-primary px-6 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
 			>
-				{m.hero.primaryCta}
+				{m.home.hero.primaryCta}
 			</a>
 			<a
 				href={GITHUB_ORG_URL}
@@ -42,14 +42,8 @@ const m = t(lang);
 				rel="noopener noreferrer"
 				class="inline-flex h-11 items-center rounded-lg bg-surface-2 px-6 text-sm font-medium text-foreground transition-colors hover:bg-muted"
 			>
-				{m.hero.secondaryCta}
+				{m.home.hero.secondaryCta}
 			</a>
 		</div>
 	</div>
-
-	{/* 三色 hairline：品牌 accent 的唯一大件露出，与页脚呼应 */}
-	<div
-		aria-hidden="true"
-		class="hero-rise mx-auto mt-20 h-px max-w-4xl bg-gradient-to-r from-transparent via-esap-blue to-transparent"
-	></div>
 </section>
