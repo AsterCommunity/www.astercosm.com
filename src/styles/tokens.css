@@ -1,0 +1,76 @@
+/**
+ * AsterCosmos 设计 tokens —— D9 骨架 + ESAP 三色 accent。
+ *
+ * 骨架事实源：AsterDrive frontend-panel/src/index.css（D9 无框化设计体系），
+ * 经 AsterDriveLanding packages/tokens/base.css 裁剪同步；surface-1/2/3 为
+ * panel 三级明度台阶（frameless 色阶分区），色值不发明。
+ *
+ * accent 事实源：WeAreESAP 的 ESAP 三色（黄/粉/蓝，品牌色精确值）。
+ * primary 取蓝族深档（白字对比度合格），装饰性蓝 accent 用 #4da6ff 本体。
+ * 两侧源变更时手工同步本文件。
+ */
+
+:root {
+	color-scheme: light;
+
+	/* D9 骨架：明度台阶与中性层 */
+	--surface-1: oklch(0.986 0.002 255);
+	--surface-2: oklch(0.955 0.004 255);
+	--surface-3: oklch(1 0 0);
+
+	--foreground: oklch(0.205 0.012 255);
+	--muted: oklch(0.955 0.004 255);
+	--muted-foreground: oklch(0.485 0.018 255);
+
+	/* primary：ESAP 蓝族深档（≈ #176fbd），浅底下白字对比合格 */
+	--primary: oklch(0.52 0.126 256);
+	--primary-foreground: oklch(0.985 0 0);
+	--accent: oklch(0.955 0.016 258);
+	--accent-foreground: oklch(0.235 0.04 258);
+
+	--border: oklch(0.885 0.006 255);
+	--ring: oklch(0.56 0.15 256);
+
+	--radius: 0.75rem;
+
+	/* ESAP 三色 accent（WeAreESAP 品牌色） */
+	--esap-yellow: #ffd93d;
+	--esap-pink: #ff69b4;
+	--esap-blue: #4da6ff;
+	/* strong 档：浅底上文文字/小元素用深色变体 */
+	--esap-yellow-strong: #a87900;
+	--esap-pink-strong: #c72f82;
+	--esap-blue-strong: #176fbd;
+}
+
+.dark {
+	color-scheme: dark;
+
+	/* D9 暖夜色：中性层 hue 65（暖炭棕），chroma 压低避免发黄 */
+	--surface-1: oklch(0.16 0.008 65);
+	--surface-2: oklch(0.19 0.009 65);
+	--surface-3: oklch(0.235 0.01 65);
+
+	--foreground: oklch(0.952 0.006 80);
+	--muted: oklch(0.29 0.011 65);
+	--muted-foreground: oklch(0.715 0.018 75);
+
+	/* primary：ESAP 蓝族浅档（≈ #66b3ff），深底下深字对比合格 */
+	--primary: oklch(0.755 0.115 248);
+	--primary-foreground: oklch(0.15 0.01 65);
+	--accent: oklch(0.315 0.016 70);
+	--accent-foreground: oklch(0.96 0.008 80);
+
+	/* frameless：仅输入框、hairline、浮层保留必要边界 */
+	--border: oklch(1 0 0 / 14%);
+	--ring: oklch(0.755 0.115 248);
+
+	/* ESAP 三色 accent 深色适配（WeAreESAP dark 变体） */
+	--esap-yellow: #ffed4e;
+	--esap-pink: #ff85c8;
+	--esap-blue: #66b3ff;
+	/* strong 档在深底下即本体（调亮后已适合文字） */
+	--esap-yellow-strong: var(--esap-yellow);
+	--esap-pink-strong: var(--esap-pink);
+	--esap-blue-strong: var(--esap-blue);
+}

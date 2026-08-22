@@ -1,0 +1,92 @@
+@import "tailwindcss";
+@import "./tokens.css";
+@import "@fontsource-variable/geist";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+	--font-sans:
+		"Geist Variable", ui-sans-serif, system-ui, "PingFang SC",
+		"Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+
+	--color-surface-1: var(--surface-1);
+	--color-surface-2: var(--surface-2);
+	--color-surface-3: var(--surface-3);
+	--color-foreground: var(--foreground);
+	--color-muted: var(--muted);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-primary: var(--primary);
+	--color-primary-foreground: var(--primary-foreground);
+	--color-accent: var(--accent);
+	--color-accent-foreground: var(--accent-foreground);
+	--color-border: var(--border);
+	--color-ring: var(--ring);
+
+	--color-esap-yellow: var(--esap-yellow);
+	--color-esap-pink: var(--esap-pink);
+	--color-esap-blue: var(--esap-blue);
+	--color-esap-yellow-strong: var(--esap-yellow-strong);
+	--color-esap-pink-strong: var(--esap-pink-strong);
+	--color-esap-blue-strong: var(--esap-blue-strong);
+
+	--radius-sm: calc(var(--radius) * 0.6);
+	--radius-md: calc(var(--radius) * 0.8);
+	--radius-lg: var(--radius);
+	--radius-xl: calc(var(--radius) * 1.4);
+	--radius-2xl: calc(var(--radius) * 1.8);
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+}
+
+body {
+	background-color: var(--surface-1);
+	color: var(--foreground);
+	font-family: var(--font-sans);
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+}
+
+::selection {
+	background-color: var(--primary);
+	color: var(--primary-foreground);
+}
+
+:focus-visible {
+	outline: 2px solid var(--ring);
+	outline-offset: 2px;
+}
+
+@keyframes hero-rise {
+	from {
+		opacity: 0;
+		transform: translateY(24px);
+	}
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.hero-rise {
+		animation: hero-rise 0.7s ease-out both;
+	}
+
+	/* 区块滚动入场：只在 JS 可用时先隐藏，无 JS 直接可见 */
+	.js [data-reveal] {
+		opacity: 0;
+		transform: translateY(14px);
+		transition:
+			opacity 0.55s ease-out,
+			transform 0.55s ease-out;
+	}
+
+	.js [data-reveal].revealed {
+		opacity: 1;
+		transform: none;
+	}
+}

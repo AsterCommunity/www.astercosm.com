@@ -1,0 +1,117 @@
+---
+import "@/styles/global.css";
+import { defaultLang, type Lang, localizedPath, t } from "@/i18n/ui";
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const messages = t(lang);
+const { title, description } = messages.meta;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const enUrl = new URL(localizedPath("en"), Astro.site);
+const zhUrl = new URL(localizedPath("zh"), Astro.site);
+
+const jsonLd = {
+	"@context": "https://schema.org",
+	"@type": "Organization",
+	name: "AsterCosmos",
+	description,
+	url: "https://www.astercosm.com",
+	sameAs: [
+		"https://github.com/AsterCommunity",
+		"https://weare.esaps.net",
+		"https://drive.astercosm.com",
+	],
+};
+---
+
+<!doctype html>
+<html lang={lang === "zh" ? "zh-CN" : "en"}>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+
+		<link rel="canonical" href={canonical} />
+		<link rel="alternate" hreflang="en" href={enUrl} />
+		<link rel="alternate" hreflang="zh-CN" href={zhUrl} />
+		<link rel="alternate" hreflang="x-default" href={enUrl} />
+
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="theme-color" media="(prefers-color-scheme: light)" content="#faf9fb" />
+		<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1a1815" />
+
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="AsterCosmos" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonical} />
+		<meta property="og:locale" content={lang === "zh" ? "zh_CN" : "en_US"} />
+
+		<script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
+
+		{/* 主题：localStorage 手动覆盖 > 跟随系统；无覆盖时监听系统变化。inline 防 FOUC */}
+		<script is:inline>
+			(() => {
+				document.documentElement.classList.add("js");
+				const stored = localStorage.getItem("theme");
+				const systemDark = matchMedia("(prefers-color-scheme: dark)").matches;
+				document.documentElement.classList.toggle(
+					"dark",
+					stored ? stored === "dark" : systemDark,
+				);
+			})();
+		</script>
+		{
+			/* 语言自动切换：仅默认语言页探测。显式手动选择（写 localStorage）优先；
+			   未选择过时按浏览器语言跳一次，不写记录，把选择权留给人 */
+		}
+		{
+			lang === defaultLang && (
+				<script is:inline>
+					(() => {
+						const pref = localStorage.getItem("lang");
+						if (pref === "zh") {
+							location.replace("/zh/");
+							return;
+						}
+						if (!pref && navigator.language.toLowerCase().startsWith("zh")) {
+							location.replace("/zh/");
+						}
+					})();
+				</script>
+			)
+		}
+	</head>
+	<body>
+		<a
+			href="#main"
+			class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-surface-3 focus:px-4 focus:py-2 focus:text-sm"
+		>
+			{messages.a11y.skipToContent}
+		</a>
+		<slot />
+		{/* 区块滚动入场：一次性 fade-up，reduced-motion 时整段不启用（CSS 侧同款门槛） */}
+		<script>
+			(() => {
+				if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+				const io = new IntersectionObserver(
+					(entries) => {
+						for (const e of entries) {
+							if (e.isIntersecting) {
+								e.target.classList.add("revealed");
+								io.unobserve(e.target);
+							}
+						}
+					},
+					{ threshold: 0.12, rootMargin: "0px 0px -6% 0px" },
+				);
+				document.querySelectorAll("[data-reveal]").forEach((el) => io.observe(el));
+			})();
+		</script>
+	</body>
+</html>

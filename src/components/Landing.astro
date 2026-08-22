@@ -1,0 +1,29 @@
+---
+import Archive from "@/components/Archive.astro";
+import Footer from "@/components/Footer.astro";
+import Hero from "@/components/Hero.astro";
+import Infrastructure from "@/components/Infrastructure.astro";
+import Nav from "@/components/Nav.astro";
+import Principles from "@/components/Principles.astro";
+import Systems from "@/components/Systems.astro";
+import type { Lang } from "@/i18n/ui";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+<BaseLayout lang={lang}>
+	<Nav lang={lang} />
+	<main id="main">
+		<Hero lang={lang} />
+		<Systems lang={lang} />
+		<Infrastructure lang={lang} />
+		<Archive lang={lang} />
+		<Principles lang={lang} />
+	</main>
+	<Footer lang={lang} />
+</BaseLayout>

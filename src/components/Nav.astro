@@ -1,0 +1,119 @@
+---
+import { GITHUB_ORG_URL, type Lang, localizedPath, t } from "@/i18n/ui";
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const m = t(lang);
+const otherLang: Lang = lang === "en" ? "zh" : "en";
+
+const iconClass = "hidden data-[active]:block";
+---
+
+<header class="sticky top-0 z-40 bg-surface-1/85 backdrop-blur-md">
+	<nav class="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
+		<a href={localizedPath(lang)} class="flex items-center gap-2.5" aria-label={m.a11y.brandHome}>
+			<img src="/favicon.svg" alt="" class="h-7 w-7" draggable="false" />
+			<span class="text-base font-semibold tracking-tight">AsterCosmos</span>
+		</a>
+
+		<div class="hidden items-center gap-7 text-sm text-muted-foreground md:flex">
+			<a href="#systems" class="transition-colors hover:text-foreground">{m.nav.systems}</a>
+			<a href="#infrastructure" class="transition-colors hover:text-foreground">{m.nav.infrastructure}</a>
+			<a href="#archive" class="transition-colors hover:text-foreground">{m.nav.archive}</a>
+			<a href="#principles" class="transition-colors hover:text-foreground">{m.nav.principles}</a>
+			<a
+				href={GITHUB_ORG_URL}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="transition-colors hover:text-foreground"
+			>
+				{m.nav.github}
+			</a>
+		</div>
+
+		<div class="flex items-center gap-1">
+			<a
+				id="lang-toggle"
+				href={localizedPath(otherLang)}
+				data-target-lang={otherLang}
+				aria-label={m.a11y.toggleLang}
+				title={m.a11y.toggleLang}
+				class="inline-flex h-9 items-center rounded-lg px-2.5 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+			>
+				<span aria-hidden="true">A/文</span>
+			</a>
+			<button
+				id="theme-toggle"
+				type="button"
+				aria-label={m.a11y.toggleTheme}
+				title={m.a11y.toggleTheme}
+				class="inline-flex size-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+			>
+				<svg data-theme-icon="light" class={iconClass} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+					<circle cx="12" cy="12" r="4"></circle>
+					<path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+				</svg>
+				<svg data-theme-icon="dark" class={iconClass} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+					<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"></path>
+				</svg>
+				<svg data-theme-icon="system" class={iconClass} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+					<rect x="2" y="3" width="20" height="14" rx="2"></rect>
+					<path d="M8 21h8m-4-4v4"></path>
+				</svg>
+			</button>
+		</div>
+	</nav>
+</header>
+
+{/* 首屏交互保持 vanilla：主题与语言切换不值得为用户首字节拉一个 JS 框架运行时 */}
+<script>
+	(() => {
+		const MEDIA = "(prefers-color-scheme: dark)";
+		type ThemePref = "system" | "light" | "dark";
+
+		const currentPref = (): ThemePref => {
+			const v = localStorage.getItem("theme");
+			return v === "light" || v === "dark" ? v : "system";
+		};
+
+		const apply = (pref: ThemePref) => {
+			const dark = pref === "system" ? matchMedia(MEDIA).matches : pref === "dark";
+			document.documentElement.classList.toggle("dark", dark);
+		};
+
+		const themeBtn = document.getElementById("theme-toggle");
+		const icons = themeBtn?.querySelectorAll("[data-theme-icon]");
+
+		const renderIcon = (pref: ThemePref) => {
+			icons?.forEach((el) => {
+				el.toggleAttribute("data-active", el.getAttribute("data-theme-icon") === pref);
+			});
+		};
+
+		renderIcon(currentPref());
+
+		themeBtn?.addEventListener("click", () => {
+			const pref = currentPref();
+			const next: ThemePref = pref === "system" ? "light" : pref === "light" ? "dark" : "system";
+			if (next === "system") {
+				localStorage.removeItem("theme");
+			} else {
+				localStorage.setItem("theme", next);
+			}
+			apply(next);
+			renderIcon(next);
+		});
+
+		matchMedia(MEDIA).addEventListener("change", () => {
+			if (currentPref() === "system") apply("system");
+		});
+
+		document.getElementById("lang-toggle")?.addEventListener("click", (e) => {
+			const target = (e.currentTarget as HTMLElement).dataset.targetLang;
+			if (target) localStorage.setItem("lang", target);
+		});
+	})();
+</script>

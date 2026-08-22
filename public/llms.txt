@@ -1,0 +1,11 @@
+# AsterCosmos
+
+> The engineering home of Aster projects — a public engineering node maintaining self-hosted systems, developer foundations, and the path from code to maintenance. Peer organization to ESAP (weare.esaps.net).
+
+## Links
+
+- [Homepage (EN)](https://www.astercosm.com/)
+- [首页（中文）](https://www.astercosm.com/zh/)
+- [GitHub organization](https://github.com/AsterCommunity)
+- [AsterDrive](https://drive.astercosm.com)
+- [WeAreESAP](https://weare.esaps.net)

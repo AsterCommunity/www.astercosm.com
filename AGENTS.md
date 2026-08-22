@@ -1,5 +1,57 @@
-<!-- BEGIN:nextjs-agent-rules -->
-# This is NOT the Next.js you know
+# www.astercosm.com — AsterCosmos 组织门面
 
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
-<!-- END:nextjs-agent-rules -->
+AsterCosmos 的落地页 —— [www.astercosm.com](https://www.astercosm.com)。
+营销与品牌门面，不是产品仓库；旗舰产品落地页在 [AsterDriveLanding](https://github.com/AsterCommunity/AsterDriveLanding)，
+两站共享同一套工程与内容原则，本文件只写本站差异。
+
+## 硬约束
+
+- 仓库可能存在未提交改动，不回滚、不覆盖、不格式化掉无关改动。
+- 不顺手扩大任务范围；页面语气、结构、素材规则的变更按本文「设计与内容不变量」对齐。
+
+## 结构与命令
+
+```text
+src/pages/           路由入口（index.astro=en，zh/index.astro=中文，404.astro 双语并列）
+src/components/      Landing 组装 + Nav/Hero/Systems/Infrastructure/Archive/Principles/Footer
+src/i18n/ui.ts       双语唯一事实源（t(lang)，结构对齐 typeof en）
+src/styles/tokens.css  视觉 token 唯一事实源（见文件头注释）
+src/styles/global.css  Tailwind 映射与全局样式
+src/assets/scenes/   产品真实截图（素材同步见 README）
+```
+
+```bash
+bun install
+bun run dev        # 本地开发
+bun run build      # 构建到 dist/
+bun run check      # biome check + astro check（必须全绿才算完）
+```
+
+工程要点：
+
+- `astro check` 与 TypeScript 7 不兼容，锁 `typescript@^6`，勿升。
+- biome 对 `*.astro` 关闭了 `noUnusedImports/noUnusedVariables`（模板引用 frontmatter 变量会误报），不要在 overrides 里再放宽别的规则。
+- 站点无 JS 框架运行时（无 React/Vue 岛屿）。首屏交互保持 vanilla script；确需交互组件时先论证为什么 vanilla 不够。
+
+## 设计与内容不变量
+
+页面文案与视觉的任何修改都要守住这几条（与 AsterDriveLanding 同源的已确立决策）：
+
+1. **面向用户，不是面向工程师**。第一屏只允许用户语言：禁止版本号、技术栈、协议名、内部代号、许可证罗列。工程深度随滚动展开。
+2. **物料必须产品原生**。只用真实 UI 截图、真实命令与自绘品牌元素（三色 asterisk、hairline、色点）。**禁止示意图/拓扑图**、stock 插画、AI 生成配图、渐变 mesh、玻璃拟态、假 dashboard mockup、假社交证明。截图一律来自 AsterDriveLanding 截图管线的产物，不手工伪造。
+3. **动效只润色不遮羞**。reduced-motion 必须完整降级；无 JS 时全部内容可见可用；首屏 JS 保持 ≈0KB。禁止全屏滚动劫持（snap 容器、scroll jacking），hero 标题不加打字机。
+4. **视觉 token 的事实源**：骨架是 AsterDrive D9 体系（经 AsterDriveLanding `packages/tokens/base.css` 同步），accent 是 WeAreESAP 的 ESAP 三色；`src/styles/tokens.css` 只做语义映射与裁剪，色值不发明。
+5. **双语**：`/` 英文（默认）+ `/zh/` 中文，文案唯一事实源 `src/i18n/ui.ts`；语言切换写 `localStorage.lang`，根页仅对未选择过的访客按浏览器语言跳一次。
+
+## 素材同步
+
+从 AsterDriveLanding 复制的截图素材清单与刷新流程见 [README.md](README.md)「素材同步约定」。
+
+## 部署
+
+`main` 分支推送后由 GitHub Actions 构建并发布到 GitHub Pages（`www.astercosm.com`，
+CNAME 在 `public/CNAME`）。不手动编辑生成产物；DNS 与 Pages 设置由仓库所有者手工管理。
+
+## License
+
+Code: Apache-2.0。站点内容 CC-BY 4.0；品牌标识保留所有权利。

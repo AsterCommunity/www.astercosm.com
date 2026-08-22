@@ -1,0 +1,28 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+{/* GH Pages 对所有未命中路径自动服务本页。双语并列，不做语言跳转 */}
+<BaseLayout lang="en">
+	<main class="mx-auto flex min-h-[70vh] max-w-2xl flex-col items-center justify-center px-6 text-center">
+		<p class="font-mono text-sm text-esap-blue-strong">404</p>
+		<h1 class="mt-4 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+			This page isn't here.
+		</h1>
+		<p class="mt-3 text-lg text-muted-foreground">这个页面不在这儿。</p>
+		<div class="mt-9 flex flex-wrap items-center justify-center gap-3">
+			<a
+				href="/"
+				class="inline-flex h-11 items-center rounded-lg bg-primary px-6 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+			>
+				Back to homepage
+			</a>
+			<a
+				href="/zh/"
+				class="inline-flex h-11 items-center rounded-lg bg-surface-2 px-6 text-sm font-medium text-foreground transition-colors hover:bg-muted"
+			>
+				回到首页
+			</a>
+		</div>
+	</main>
+</BaseLayout>

@@ -1,0 +1,83 @@
+---
+import { Image } from "astro:assets";
+import heroDarkEn from "@/assets/scenes/hero-dark-en.webp";
+import heroDarkZh from "@/assets/scenes/hero-dark-zh.webp";
+import heroLightEn from "@/assets/scenes/hero-light-en.webp";
+import heroLightZh from "@/assets/scenes/hero-light-zh.webp";
+import { DRIVE_GITHUB_URL, DRIVE_URL, type Lang, t } from "@/i18n/ui";
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const m = t(lang);
+const shotLight = lang === "zh" ? heroLightZh : heroLightEn;
+const shotDark = lang === "zh" ? heroDarkZh : heroDarkEn;
+---
+
+<section id="systems" data-reveal class="mx-auto max-w-6xl scroll-mt-20 px-6 py-24">
+	<div class="grid items-center gap-12 lg:grid-cols-[0.9fr_1.1fr]">
+		<div>
+			<p class="font-mono text-sm text-esap-blue-strong">{m.systems.kicker}</p>
+			<h2 class="mt-4 max-w-xl text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+				{m.systems.title}
+			</h2>
+			<p class="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground">
+				{m.systems.description}
+			</p>
+			<ul class="mt-8 space-y-3">
+				{
+					m.systems.points.map((point) => (
+						<li class="border-l-2 border-esap-blue pl-4 text-sm font-medium">{point}</li>
+					))
+				}
+			</ul>
+		</div>
+
+		{/* 物料必须产品原生：组织旗舰系统的真实面板截图，亮暗双版实拍 */}
+		<figure>
+			<div
+				class="overflow-hidden rounded-t-2xl [mask-image:linear-gradient(to_bottom,black_78%,transparent)] [filter:drop-shadow(0_24px_48px_rgba(0,0,0,0.14))] dark:[filter:drop-shadow(0_24px_56px_rgba(0,0,0,0.5))]"
+			>
+				<Image
+					src={shotLight}
+					alt={m.systems.showcaseAlt}
+					widths={[640, 960, 1280]}
+					sizes="(max-width: 1024px) 100vw, 560px"
+					class="h-auto w-full dark:hidden"
+					loading="lazy"
+				/>
+				<Image
+					src={shotDark}
+					alt={m.systems.showcaseAlt}
+					widths={[640, 960, 1280]}
+					sizes="(max-width: 1024px) 100vw, 560px"
+					class="hidden h-auto w-full dark:block"
+					loading="lazy"
+				/>
+			</div>
+			<figcaption class="mt-4 flex flex-wrap items-center justify-between gap-3 text-sm">
+				<span class="text-muted-foreground">{m.systems.showcaseCaption}</span>
+				<span class="flex items-center gap-4">
+					<a
+						href={DRIVE_URL}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="font-medium text-esap-blue-strong transition-opacity hover:opacity-80"
+					>
+						{m.systems.showcaseCta} →
+					</a>
+					<a
+						href={DRIVE_GITHUB_URL}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="text-muted-foreground transition-colors hover:text-foreground"
+					>
+						GitHub
+					</a>
+				</span>
+			</figcaption>
+		</figure>
+	</div>
+</section>

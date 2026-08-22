@@ -1,0 +1,38 @@
+---
+import { type Lang, t } from "@/i18n/ui";
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const m = t(lang);
+---
+
+{/* frameless 色阶分区：整段大色带用 surface-2，不加边框 */}
+<section id="infrastructure" data-reveal class="scroll-mt-20 bg-surface-2">
+	<div class="mx-auto grid max-w-6xl gap-14 px-6 py-24 lg:grid-cols-[0.9fr_1.1fr]">
+		<div>
+			<p class="font-mono text-sm text-esap-yellow-strong">{m.infrastructure.kicker}</p>
+			<h2 class="mt-4 max-w-xl text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+				{m.infrastructure.title}
+			</h2>
+			<p class="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground">
+				{m.infrastructure.description}
+			</p>
+		</div>
+		<div class="space-y-8">
+			{
+				m.infrastructure.points.map((point, i) => (
+					<div class="border-l-2 border-esap-yellow pl-5">
+						<p class="font-mono text-xs text-muted-foreground">
+							{String(i + 1).padStart(2, "0")}
+						</p>
+						<h3 class="mt-2 text-base font-medium">{point.title}</h3>
+						<p class="mt-2 text-sm leading-relaxed text-muted-foreground">{point.body}</p>
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>

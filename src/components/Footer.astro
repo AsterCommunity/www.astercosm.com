@@ -1,0 +1,111 @@
+---
+import {
+	DRIVE_GITHUB_URL,
+	DRIVE_URL,
+	ESAP_STORY_URL,
+	ESAP_URL,
+	GITHUB_ORG_URL,
+	type Lang,
+	SOURCE_URL,
+	t,
+} from "@/i18n/ui";
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const m = t(lang);
+
+const columns = [
+	{
+		heading: m.footer.columns.projects,
+		links: [
+			{ label: m.footer.links.driveSite, href: DRIVE_URL },
+			{ label: m.footer.links.driveRepo, href: DRIVE_GITHUB_URL },
+		],
+	},
+	{
+		heading: m.footer.columns.community,
+		links: [
+			{ label: m.footer.links.github, href: GITHUB_ORG_URL },
+			{ label: m.footer.links.source, href: SOURCE_URL },
+		],
+	},
+	{
+		heading: m.footer.columns.esap,
+		links: [
+			{ label: m.footer.links.characterArchive, href: ESAP_URL },
+			{ label: m.footer.links.stories, href: ESAP_STORY_URL },
+		],
+	},
+];
+---
+
+<footer>
+	{/* 06 / Entry points：页面叙事的收尾 CTA */}
+	<div class="mx-auto max-w-6xl px-6 pt-24 pb-20">
+		<div data-reveal class="max-w-3xl">
+			<p class="font-mono text-sm text-muted-foreground">{m.entry.kicker}</p>
+			<h2 class="mt-4 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+				{m.entry.title}
+			</h2>
+			<p class="mt-5 text-base leading-relaxed text-muted-foreground">
+				{m.entry.description}
+			</p>
+		</div>
+	</div>
+
+	{/* 三色 hairline：品牌 accent，与首屏呼应 */}
+	<div
+		aria-hidden="true"
+		class="h-px bg-gradient-to-r from-esap-yellow via-esap-pink to-esap-blue"
+	>
+	</div>
+
+	<div class="bg-surface-2">
+		<div class="mx-auto max-w-6xl px-6 py-14">
+			<div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+				<div>
+					<div class="flex items-center gap-2.5">
+						<img src="/favicon.svg" alt="" class="h-7 w-7" draggable="false" />
+						<span class="text-base font-semibold tracking-tight">AsterCosmos</span>
+					</div>
+					<p class="mt-4 max-w-48 text-sm leading-relaxed text-muted-foreground">
+						{m.footer.tagline}
+					</p>
+					<p class="mt-4 font-mono text-xs text-muted-foreground uppercase">
+						{m.footer.badge}
+					</p>
+				</div>
+
+				{
+					columns.map((col) => (
+						<nav aria-label={col.heading}>
+							<h3 class="text-sm font-medium">{col.heading}</h3>
+							<ul class="mt-4 space-y-2.5">
+								{col.links.map((link) => (
+									<li>
+										<a
+											href={link.href}
+											target="_blank"
+											rel="noopener noreferrer"
+											class="text-sm text-muted-foreground transition-colors hover:text-foreground"
+										>
+											{link.label}
+										</a>
+									</li>
+								))}
+							</ul>
+						</nav>
+					))
+				}
+			</div>
+
+			<div class="mt-12 space-y-1 text-xs text-muted-foreground">
+				<p>{m.footer.copyright}</p>
+				<p>{m.footer.license}</p>
+			</div>
+		</div>
+	</div>
+</footer>
