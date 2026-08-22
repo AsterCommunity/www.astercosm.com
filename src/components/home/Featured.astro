@@ -4,7 +4,7 @@ import heroDarkEn from "@/assets/scenes/hero-dark-en.webp";
 import heroDarkZh from "@/assets/scenes/hero-dark-zh.webp";
 import heroLightEn from "@/assets/scenes/hero-light-en.webp";
 import heroLightZh from "@/assets/scenes/hero-light-zh.webp";
-import { DRIVE_GITHUB_URL, DRIVE_URL, type Lang, t } from "@/i18n/ui";
+import { DRIVE_GITHUB_URL, DRIVE_URL, type Lang, pagePath, t } from "@/i18n/ui";
 
 interface Props {
 	lang: Lang;
@@ -68,6 +68,35 @@ const shotDark = lang === "zh" ? heroDarkZh : heroDarkEn;
 					loading="lazy"
 				/>
 			</div>
+		</div>
+
+		{/* 组织不只有一个产品的证据行 */}
+		<div class="flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-border px-8 py-4 sm:px-10">
+			<span class="text-xs font-medium tracking-wide text-muted-foreground uppercase">
+				{m.home.featured.alsoRunning.label}
+			</span>
+			{
+				m.home.featured.alsoRunning.items.map((item) => (
+					<a
+						href={item.href}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="text-sm font-medium text-foreground transition-colors hover:text-esap-blue-strong"
+					>
+						{item.name}
+					</a>
+				))
+			}
+			<a
+				href={pagePath(lang, "projects")}
+				class="ml-auto inline-flex items-center gap-1 text-sm font-medium text-esap-blue-strong transition-opacity hover:opacity-80"
+			>
+				{m.home.featured.alsoRunning.allCta}
+				<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+					<path d="M5 12h14" />
+					<path d="m12 5 7 7-7 7" />
+				</svg>
+			</a>
 		</div>
 	</div>
 </section>

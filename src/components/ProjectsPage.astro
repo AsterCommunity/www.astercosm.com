@@ -74,18 +74,21 @@ const m = t(lang);
 					))}
 				</ul>
 				{gi === m.projects.groups.length - 1 && (
-					<a
-						href={GITHUB_ORG_URL}
-						target="_blank"
-						rel="noopener noreferrer"
-						class="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-esap-blue-strong transition-opacity hover:opacity-80"
-					>
-						{m.projects.fullListCta}
-						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-							<path d="M7 17 17 7" />
-							<path d="M7 7h10v10" />
-						</svg>
-					</a>
+					<div class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2">
+						<a
+							href={GITHUB_ORG_URL}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="inline-flex items-center gap-1.5 text-sm font-medium text-esap-blue-strong transition-opacity hover:opacity-80"
+						>
+							{m.projects.fullListCta}
+							<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+								<path d="M7 17 17 7" />
+								<path d="M7 7h10v10" />
+							</svg>
+						</a>
+						<p class="text-sm text-muted-foreground">{m.projects.involve}</p>
+					</div>
 				)}
 			</section>
 		))

@@ -1,0 +1,28 @@
+---
+import { type Lang, navPath, t } from "@/i18n/ui";
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const m = t(lang);
+---
+
+{/* ESAP 关系条带：双组织叙事是品牌核心，首页不能只靠入口卡一句话 */}
+<section data-reveal class="mx-auto max-w-6xl px-6 pb-16">
+	<div class="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-center">
+		<span class="inline-block size-1.5 rounded-full bg-esap-pink" aria-hidden="true"></span>
+		<p class="text-sm text-muted-foreground">{m.home.relation.text}</p>
+		<a
+			href={navPath(lang, "archive")}
+			class="inline-flex items-center gap-1 text-sm font-medium text-esap-pink-strong transition-opacity hover:opacity-80"
+		>
+			{m.home.relation.cta}
+			<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+				<path d="M5 12h14" />
+				<path d="m12 5 7 7-7 7" />
+			</svg>
+		</a>
+	</div>
+</section>

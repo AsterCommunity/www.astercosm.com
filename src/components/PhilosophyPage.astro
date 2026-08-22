@@ -1,5 +1,5 @@
 ---
-import { type Lang, t } from "@/i18n/ui";
+import { type Lang, navPath, t } from "@/i18n/ui";
 
 interface Props {
 	lang: Lang;
@@ -95,5 +95,39 @@ const principleAccents = [
 				</div>
 			))
 		}
+	</div>
+</section>
+
+{/* 04 / In practice：宣言必须挂证据，否则只是口号 */}
+<section class="bg-surface-2">
+	<div class="mx-auto max-w-6xl px-6 py-24" data-reveal>
+		<p class="font-mono text-sm text-muted-foreground">{p.practice.kicker}</p>
+		<h2 class="mt-4 max-w-2xl text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+			{p.practice.title}
+		</h2>
+		<div class="mt-14 space-y-0 border-t border-border">
+			{
+				p.practice.items.map((item) => (
+					<div class="grid gap-3 border-b border-border py-7 sm:grid-cols-[minmax(0,16rem)_1fr_auto] sm:items-center sm:gap-8">
+						<p class="font-mono text-xs tracking-wide text-muted-foreground uppercase">
+							{item.principle}
+						</p>
+						<p class="text-sm leading-relaxed">{item.evidence}</p>
+						<a
+							href={item.page ? navPath(lang, item.page) : item.href}
+							target={item.page ? undefined : "_blank"}
+							rel={item.page ? undefined : "noopener noreferrer"}
+							class="inline-flex items-center gap-1.5 text-sm font-medium whitespace-nowrap text-esap-blue-strong transition-opacity hover:opacity-80"
+						>
+							{item.cta}
+							<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+								<path d="M7 17 17 7" />
+								<path d="M7 7h10v10" />
+							</svg>
+						</a>
+					</div>
+				))
+			}
+		</div>
 	</div>
 </section>

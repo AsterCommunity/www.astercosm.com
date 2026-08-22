@@ -13,6 +13,11 @@ export const DRIVE_DOCS_URL = "https://drive.docs.astercosm.com";
 export const DRIVE_GITHUB_URL = "https://github.com/AsterCommunity/AsterDrive";
 export const ESAP_URL = "https://weare.esaps.net";
 export const ESAP_STORY_URL = "https://story.esaps.net";
+export const PULSE_URL = "https://github.com/AsterCommunity/AsterPulse";
+export const YGGDRASIL_URL = "https://github.com/AsterCommunity/AsterYggdrasil";
+export const ASTERGIT_URL = "https://github.com/AsterCommunity/AsterGit";
+export const LANDING_GITHUB_URL =
+	"https://github.com/AsterCommunity/AsterDriveLanding";
 
 /** 站内语言切换目标路径（根页） */
 export function localizedPath(lang: Lang): string {
@@ -54,13 +59,17 @@ const en = {
 	},
 	home: {
 		hero: {
-			kicker: "Public engineering node",
+			kicker: "The Aster project's engineering arm",
 			title: "Built to be operated.",
 			subtitle: "AsterCosmos is the engineering home of Aster projects.",
 			description:
 				"Built for systems that need to run, evolve, and be maintained. AsterCosmos is a peer organization to ESAP, sharing membership while keeping engineering work in its own public space.",
 			primaryCta: "Explore projects",
 			secondaryCta: "View GitHub",
+		},
+		relation: {
+			text: "Creative archives? That's ESAP — our peer organization.",
+			cta: "How we fit together",
 		},
 		featured: {
 			kicker: "Featured system",
@@ -69,6 +78,15 @@ const en = {
 			alt: "AsterDrive web panel screenshot",
 			cta: "Visit AsterDrive",
 			repoCta: "Repository",
+			alsoRunning: {
+				label: "Also running",
+				items: [
+					{ name: "AsterPulse", href: PULSE_URL },
+					{ name: "AsterYggdrasil", href: YGGDRASIL_URL },
+					{ name: "AsterGit", href: ASTERGIT_URL },
+				] as { name: string; href: string }[],
+				allCta: "All projects",
+			},
 		},
 		entries: {
 			kicker: "Entry points",
@@ -199,6 +217,8 @@ const en = {
 			},
 		],
 		fullListCta: "Full repository list on GitHub",
+		involve:
+			"Want to get involved? Each repository's README is the entry point — issues and discussions are open.",
 	},
 	philosophy: {
 		meta: {
@@ -260,6 +280,40 @@ const en = {
 					body: "Documentation is not only for the first install. It is also for the person who returns six months later to repair the system.",
 				},
 			],
+		},
+		practice: {
+			kicker: "04 / In practice",
+			title: "Already true, not aspirational.",
+			items: [
+				{
+					principle: "Build for deployment",
+					evidence:
+						"AsterDrive ships a five-minute quick trial and a documented path from a single container to production.",
+					cta: "Quick trial docs",
+					href: `${DRIVE_DOCS_URL}/start/quick-trial/`,
+				},
+				{
+					principle: "Document the running system",
+					evidence:
+						"AsterDrive's landing screenshots are captured from a real running instance by an automated pipeline — docs and UI never drift apart.",
+					cta: "See the pipeline",
+					href: LANDING_GITHUB_URL,
+				},
+				{
+					principle: "Keep ownership visible",
+					evidence:
+						"Every public project sits on one index page, repository and live site side by side — including this site itself.",
+					cta: "The projects index",
+					href: "",
+					page: "projects",
+				},
+			] as {
+				principle: string;
+				evidence: string;
+				cta: string;
+				href: string;
+				page?: PageId;
+			}[],
 		},
 	},
 	archive: {
@@ -357,13 +411,17 @@ const zh: Messages = {
 	},
 	home: {
 		hero: {
-			kicker: "公开工程节点",
+			kicker: "Aster 项目的工程组织",
 			title: "为运行而构建。",
 			subtitle: "AsterCosmos 是 Aster 项目的工程归档与运行入口。",
 			description:
 				"为需要运行、演进和维护的系统而建。AsterCosmos 与 ESAP 同级，共享成员关系，同时把工程项目保留在自己的公开空间里。",
 			primaryCta: "浏览项目",
 			secondaryCta: "访问 GitHub",
+		},
+		relation: {
+			text: "创作档案？那是 ESAP —— 我们的同级组织。",
+			cta: "我们如何拼在一起",
 		},
 		featured: {
 			kicker: "精选系统",
@@ -372,6 +430,15 @@ const zh: Messages = {
 			alt: "AsterDrive 网盘面板截图",
 			cta: "访问 AsterDrive",
 			repoCta: "仓库",
+			alsoRunning: {
+				label: "同样在运行",
+				items: [
+					{ name: "AsterPulse", href: PULSE_URL },
+					{ name: "AsterYggdrasil", href: YGGDRASIL_URL },
+					{ name: "AsterGit", href: ASTERGIT_URL },
+				] as { name: string; href: string }[],
+				allCta: "全部项目",
+			},
 		},
 		entries: {
 			kicker: "入口",
@@ -498,6 +565,8 @@ const zh: Messages = {
 			},
 		],
 		fullListCta: "GitHub 上的完整仓库列表",
+		involve:
+			"想参与？每个仓库的 README 就是入口——issues 和 discussions 都开着。",
 	},
 	philosophy: {
 		meta: {
@@ -555,6 +624,40 @@ const zh: Messages = {
 					body: "文档不只写给第一次安装，也写给半年后回来修东西的人。",
 				},
 			],
+		},
+		practice: {
+			kicker: "04 / 在实践中",
+			title: "已经是事实，不是愿望。",
+			items: [
+				{
+					principle: "为部署而构建",
+					evidence:
+						"AsterDrive 提供五分钟的快速试用，以及从单容器到生产环境的文档化路径。",
+					cta: "快速试用文档",
+					href: `${DRIVE_DOCS_URL}/start/quick-trial/`,
+				},
+				{
+					principle: "记录正在运行的系统",
+					evidence:
+						"AsterDrive 落地页的截图由自动化管线从真实运行的实例截取——文档和界面永远不会脱节。",
+					cta: "看看这条管线",
+					href: LANDING_GITHUB_URL,
+				},
+				{
+					principle: "让责任边界可见",
+					evidence:
+						"每个公开项目都在同一页索引上，仓库和运行站点并排——包括本网站自己。",
+					cta: "项目索引",
+					href: "",
+					page: "projects",
+				},
+			] as {
+				principle: string;
+				evidence: string;
+				cta: string;
+				href: string;
+				page?: PageId;
+			}[],
 		},
 	},
 	archive: {
