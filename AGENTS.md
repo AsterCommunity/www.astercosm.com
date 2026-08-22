@@ -29,6 +29,7 @@ bun run check      # biome check + astro check（必须全绿才算完）
 
 工程要点：
 
+- `packageManager` 的 bun 版本必须与本地工具链对齐：bun 1.4 生成的 `bun.lock`（lockfileVersion 2）不被 bun ≤1.3 识别，CI 的 `oven-sh/setup-bun` 会按 `packageManager` 字段装版本，错位直接炸 `--frozen-lockfile`。
 - `astro check` 与 TypeScript 7 不兼容，锁 `typescript@^6`，勿升。
 - biome 对 `*.astro` 关闭了 `noUnusedImports/noUnusedVariables`（模板引用 frontmatter 变量会误报），不要在 overrides 里再放宽别的规则。
 - 站点无 JS 框架运行时（无 React/Vue 岛屿）。首屏交互保持 vanilla script；确需交互组件时先论证为什么 vanilla 不够。
