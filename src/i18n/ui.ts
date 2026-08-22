@@ -362,6 +362,12 @@ const en = {
 				},
 			],
 		},
+		look: {
+			kicker: "A look inside",
+			caption: "weare.esaps.net — the character archive, live.",
+			alt: "WeAreESAP homepage screenshot",
+			cta: "Visit WeAreESAP",
+		},
 	},
 	footer: {
 		tagline: "AsterCosmos public node. Built for the Aster project.",
@@ -701,6 +707,12 @@ const zh: Messages = {
 					href: ESAP_STORY_URL,
 				},
 			],
+		},
+		look: {
+			kicker: "看一眼里面",
+			caption: "weare.esaps.net —— 角色档案，运行中。",
+			alt: "WeAreESAP 首页截图",
+			cta: "访问 WeAreESAP",
 		},
 	},
 	footer: {

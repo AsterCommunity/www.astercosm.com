@@ -40,7 +40,7 @@ bun run check      # biome check + astro check（必须全绿才算完）
 页面文案与视觉的任何修改都要守住这几条（与 AsterDriveLanding 同源的已确立决策）：
 
 1. **面向用户，不是面向工程师**。第一屏只允许用户语言：禁止版本号、技术栈、协议名、内部代号、许可证罗列。工程深度随滚动展开。
-2. **物料必须产品原生**。只用真实 UI 截图、真实命令与自绘品牌元素（三色 asterisk、hairline、色点）。**禁止示意图/拓扑图**、stock 插画、AI 生成配图、渐变 mesh、玻璃拟态、假 dashboard mockup、假社交证明。截图一律来自 AsterDriveLanding 截图管线的产物，不手工伪造。
+2. **物料必须产品原生**。只用真实 UI 截图、真实命令与自绘品牌元素（三色 asterisk、hairline、色点）。**禁止示意图/拓扑图**、stock 插画、AI 生成配图、渐变 mesh、玻璃拟态、假 dashboard mockup、假社交证明。截图只来自两条管线：AsterDrive 图复制自 AsterDriveLanding 截图管线产物；ESAP 图由本仓库 `scripts/capture-esap.mts` 从线上实拍。不手工伪造。
 3. **动效只润色不遮羞**。reduced-motion 必须完整降级；无 JS 时全部内容可见可用；首屏 JS 保持 ≈0KB。禁止全屏滚动劫持（snap 容器、scroll jacking），hero 标题不加打字机。
 4. **视觉 token 的事实源**：骨架是 AsterDrive D9 体系（经 AsterDriveLanding `packages/tokens/base.css` 同步），accent 是 WeAreESAP 的 ESAP 三色；`src/styles/tokens.css` 只做语义映射与裁剪，色值不发明。
 5. **双语**：`/` 英文（默认）+ `/zh/` 中文前缀，四页结构双语一一对应；文案唯一事实源 `src/i18n/ui.ts`；语言切换保持当前页并写 `localStorage.lang`，根页仅对未选择过的访客按浏览器语言跳一次。`/projects/` 是策展视图（完整列表在 GitHub org），收录标准是有公开故事可讲；`AsterFlux` 这类无描述仓库不收录，补了描述再说。

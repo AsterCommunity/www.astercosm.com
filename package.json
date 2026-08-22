@@ -12,7 +12,8 @@
 		"check": "biome check . && astro check",
 		"check:fix": "biome check --write .",
 		"format": "biome format --write .",
-		"generate:assets": "bun run scripts/generate-assets.mts"
+		"generate:assets": "bun run scripts/generate-assets.mts",
+		"capture:esap": "bun run scripts/capture-esap.mts"
 	},
 	"dependencies": {
 		"@astrojs/sitemap": "^3.7.3",
@@ -23,6 +24,7 @@
 		"@biomejs/biome": "^2.5.10",
 		"@fontsource-variable/geist": "^5.3.0",
 		"@tailwindcss/vite": "^4.3.3",
+		"playwright": "^1.62.1",
 		"sharp": "^0.35.3",
 		"tailwindcss": "^4.3.3",
 		"typescript": "^6.0.3"

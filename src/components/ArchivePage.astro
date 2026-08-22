@@ -1,5 +1,8 @@
 ---
-import { type Lang, t } from "@/i18n/ui";
+import { Image } from "astro:assets";
+import esapDarkEn from "@/assets/scenes/esap-home-dark-en.webp";
+import esapDarkZh from "@/assets/scenes/esap-home-dark-zh.webp";
+import { ESAP_URL, type Lang, t } from "@/i18n/ui";
 
 interface Props {
 	lang: Lang;
@@ -11,6 +14,9 @@ const a = m.archive;
 
 /* ESAP 粉 / AsterCosmos 蓝：两个同级组织的对照卡 */
 const pillarAccents = ["border-esap-pink", "border-esap-blue"] as const;
+
+/* ESAP 站实拍只有 dark 版（其标志性观感），亮暗主题同用 */
+const esapShot = lang === "zh" ? esapDarkZh : esapDarkEn;
 ---
 
 <section class="mx-auto max-w-6xl px-6 pt-20 pb-24 lg:pt-24">
@@ -60,6 +66,34 @@ const pillarAccents = ["border-esap-pink", "border-esap-blue"] as const;
 			))
 		}
 	</ul>
+
+	{/* 看一眼 ESAP：线上实拍截图（scripts/capture-esap.mts 产出） */}
+	<figure data-reveal class="mt-16">
+		<p class="font-mono text-sm text-muted-foreground">{a.look.kicker}</p>
+		<div
+			class="mt-6 overflow-hidden rounded-xl [filter:drop-shadow(0_18px_36px_rgba(0,0,0,0.14))] dark:[filter:drop-shadow(0_18px_40px_rgba(0,0,0,0.5))]"
+		>
+			<Image
+				src={esapShot}
+				alt={a.look.alt}
+				widths={[640, 960, 1280, 1600]}
+				sizes="(max-width: 1152px) 100vw, 1152px"
+				class="h-auto w-full"
+				loading="lazy"
+			/>
+		</div>
+		<figcaption class="mt-4 flex flex-wrap items-center justify-between gap-3 text-sm">
+			<span class="text-muted-foreground">{a.look.caption}</span>
+			<a
+				href={ESAP_URL}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="font-medium text-esap-pink-strong transition-opacity hover:opacity-80"
+			>
+				{a.look.cta} →
+			</a>
+		</figcaption>
+	</figure>
 
 	{/* ESAP 侧站点入口 */}
 	<section data-reveal class="mt-16">

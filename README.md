@@ -35,7 +35,8 @@ bun run generate:assets  # 重新生成 og.png / apple-touch-icon.png（scripts/
 
 | 本站路径 | 来源 |
 | --- | --- |
-| `src/assets/scenes/` | AsterDriveLanding `apps/web/src/assets/scenes/`（由其截图管线 `capture-scenes.mts` 产出，AsterDrive 前端 UI 更新后需重跑并重新复制） |
+| `src/assets/scenes/hero-*-*.webp` | AsterDriveLanding `apps/web/src/assets/scenes/`（由其截图管线 `capture-scenes.mts` 产出，AsterDrive 前端 UI 更新后需重跑并重新复制） |
+| `src/assets/scenes/esap-home-dark-*.webp` | 本仓库 `scripts/capture-esap.mts` 从线上 weare.esaps.net 实拍；WeAreESAP 前端更新后重跑 `bun run capture:esap`，并在 commit message 注明对方 revision |
 | `public/og.png` / `public/apple-touch-icon.png` | 本仓库 `scripts/generate-assets.mts` 生成（品牌 asterisk 自绘，改版后重跑 `bun run generate:assets`） |
 
 ## 部署
