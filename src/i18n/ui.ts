@@ -400,7 +400,7 @@ const zh: Messages = {
 	meta: {
 		title: "AsterCosmos — Aster 项目的工程入口",
 		description:
-			"AsterCosmos 是 Aster 项目的公开工程节点：系统、基础设施与档案，为运行而构建。",
+			"AsterCosmos 是 Aster 项目的公开工程节点：系统、基础设施与档案，为运行而构建",
 	},
 	nav: {
 		home: "首页",
@@ -418,21 +418,21 @@ const zh: Messages = {
 	home: {
 		hero: {
 			kicker: "Aster 项目的工程组织",
-			title: "为运行而构建。",
-			subtitle: "AsterCosmos 是 Aster 项目的工程归档与运行入口。",
+			title: "为运行而构建",
+			subtitle: "AsterCosmos 是 Aster 项目的工程归档与运行入口",
 			description:
-				"为需要运行、演进和维护的系统而建。AsterCosmos 与 ESAP 同级，共享成员关系，同时把工程项目保留在自己的公开空间里。",
+				"为需要运行、演进和维护的系统而建。AsterCosmos 与 ESAP 同级，共享成员关系，同时把工程项目保留在自己的公开空间里",
 			primaryCta: "浏览项目",
 			secondaryCta: "访问 GitHub",
 		},
 		relation: {
-			text: "创作档案？那是 ESAP —— 我们的同级组织。",
+			text: "创作档案？那是 ESAP —— 我们的同级组织",
 			cta: "我们如何拼在一起",
 		},
 		featured: {
 			kicker: "精选系统",
 			title: "AsterDrive —— 自托管文件基础设施",
-			body: "可靠上传、跨 S3 与远程节点后端的存储策略、WebDAV/WOPI，以及一等公民的运维工具。它是 AsterCosmos 如何构建和运行软件的参考实现。",
+			body: "可靠上传、跨 S3 与远程节点后端的存储策略、WebDAV/WOPI，以及一等公民的运维工具。它是 AsterCosmos 如何构建和运行软件的参考实现",
 			alt: "AsterDrive 网盘面板截图",
 			cta: "访问 AsterDrive",
 			repoCta: "仓库",
@@ -451,19 +451,19 @@ const zh: Messages = {
 			cards: [
 				{
 					title: "项目",
-					body: "运行中的系统、工程底座，以及展示它们的站点。",
+					body: "运行中的系统、工程底座，以及展示它们的站点",
 					cta: "浏览索引",
 					page: "projects",
 				},
 				{
 					title: "理念",
-					body: "产品是正在运行的系统，从代码到维护的路径始终可见。",
+					body: "产品是正在运行的系统，从代码到维护的路径始终可见",
 					cta: "我们如何构建",
 					page: "philosophy",
 				},
 				{
 					title: "档案",
-					body: "ESAP 在 AsterCosmos 旁边，不在它下面——共享成员，各自独立。",
+					body: "ESAP 在 AsterCosmos 旁边，不在它下面——共享成员，各自独立",
 					cta: "另一半",
 					page: "archive",
 				},
@@ -474,47 +474,47 @@ const zh: Messages = {
 		meta: {
 			title: "项目 — AsterCosmos",
 			description:
-				"AsterCosmos 的公开系统与工程底座：自托管产品、共享运行时，以及让它们保持可维护的工具。",
+				"AsterCosmos 的公开系统与工程底座：自托管产品、共享运行时，以及让它们保持可维护的工具",
 		},
 		kicker: "项目",
-		title: "这里的一切都是为了持续运行。",
+		title: "这里的一切都是为了持续运行",
 		description:
-			"这是 AsterCommunity 仓库的策展视图。完整列表在 GitHub 上；本页展示那些有公开故事可讲的。",
+			"这是 AsterCommunity 仓库的策展视图。完整列表在 GitHub 上；本页展示那些有公开故事可讲的",
 		groups: [
 			{
 				heading: "系统",
-				note: "有真实部署在运行的自托管产品。",
+				note: "有真实部署在运行的自托管产品",
 				items: [
 					{
 						name: "AsterDrive",
 						tagline:
-							"面向小团队的自托管文件基础设施：可靠上传、跨 S3 与远程节点的存储策略、WebDAV/WOPI 与运维工具。",
+							"面向小团队的自托管文件基础设施：可靠上传、跨 S3 与远程节点的存储策略、WebDAV/WOPI 与运维工具",
 						href: DRIVE_GITHUB_URL,
 						site: DRIVE_URL,
 						tech: "Rust",
 					},
 					{
 						name: "AsterPulse",
-						tagline: "分布式可用性监控系统。",
+						tagline: "分布式可用性监控系统",
 						href: "https://github.com/AsterCommunity/AsterPulse",
 						tech: "Rust",
 					},
 					{
 						name: "AsterYggdrasil",
 						tagline:
-							"自托管 Minecraft 皮肤站与 Yggdrasil/authlib-injector 认证服务器。",
+							"自托管 Minecraft 皮肤站与 Yggdrasil/authlib-injector 认证服务器",
 						href: "https://github.com/AsterCommunity/AsterYggdrasil",
 						tech: "Rust",
 					},
 					{
 						name: "AsterGit",
-						tagline: "用 Rust 构建的轻量自托管软件开发 forge。",
+						tagline: "用 Rust 构建的轻量自托管软件开发 forge",
 						href: "https://github.com/AsterCommunity/AsterGit",
 						tech: "Rust",
 					},
 					{
 						name: "AsterMail",
-						tagline: "主权自托管邮件系统。",
+						tagline: "主权自托管邮件系统",
 						href: "https://github.com/AsterCommunity/AsterMail",
 						tech: "—",
 					},
@@ -522,30 +522,30 @@ const zh: Messages = {
 			},
 			{
 				heading: "底座",
-				note: "产品赖以构建的共享工程基础。",
+				note: "产品赖以构建的共享工程基础",
 				items: [
 					{
 						name: "AsterForge",
-						tagline: "Aster 服务共享的 Rust 运行时底座与基础设施内核。",
+						tagline: "Aster 服务共享的 Rust 运行时底座与基础设施内核",
 						href: "https://github.com/AsterCommunity/AsterForge",
 						tech: "Rust",
 					},
 					{
 						name: "aster-automation",
 						tagline:
-							"AsterCommunity 仓库的确定性 GitHub PR 与 CI 生命周期自动化。",
+							"AsterCommunity 仓库的确定性 GitHub PR 与 CI 生命周期自动化",
 						href: "https://github.com/AsterCommunity/aster-automation",
 						tech: "JavaScript",
 					},
 					{
 						name: "AsterDriveClients",
-						tagline: "AsterDrive 的客户端应用。",
+						tagline: "AsterDrive 的客户端应用",
 						href: "https://github.com/AsterCommunity/AsterDriveClients",
 						tech: "—",
 					},
 					{
 						name: "AsterDriveMigration",
-						tagline: "把现有文件服务迁移到 AsterDrive 的工具集。",
+						tagline: "把现有文件服务迁移到 AsterDrive 的工具集",
 						href: "https://github.com/AsterCommunity/AsterDriveMigration",
 						tech: "Rust",
 					},
@@ -553,17 +553,17 @@ const zh: Messages = {
 			},
 			{
 				heading: "站点",
-				note: "你正在看的公开界面。",
+				note: "你正在看的公开界面",
 				items: [
 					{
 						name: "www.astercosm.com",
-						tagline: "本站 —— AsterCosmos 的门面。",
+						tagline: "本站 —— AsterCosmos 的门面",
 						href: SOURCE_URL,
 						tech: "Astro",
 					},
 					{
 						name: "AsterDriveLanding",
-						tagline: "AsterDrive 产品落地页及其截图资产管线。",
+						tagline: "AsterDrive 产品落地页及其截图资产管线",
 						href: "https://github.com/AsterCommunity/AsterDriveLanding",
 						tech: "Astro",
 					},
@@ -571,88 +571,87 @@ const zh: Messages = {
 			},
 		],
 		fullListCta: "GitHub 上的完整仓库列表",
-		involve:
-			"想参与？每个仓库的 README 就是入口——issues 和 discussions 都开着。",
+		involve: "想参与？每个仓库的 README 就是入口——issues 和 discussions 都开着",
 	},
 	philosophy: {
 		meta: {
 			title: "理念 — AsterCosmos",
 			description:
-				"AsterCosmos 如何构建：产品是正在运行的系统，从代码到维护的路径始终可见，项目从维持运行的部分开始。",
+				"AsterCosmos 如何构建：产品是正在运行的系统，从代码到维护的路径始终可见，项目从维持运行的部分开始",
 		},
 		kicker: "理念",
-		title: "AsterCosmos 的构建方式。",
+		title: "AsterCosmos 的构建方式",
 		intro:
-			"这些不是愿望清单。它们是每个 AsterCosmos 项目在被称为「完成」之前必须满足的约束。",
+			"这些不是愿望清单。它们是每个 AsterCosmos 项目在被称为「完成」之前必须满足的约束",
 		systems: {
 			kicker: "01 / 系统",
-			title: "产品首先是正在运行的系统，不是演示样板。",
+			title: "产品首先是正在运行的系统，不是演示样板",
 			description:
-				"AsterCosmos 维护那些需要长期运行的东西：自托管服务、工程底座、管理面板，以及让它们能被部署、观察和继续修改的基础设施。",
+				"AsterCosmos 维护那些需要长期运行的东西：自托管服务、工程底座、管理面板，以及让它们能被部署、观察和继续修改的基础设施",
 			points: ["自托管产品系统", "面向开发者的工程底座", "小团队运维界面"],
 		},
 		infrastructure: {
 			kicker: "02 / 基础设施",
-			title: "从代码到维护的路径，应该一直可见。",
+			title: "从代码到维护的路径，应该一直可见",
 			description:
-				"AsterCosmos 存在的意义，是让代码、服务、文档、部署和责任边界能被统一管理，而不是散落在个人仓库里。",
+				"AsterCosmos 存在的意义，是让代码、服务、文档、部署和责任边界能被统一管理，而不是散落在个人仓库里",
 			points: [
 				{
 					title: "运行时与部署默认值",
-					body: "每个项目都附带文档化的运行方式：配置边界、部署目标，以及抵达那里的命令。",
+					body: "每个项目都附带文档化的运行方式：配置边界、部署目标，以及抵达那里的命令",
 				},
 				{
 					title: "身份、存储、监控、自动化",
-					body: "共享的运维事项由组织统一负责，而不是每个项目重新发明一遍。",
+					body: "共享的运维事项由组织统一负责，而不是每个项目重新发明一遍",
 				},
 				{
 					title: "项目之间可维护的边界",
-					body: "项目保持独立部署与修改的能力，同时不漂变成私人仓库的蔓生。",
+					body: "项目保持独立部署与修改的能力，同时不漂变成私人仓库的蔓生",
 				},
 			],
 		},
 		principles: {
 			kicker: "03 / 工作原则",
-			title: "我们如何工作。",
+			title: "我们如何工作",
 			description:
-				"AsterCosmos 的项目从维持运行的部分开始：部署、责任边界、配置、文档，以及重新回到维护状态的路径。",
+				"AsterCosmos 的项目从维持运行的部分开始：部署、责任边界、配置、文档，以及重新回到维护状态的路径",
 			items: [
 				{
 					title: "为部署而构建",
-					body: "每个项目都应该有清晰的运行方式、配置边界和部署路径。",
+					body: "每个项目都应该有清晰的运行方式、配置边界和部署路径",
 				},
 				{
 					title: "让责任边界可见",
-					body: "组织不是用来藏复杂度的；它应该让项目、权限和维护者更容易被找到。",
+					body: "组织不是用来藏复杂度的；它应该让项目、权限和维护者更容易被找到",
 				},
 				{
 					title: "记录正在运行的系统",
-					body: "文档不只写给第一次安装，也写给半年后回来修东西的人。",
+					body: "文档不只写给第一次安装，也写给半年后回来修东西的人",
 				},
 			],
 		},
 		practice: {
 			kicker: "04 / 在实践中",
-			title: "已经是事实，不是愿望。",
+			title: "已经是事实，不是愿望",
 			items: [
 				{
 					principle: "为部署而构建",
 					evidence:
-						"AsterDrive 提供五分钟的快速试用，以及从单容器到生产环境的文档化路径。",
+						"AsterDrive 提供五分钟的快速试用，以及从单容器到生产环境的文档化路径",
 					cta: "快速试用文档",
 					href: `${DRIVE_DOCS_URL}/start/quick-trial/`,
 				},
 				{
 					principle: "记录正在运行的系统",
 					evidence:
-						"AsterDrive 落地页的截图由自动化管线从真实运行的实例截取——文档和界面永远不会脱节。",
+						"AsterDrive 落地页的截图由自动化管线从真实运行的实例截取——文档和界面永远不会脱节",
 					cta: "看看这条管线",
 					href: LANDING_GITHUB_URL,
 				},
 				{
 					principle: "让责任边界可见",
 					evidence:
-						"每个公开项目都在同一页索引上，仓库和运行站点并排——包括本网站自己。",
+						"每个公开项目都在同一页索引上，仓库和运行站点并排——包括本网站自己",
 					cta: "项目索引",
 					href: "",
 					page: "projects",
@@ -670,24 +669,24 @@ const zh: Messages = {
 		meta: {
 			title: "档案 — AsterCosmos",
 			description:
-				"ESAP 在 AsterCosmos 旁边，不在它下面：共享成员关系，保留各自的公开身份，档案与系统互相引用。",
+				"ESAP 在 AsterCosmos 旁边，不在它下面：共享成员关系，保留各自的公开身份，档案与系统互相引用",
 		},
 		kicker: "档案",
-		title: "ESAP 在 AsterCosmos 旁边，不在它下面。",
+		title: "ESAP 在 AsterCosmos 旁边，不在它下面",
 		description:
-			"ESAP 保存角色、时间线、世界构建和创作档案；AsterCosmos 保存工程项目、运行系统和技术入口。它们共享成员关系，但保留各自的公开身份。",
+			"ESAP 保存角色、时间线、世界构建和创作档案；AsterCosmos 保存工程项目、运行系统和技术入口。它们共享成员关系，但保留各自的公开身份",
 		pillars: [
 			{
 				heading: "ESAP",
 				subheading: "创作档案",
-				body: "角色、时间线、世界构建。",
+				body: "角色、时间线、世界构建",
 				cta: "访问 WeAreESAP",
 				href: ESAP_URL,
 			},
 			{
 				heading: "AsterCosmos",
 				subheading: "工程入口",
-				body: "工程项目、运行系统、技术入口。",
+				body: "工程项目、运行系统、技术入口",
 				cta: "浏览 GitHub",
 				href: GITHUB_ORG_URL,
 			},
@@ -698,25 +697,25 @@ const zh: Messages = {
 			items: [
 				{
 					name: "weare.esaps.net",
-					body: "ESAP 企划的角色档案与主站。",
+					body: "ESAP 企划的角色档案与主站",
 					href: ESAP_URL,
 				},
 				{
 					name: "story.esaps.net",
-					body: "ESAP 世界观的长篇故事。",
+					body: "ESAP 世界观的长篇故事",
 					href: ESAP_STORY_URL,
 				},
 			],
 		},
 		look: {
 			kicker: "看一眼里面",
-			caption: "weare.esaps.net —— 角色档案，运行中。",
+			caption: "weare.esaps.net —— 角色档案，运行中",
 			alt: "WeAreESAP 首页截图",
 			cta: "访问 WeAreESAP",
 		},
 	},
 	footer: {
-		tagline: "AsterCosmos 公开节点。为 Aster 项目构建。",
+		tagline: "AsterCosmos 公开节点。为 Aster 项目构建",
 		columns: {
 			site: "本站",
 			projects: "项目",
