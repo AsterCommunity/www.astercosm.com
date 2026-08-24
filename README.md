@@ -26,7 +26,7 @@ bun run check            # biome check + astro check（必须全绿才算完）
 - Astro 静态站，无 JS 框架运行时；首屏交互（主题/语言切换、滚动入场）全部是 vanilla script。
 - 双语：`/` 英文（默认）+ `/zh/` 中文，文案唯一事实源 `src/i18n/ui.ts`。
 - 视觉 token 唯一事实源 `src/styles/tokens.css`（D9 骨架 + ESAP 三色 accent，色值不发明，见文件头注释）。
-- 图片使用原生 `<img>`，避免启用 Astro 可选的 sharp/libvips 图片处理服务；Astro 的未使用 `sharp` 入口锁定到 MIT 包。ESAP 截图脚本需要本机安装 ImageMagick（`magick`）。
+- 图片使用原生 `<img>`，并在 `astro.config.mts` 明确配置 Astro 官方 no-op image service，避免启用 sharp/libvips 图片处理服务；未使用的 `sharp` 入口也锁定到 MIT 包，防止安装器把平台二进制拉回来。ESAP 截图脚本需要本机安装 ImageMagick（`magick`）。
 - 旧版品牌 PNG 生成脚本保留在 `scripts/generate-assets.mts.bak`，仅作备份，不参与安装、检查或构建。
 - 设计与内容不变量见 [AGENTS.md](AGENTS.md)。
 
