@@ -27,6 +27,7 @@ bun run generate:assets  # 重新生成 og.png / apple-touch-icon.png（scripts/
 - Astro 静态站，无 JS 框架运行时；首屏交互（主题/语言切换、滚动入场）全部是 vanilla script。
 - 双语：`/` 英文（默认）+ `/zh/` 中文，文案唯一事实源 `src/i18n/ui.ts`。
 - 视觉 token 唯一事实源 `src/styles/tokens.css`（D9 骨架 + ESAP 三色 accent，色值不发明，见文件头注释）。
+- 图片使用原生 `<img>`，避免引入 Astro 可选的 LGPL libvips 运行时；`@resvg/resvg-js` 只用于本地品牌 PNG 生成。ESAP 截图脚本还需要本机安装 ImageMagick（`magick`）。
 - 设计与内容不变量见 [AGENTS.md](AGENTS.md)。
 
 ## 素材同步约定

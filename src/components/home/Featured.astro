@@ -1,5 +1,4 @@
 ---
-import { Image } from "astro:assets";
 import heroDarkEn from "@/assets/scenes/hero-dark-en.webp";
 import heroDarkZh from "@/assets/scenes/hero-dark-zh.webp";
 import heroLightEn from "@/assets/scenes/hero-light-en.webp";
@@ -51,21 +50,23 @@ const shotDark = lang === "zh" ? heroDarkZh : heroDarkEn;
 			<div
 				class="overflow-hidden rounded-xl [filter:drop-shadow(0_18px_36px_rgba(0,0,0,0.14))] dark:[filter:drop-shadow(0_18px_40px_rgba(0,0,0,0.5))]"
 			>
-				<Image
-					src={shotLight}
+				<img
+					src={shotLight.src}
 					alt={m.home.featured.alt}
-					widths={[640, 960, 1280]}
-					sizes="(max-width: 1024px) 100vw, 560px"
+					width={1600}
+					height={1000}
 					class="h-auto w-full dark:hidden"
 					loading="lazy"
+					decoding="async"
 				/>
-				<Image
-					src={shotDark}
+				<img
+					src={shotDark.src}
 					alt={m.home.featured.alt}
-					widths={[640, 960, 1280]}
-					sizes="(max-width: 1024px) 100vw, 560px"
+					width={1600}
+					height={1000}
 					class="hidden h-auto w-full dark:block"
 					loading="lazy"
+					decoding="async"
 				/>
 			</div>
 		</div>

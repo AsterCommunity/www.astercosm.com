@@ -9,8 +9,14 @@
  * 只截 dark 主题（ESAP 站的标志性观感）；语言按路径 / 与 /en/ 各一张。
  */
 import { Buffer } from "node:buffer";
+import { execFile } from "node:child_process";
+import { unlink } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+import { promisify } from "node:util";
 import { chromium } from "playwright";
-import sharp from "sharp";
+
+const execFileAsync = promisify(execFile);
 
 const BASE = "https://weare.esaps.net";
 
@@ -39,7 +45,13 @@ for (const target of targets) {
 
 	const png = await page.screenshot({ type: "png" });
 	const out = `src/assets/scenes/esap-home-dark-${target.lang}.webp`;
-	await sharp(Buffer.from(png)).webp({ quality: 82 }).toFile(out);
+	const input = join(tmpdir(), `astercosm-esap-${target.lang}.png`);
+	try {
+		await Bun.write(input, Buffer.from(png));
+		await execFileAsync("magick", [input, "-quality", "82", out]);
+	} finally {
+		await unlink(input).catch(() => {});
+	}
 	console.log(`captured: ${out}`);
 
 	await context.close();

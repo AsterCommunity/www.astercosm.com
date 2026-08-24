@@ -7,7 +7,7 @@
  * 产物是生成文件，但按仓库约定提交入库（public/ 直出，不经构建期处理）。
  */
 import { Buffer } from "node:buffer";
-import sharp from "sharp";
+import { Resvg } from "@resvg/resvg-js";
 
 /** ESAP 三色（src/styles/tokens.css light 主题精确值） */
 const YELLOW = "#ffd93d";
@@ -55,10 +55,12 @@ const touchIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="180" height
 	${asterisk(90, 90, 56, 13)}
 </svg>`;
 
-await sharp(Buffer.from(ogSvg), { density: 150 }).png().toFile("public/og.png");
-await sharp(Buffer.from(touchIconSvg), { density: 150 })
-	.png()
-	.toFile("public/apple-touch-icon.png");
+function renderPng(svg: string): Buffer {
+	return Buffer.from(new Resvg(svg).render().asPng());
+}
+
+await Bun.write("public/og.png", renderPng(ogSvg));
+await Bun.write("public/apple-touch-icon.png", renderPng(touchIconSvg));
 
 console.log(
 	"generated: public/og.png (1200x630), public/apple-touch-icon.png (180x180)",
