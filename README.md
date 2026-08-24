@@ -1,4 +1,6 @@
 # www.astercosm.com
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FAsterCommunity%2Fwww.astercosm.com.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FAsterCommunity%2Fwww.astercosm.com?ref=badge_shield)
+
 
 AsterCosmos 的组织门面落地页 —— [www.astercosm.com](https://www.astercosm.com)。
 营销与品牌门面，不是产品仓库；旗舰产品站在 [AsterDriveLanding](https://github.com/AsterCommunity/AsterDriveLanding)。
@@ -46,3 +48,6 @@ bun run generate:assets  # 重新生成 og.png / apple-touch-icon.png（scripts/
 ## License
 
 Code: Apache-2.0（见 [LICENSE](LICENSE)）。站点内容 CC-BY 4.0；品牌标识保留所有权利。
+
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FAsterCommunity%2Fwww.astercosm.com.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FAsterCommunity%2Fwww.astercosm.com?ref=badge_large)
