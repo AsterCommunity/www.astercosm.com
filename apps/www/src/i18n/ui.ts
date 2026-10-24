@@ -17,6 +17,7 @@ export const PULSE_URL = "https://github.com/AsterCommunity/AsterPulse";
 export const YGGDRASIL_URL = "https://github.com/AsterCommunity/AsterYggdrasil";
 export const ASTERGIT_URL = "https://github.com/AsterCommunity/AsterGit";
 export const ASTERGATE_URL = "https://github.com/AsterCommunity/AsterGate";
+export const GATE_URL = "https://gate.astercosm.com";
 
 /** 站内语言切换目标路径（根页） */
 export function localizedPath(lang: Lang): string {
@@ -80,7 +81,7 @@ const en = {
 			alsoRunning: {
 				label: "Also running",
 				items: [
-					{ name: "AsterGate", href: ASTERGATE_URL },
+					{ name: "AsterGate", href: GATE_URL },
 					{ name: "AsterPulse", href: PULSE_URL },
 					{ name: "AsterYggdrasil", href: YGGDRASIL_URL },
 					{ name: "AsterGit", href: ASTERGIT_URL },
@@ -140,6 +141,7 @@ const en = {
 						tagline:
 							"Self-hosted identity and authorization platform: accounts, organizations, and OAuth/OIDC for the services you run. In active development.",
 						href: ASTERGATE_URL,
+						site: GATE_URL,
 						tech: "Rust",
 					},
 					{
@@ -439,7 +441,7 @@ const zh: Messages = {
 			alsoRunning: {
 				label: "同样在运行",
 				items: [
-					{ name: "AsterGate", href: ASTERGATE_URL },
+					{ name: "AsterGate", href: GATE_URL },
 					{ name: "AsterPulse", href: PULSE_URL },
 					{ name: "AsterYggdrasil", href: YGGDRASIL_URL },
 					{ name: "AsterGit", href: ASTERGIT_URL },
@@ -499,6 +501,7 @@ const zh: Messages = {
 						tagline:
 							"自托管身份与授权平台：为你运行的服务提供账号、组织与 OAuth/OIDC。正在积极构建中",
 						href: ASTERGATE_URL,
+						site: GATE_URL,
 						tech: "Rust",
 					},
 					{

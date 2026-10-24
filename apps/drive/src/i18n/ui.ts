@@ -180,7 +180,7 @@ const zh: Messages = {
 	meta: {
 		title: "AsterDrive — Rust 写的自托管文件基础设施",
 		description:
-			"AsterDrive 是小团队的自托管文件服务：可靠上传、安全分享、存储位置由你决定，还有一个不碍事的界面。",
+			"AsterDrive 是小团队的自托管文件服务：可靠上传、安全分享、存储位置由你决定，还有一个不碍事的界面",
 	},
 	nav: {
 		features: "特性",
@@ -195,9 +195,9 @@ const zh: Messages = {
 		skipToContent: "跳到正文",
 	},
 	hero: {
-		title: "文件归你，存储归你，规矩也归你。",
+		title: "文件归你，存储归你，规矩也归你",
 		subtitle:
-			"AsterDrive 是小团队的自托管文件服务——安心上传、整理和分享，接上你已经在用的工具，并且由你决定每个文件存在哪里。",
+			"AsterDrive 是小团队的自托管文件服务——安心上传、整理和分享，接上你已经在用的工具，并且由你决定每个文件存在哪里",
 		primaryCta: "快速开始",
 		secondaryCta: "GitHub 加星",
 		screenshotAlt: "AsterDrive Web 面板截图",
@@ -207,31 +207,31 @@ const zh: Messages = {
 		items: [
 			{
 				title: "存储控制",
-				body: "按用户、团队和文件大小，把上传路由到本机磁盘、S3 兼容存储、Azure Blob、腾讯云 COS、阿里云 OSS、七牛 Kodo、OneDrive、SFTP 或远程从节点。策略决定字节的落点，你决定策略。",
+				body: "按用户、团队和文件大小，把上传路由到本机磁盘、S3 兼容存储、Azure Blob、腾讯云 COS、阿里云 OSS、七牛 Kodo、OneDrive、SFTP 或远程从节点。策略决定字节的落点，你决定策略",
 			},
 			{
 				title: "大文件是一等公民",
-				body: "直连、断点续传分块、预签名和 multipart 上传。后端按策略和对象大小协商最合适的路径，而不是把所有文件挤进同一条管道。",
+				body: "直连、断点续传分块、预签名和 multipart 上传。后端按策略和对象大小协商最合适的路径，而不是把所有文件挤进同一条管道",
 			},
 			{
 				title: "运维内生",
-				body: "健康端点、审计日志、后台任务记录、存储连接测试、doctor 诊断和迁移命令都是一等功能——因为跑这套系统的人是你自己。",
+				body: "健康端点、审计日志、后台任务记录、存储连接测试、doctor 诊断和迁移命令都是一等功能——因为跑这套系统的人是你自己",
 			},
 		],
 	},
 	connectors: {
 		title: "九个后端，一个契约",
 		subtitle:
-			"每个存储后端实现同一套 connector 契约：descriptor 驱动的管理界面、版本化类型配置、加密凭据。新增 provider 不再需要改动核心。",
+			"每个存储后端实现同一套 connector 契约：descriptor 驱动的管理界面、版本化类型配置、加密凭据。新增 provider 不再需要改动核心",
 		docsCta: "存储后端指南",
 	},
 	coverage: {
 		title: "一次部署，覆盖整个文件工作流",
-		subtitle: "完整的文件工作流开箱即有——不用逛插件市场。",
+		subtitle: "完整的文件工作流开箱即有——不用逛插件市场",
 		groups: [
 			{
 				title: "文件管理",
-				body: "每天的文件活：浏览、搜索、预览、编辑，出了岔子还能找回来。",
+				body: "每天的文件活：浏览、搜索、预览、编辑，出了岔子还能找回来",
 				items: [
 					"目录树与面包屑",
 					"全文搜索",
@@ -244,7 +244,7 @@ const zh: Messages = {
 			},
 			{
 				title: "分享与工作空间",
-				body: "有边界的团队空间，有规矩的分享链接——密码、过期时间、下载限制。",
+				body: "有边界的团队空间，有规矩的分享链接——密码、过期时间、下载限制",
 				items: [
 					"个人与团队工作空间",
 					"密码与过期时间的公开分享",
@@ -255,7 +255,7 @@ const zh: Messages = {
 			},
 			{
 				title: "接入与编辑",
-				body: "从任何地方打开文件：浏览器、WebDAV 挂载，或者你的 Office 套件。",
+				body: "从任何地方打开文件：浏览器、WebDAV 挂载，或者你的 Office 套件",
 				items: [
 					"限定根目录的 WebDAV",
 					"WOPI 在线编辑 Office",
@@ -265,7 +265,7 @@ const zh: Messages = {
 			},
 			{
 				title: "运维",
-				body: "系统是你自己跑的，所以你看得见：健康、审计、任务、诊断全部内置。",
+				body: "系统是你自己跑的，所以你看得见：健康、审计、任务、诊断全部内置",
 				items: [
 					"健康端点与 doctor",
 					"后台任务记录",
@@ -279,7 +279,7 @@ const zh: Messages = {
 	deploy: {
 		title: "三条命令，从零到网盘",
 		subtitle:
-			"一个容器，内嵌前端，SQLite 开箱即用。长大了换 PostgreSQL 或 MySQL。长很大还有 Kubernetes 和 Helm chart。",
+			"一个容器，内嵌前端，SQLite 开箱即用。长大了换 PostgreSQL 或 MySQL。长很大还有 Kubernetes 和 Helm chart",
 		dockerCta: "Docker 部署指南",
 		k8sCta: "Kubernetes 与 Helm",
 	},
@@ -305,15 +305,15 @@ const zh: Messages = {
 		],
 	},
 	cta: {
-		title: "把文件拿回来。",
-		subtitle: "几分钟起一个本地试用。留下它，因为它不碍事。",
+		title: "把文件拿回来",
+		subtitle: "几分钟起一个本地试用。留下它，因为它不碍事",
 		primary: "快速开始",
 		secondary: "阅读文档",
 		license:
-			"MIT OR Apache-2.0 双许可的自由开源软件——代码可读、可改、可部署在任何地方，永远没有厂商锁定。",
+			"MIT OR Apache-2.0 双许可的自由开源软件——代码可读、可改、可部署在任何地方，永远没有厂商锁定",
 	},
 	footer: {
-		tagline: "小团队的自托管文件服务。",
+		tagline: "小团队的自托管文件服务",
 		product: "产品",
 		community: "社区",
 		legal: "法律与安全",
