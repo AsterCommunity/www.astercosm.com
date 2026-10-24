@@ -1,0 +1,90 @@
+---
+import Footer from "@/components/Footer.astro";
+import Hero from "@/components/Hero.astro";
+import Nav from "@/components/Nav.astro";
+import { GITHUB_URL, type Lang, t, WWW_URL } from "@/i18n/ui";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const m = t(lang);
+
+const stateStyles = {
+	inDevelopment: "bg-primary/10 text-primary",
+	planned: "bg-muted text-muted-foreground",
+} as const;
+---
+
+<BaseLayout lang={lang}>
+	<Nav lang={lang} />
+	<main id="main">
+	<Hero lang={lang} />
+
+	<section id="plan" data-reveal class="mx-auto max-w-6xl px-6 py-20">
+		<h2 class="text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+			{m.pillars.title}
+		</h2>
+		<div class="mt-10 grid gap-5 md:grid-cols-3">
+			{
+				m.pillars.items.map((item) => (
+					<div class="rounded-xl border border-border bg-surface-2 p-6">
+						<h3 class="text-lg font-semibold tracking-tight">{item.title}</h3>
+						<p class="mt-3 text-sm leading-relaxed text-muted-foreground">{item.body}</p>
+					</div>
+				))
+			}
+		</div>
+	</section>
+
+	<section id="status" data-reveal class="border-y border-border bg-surface-2">
+		<div class="mx-auto max-w-6xl px-6 py-20">
+			<p class="text-sm font-medium text-primary">{m.status.kicker}</p>
+			<h2 class="mt-3 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+				{m.status.title}
+			</h2>
+			<p class="mt-5 max-w-2xl leading-relaxed text-muted-foreground">{m.status.body}</p>
+			<ul class="mt-10 grid gap-3 md:grid-cols-2">
+				{
+					m.status.items.map((item) => (
+						<li class="flex items-center justify-between gap-4 rounded-lg border border-border bg-surface-1 px-5 py-4">
+							<span class="text-sm leading-relaxed">{item.label}</span>
+							<span
+								class={`shrink-0 rounded-full px-3 py-1 text-xs font-medium ${stateStyles[item.state]}`}
+							>
+								{item.state === "inDevelopment" ? m.status.inDevelopment : m.status.planned}
+							</span>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</section>
+
+	<section data-reveal class="mx-auto max-w-6xl px-6 py-24 text-center">
+		<h2 class="text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+			{m.cta.title}
+		</h2>
+		<p class="mx-auto mt-5 max-w-xl leading-relaxed text-muted-foreground">{m.cta.subtitle}</p>
+		<div class="mt-9 flex flex-wrap items-center justify-center gap-3">
+			<a
+				href={GITHUB_URL}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="inline-flex h-11 items-center rounded-lg bg-primary px-6 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+			>
+				{m.cta.primary}
+			</a>
+			<a
+				href={WWW_URL}
+				class="inline-flex h-11 items-center rounded-lg bg-surface-2 px-6 text-sm font-medium text-foreground transition-colors hover:bg-muted"
+			>
+				{m.cta.secondary}
+			</a>
+		</div>
+	</section>
+</main>
+<Footer lang={lang} />
+</BaseLayout>

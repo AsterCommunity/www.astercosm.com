@@ -5,9 +5,9 @@
 	"type": "module",
 	"license": "Apache-2.0",
 	"scripts": {
-		"dev": "astro dev",
+		"dev": "astro dev --port 4321",
 		"build": "astro build",
-		"preview": "astro preview",
+		"preview": "astro preview --port 4321",
 		"check": "astro check",
 		"capture:esap": "bun run scripts/capture-esap.mts"
 	},

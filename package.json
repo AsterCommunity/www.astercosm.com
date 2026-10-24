@@ -8,12 +8,16 @@
 		"packages/*"
 	],
 	"scripts": {
+		"dev": "bun --filter @astercosm/www --filter @astercosm/drive --filter @astercosm/gate dev",
 		"dev:www": "bun --filter @astercosm/www dev",
 		"dev:drive": "bun --filter @astercosm/drive dev",
-		"build": "bun --filter @astercosm/www --filter @astercosm/drive build",
+		"dev:gate": "bun --filter @astercosm/gate dev",
+		"build": "bun --filter @astercosm/www --filter @astercosm/drive --filter @astercosm/gate build",
+		"preview": "bun --filter @astercosm/www --filter @astercosm/drive --filter @astercosm/gate preview",
 		"preview:www": "bun --filter @astercosm/www preview",
 		"preview:drive": "bun --filter @astercosm/drive preview",
-		"check": "biome check . && bun --filter @astercosm/www --filter @astercosm/drive check",
+		"preview:gate": "bun --filter @astercosm/gate preview",
+		"check": "biome check . && bun --filter @astercosm/www --filter @astercosm/drive --filter @astercosm/gate check",
 		"check:fix": "biome check --write .",
 		"format": "biome format --write .",
 		"capture:esap": "bun --filter @astercosm/www capture:esap",

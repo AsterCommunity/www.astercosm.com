@@ -1,0 +1,39 @@
+---
+import { GITHUB_URL, type Lang, t, WWW_URL } from "@/i18n/ui";
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const m = t(lang);
+---
+
+<footer class="bg-surface-2">
+	<div class="mx-auto flex max-w-6xl flex-col gap-6 px-6 py-12 sm:flex-row sm:items-center sm:justify-between">
+		<div class="flex items-center gap-2.5">
+			<img src="/favicon.svg" alt="" class="size-8" draggable="false" />
+			<div>
+				<p class="text-sm font-semibold tracking-tight">AsterGate</p>
+				<p class="text-sm text-muted-foreground">{m.footer.tagline}</p>
+			</div>
+		</div>
+
+		<div class="flex items-center gap-6 text-sm text-muted-foreground">
+			<a
+				href={GITHUB_URL}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="transition-colors hover:text-foreground"
+			>
+				GitHub
+			</a>
+			<a href={WWW_URL} class="transition-colors hover:text-foreground">AsterCosmos</a>
+		</div>
+	</div>
+	<div class="mx-auto max-w-6xl px-6 pb-8">
+		<p class="text-xs text-muted-foreground">
+			{m.footer.copyright} · {m.footer.license}
+		</p>
+	</div>
+</footer>

@@ -13,16 +13,18 @@
 ```text
 apps/www/           @astercosm/www — www.astercosm.com 组织门面（无 JS 框架运行时）
 apps/drive/         @astercosm/drive — drive.astercosm.com 产品落地页（React 折叠线以下岛屿）
-packages/tokens/    @astercosm/tokens — AsterDrive D9 设计 token 语义映射（drive 依赖）
+apps/gate/          @astercosm/gate — gate.astercosm.com AsterGate 预告页（无 JS 框架运行时）
+packages/tokens/    @astercosm/tokens — AsterDrive D9 设计 token 语义映射（drive、gate 依赖）
 ```
 
 `apps/drive` 迁移自 AsterDriveLanding@`250df1d`（原仓库归档，其 AGENTS.md 约束已并入本文）。
 
 ```bash
 bun install
-bun run dev:www / dev:drive   # 两个 astro dev 同端口，不能同时跑
+bun run dev                   # 三站并行：www 4321 / drive 4322 / gate 4323
+bun run dev:www / dev:drive / dev:gate   # 单独拉起某一站
 bun run build                 # 构建全部站点
-bun run check                 # biome + 两个 app 的 astro check（必须全绿才算完）
+bun run check                 # biome + 全部 app 的 astro check（必须全绿才算完）
 bun run capture:esap          # www 的 ESAP 实拍管线（见 README）
 bun run capture:scenes -- --binary /path/to/aster_drive   # drive 的截图管线（见 README）
 ```

@@ -16,8 +16,7 @@ export const ESAP_STORY_URL = "https://story.esaps.net";
 export const PULSE_URL = "https://github.com/AsterCommunity/AsterPulse";
 export const YGGDRASIL_URL = "https://github.com/AsterCommunity/AsterYggdrasil";
 export const ASTERGIT_URL = "https://github.com/AsterCommunity/AsterGit";
-export const LANDING_GITHUB_URL =
-	"https://github.com/AsterCommunity/AsterDriveLanding";
+export const ASTERGATE_URL = "https://github.com/AsterCommunity/AsterGate";
 
 /** 站内语言切换目标路径（根页） */
 export function localizedPath(lang: Lang): string {
@@ -81,6 +80,7 @@ const en = {
 			alsoRunning: {
 				label: "Also running",
 				items: [
+					{ name: "AsterGate", href: ASTERGATE_URL },
 					{ name: "AsterPulse", href: PULSE_URL },
 					{ name: "AsterYggdrasil", href: YGGDRASIL_URL },
 					{ name: "AsterGit", href: ASTERGIT_URL },
@@ -133,6 +133,13 @@ const en = {
 							"Self-hosted file infrastructure for small teams: reliable uploads, storage policies, S3/remote-node backends, WebDAV/WOPI, and ops tooling.",
 						href: DRIVE_GITHUB_URL,
 						site: DRIVE_URL,
+						tech: "Rust",
+					},
+					{
+						name: "AsterGate",
+						tagline:
+							"Self-hosted identity and authorization platform: accounts, organizations, and OAuth/OIDC for the services you run. In active development.",
+						href: ASTERGATE_URL,
 						tech: "Rust",
 					},
 					{
@@ -198,19 +205,12 @@ const en = {
 			},
 			{
 				heading: "Sites",
-				note: "The public surfaces you are looking at.",
+				note: "The public surface you are looking at.",
 				items: [
 					{
 						name: "www.astercosm.com",
 						tagline: "This site — the AsterCosmos front door.",
 						href: SOURCE_URL,
-						tech: "Astro",
-					},
-					{
-						name: "AsterDriveLanding",
-						tagline:
-							"The AsterDrive product landing page and its screenshot asset pipeline.",
-						href: "https://github.com/AsterCommunity/AsterDriveLanding",
 						tech: "Astro",
 					},
 				],
@@ -297,7 +297,7 @@ const en = {
 					evidence:
 						"AsterDrive's landing screenshots are captured from a real running instance by an automated pipeline — docs and UI never drift apart.",
 					cta: "See the pipeline",
-					href: LANDING_GITHUB_URL,
+					href: SOURCE_URL,
 				},
 				{
 					principle: "Keep ownership visible",
@@ -439,6 +439,7 @@ const zh: Messages = {
 			alsoRunning: {
 				label: "同样在运行",
 				items: [
+					{ name: "AsterGate", href: ASTERGATE_URL },
 					{ name: "AsterPulse", href: PULSE_URL },
 					{ name: "AsterYggdrasil", href: YGGDRASIL_URL },
 					{ name: "AsterGit", href: ASTERGIT_URL },
@@ -491,6 +492,13 @@ const zh: Messages = {
 							"面向小团队的自托管文件基础设施：可靠上传、跨 S3 与远程节点的存储策略、WebDAV/WOPI 与运维工具",
 						href: DRIVE_GITHUB_URL,
 						site: DRIVE_URL,
+						tech: "Rust",
+					},
+					{
+						name: "AsterGate",
+						tagline:
+							"自托管身份与授权平台：为你运行的服务提供账号、组织与 OAuth/OIDC。正在积极构建中",
+						href: ASTERGATE_URL,
 						tech: "Rust",
 					},
 					{
@@ -559,12 +567,6 @@ const zh: Messages = {
 						name: "www.astercosm.com",
 						tagline: "本站 —— AsterCosmos 的门面",
 						href: SOURCE_URL,
-						tech: "Astro",
-					},
-					{
-						name: "AsterDriveLanding",
-						tagline: "AsterDrive 产品落地页及其截图资产管线",
-						href: "https://github.com/AsterCommunity/AsterDriveLanding",
 						tech: "Astro",
 					},
 				],
@@ -646,7 +648,7 @@ const zh: Messages = {
 					evidence:
 						"AsterDrive 落地页的截图由自动化管线从真实运行的实例截取——文档和界面永远不会脱节",
 					cta: "看看这条管线",
-					href: LANDING_GITHUB_URL,
+					href: SOURCE_URL,
 				},
 				{
 					principle: "让责任边界可见",

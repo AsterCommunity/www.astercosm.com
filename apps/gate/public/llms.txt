@@ -1,0 +1,12 @@
+# AsterGate
+
+> Self-hosted identity and authorization platform by AsterCosmos. In active
+> development — the first public release (0.1.0-alpha) ships when complete,
+> not before.
+
+## Links
+
+- [Homepage (EN)](https://gate.astercosm.com/)
+- [首页（中文）](https://gate.astercosm.com/zh/)
+- [Repository](https://github.com/AsterCommunity/AsterGate)
+- [AsterCosmos](https://www.astercosm.com)
