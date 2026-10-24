@@ -33,6 +33,8 @@ bun run capture:scenes -- --binary /path/to/aster_drive   # drive 的截图管�
 - `packageManager` 的 bun 版本必须与本地工具链对齐：bun 1.4 生成的 `bun.lock`
   （lockfileVersion 2）不被 bun ≤1.3 识别，CI 的 `oven-sh/setup-bun` 按 `packageManager`
   字段装版本，错位直接炸 `--frozen-lockfile`。
+- CI 显式用 `actions/setup-node@v7` 装 Node 24：astro 7.4 要求 node ≥ 22.23.4，而
+  runner 系统路径和工具缓存里的 22.x 都不满足；降 Node 版本前先对 astro 的 engines。
 - `astro check` 与 TypeScript 7 不兼容，两个 app 都锁 `typescript@^6`，勿升。
 - biome 对 `*.astro` 关闭了 `noUnusedImports/noUnusedVariables`（模板引用 frontmatter
   变量会误报），不要在 overrides 里再放宽别的规则。
