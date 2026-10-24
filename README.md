@@ -9,7 +9,7 @@ AsterCosmos 的站点 monorepo —— 一个仓库多个静态站点，Cloudflar
 | D9 设计 token | `packages/tokens/` | `@astercosm/tokens` | —（drive 依赖） |
 
 `apps/drive` 迁移自 [AsterDriveLanding](https://github.com/AsterCommunity/AsterDriveLanding)@`250df1d`
-（原仓库归档后，历史提交保留在原仓库）。两个 app 共享同一套工程与内容原则，见 [AGENTS.md](AGENTS.md)。
+（原仓库已归档，历史提交保留在原仓库）。两个 app 共享同一套工程与内容原则，见 [AGENTS.md](AGENTS.md)。
 
 ## 开发
 
@@ -34,16 +34,12 @@ bun run capture:scenes -- --binary /path/to/aster_drive   # drive 的截图管�
 - `astercosm-www` → www.astercosm.com
 - `asterdrive-landing` → drive.astercosm.com
 
-### 一次性切换清单（仓库所有者执行）
+### 一次性切换（2026-10-24 已完成）
 
-1. `astercosm.com` zone 接入 Cloudflare 账号（若尚未）。
-2. GitHub 仓库 secrets：`CLOUDFLARE_API_TOKEN`（Account token 即可，需
-   Account → Workers Scripts → Edit + Zone → DNS → Edit）、`CLOUDFLARE_ACCOUNT_ID`。
-3. 提交并推送本迁移，Actions 部署成功即完成切换。
-4. 若 DNS 仍存在指向 GitHub Pages 的 `www` / `drive` 记录，先删除（custom domain
-   接管时记录冲突会明确报错）。
-5. 两个域名验证通过后，在 GitHub 归档 AsterDriveLanding 仓库；确认 Cloudflare 稳定后
-   可在原仓库关闭 GitHub Pages。
+`astercosm.com` zone 接入 The ESAP Project Cloudflare 账号，GitHub secrets
+（`CLOUDFLARE_API_TOKEN` / `CLOUDFLARE_ACCOUNT_ID`）就位，旧 GH Pages DNS 记录删除，
+两域名已在 Workers 上线；AsterDriveLanding 仓库同步归档。历史记录见原仓库与本节变更前的
+README。
 
 ## 素材同步约定
 
