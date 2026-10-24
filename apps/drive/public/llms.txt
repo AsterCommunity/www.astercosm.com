@@ -1,0 +1,23 @@
+# AsterDrive
+
+> Self-hosted file infrastructure in Rust for small teams: storage policies,
+> reliable large-file uploads, WebDAV/WOPI, and operations visibility —
+> without adopting a full private-cloud suite.
+
+## Canonical sources
+
+- Product overview and source: https://github.com/AsterCommunity/AsterDrive
+- Documentation (English): https://drive.docs.astercosm.com/en/
+- 中文文档: https://drive.docs.astercosm.com/
+- Quick start: https://drive.docs.astercosm.com/en/start/quick-trial/
+- Docker deployment: https://drive.docs.astercosm.com/en/deploy/docker/
+- Storage backends: https://drive.docs.astercosm.com/en/admin/storage-backends/
+- Security policy: https://github.com/AsterCommunity/AsterDrive/security
+
+## Key facts
+
+- Dual-licensed MIT OR Apache-2.0
+- Rust backend + React frontend, SQLite by default, PostgreSQL/MySQL optional
+- Storage connectors: Local, S3-compatible, Azure Blob, Tencent COS,
+  Alibaba Cloud OSS, Qiniu Kodo, OneDrive/SharePoint, SFTP, remote follower nodes
+- WebDAV with RFC 3253 core DeltaV versioning; WOPI for Office editing

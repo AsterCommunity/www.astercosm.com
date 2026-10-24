@@ -1,0 +1,75 @@
+---
+import { type Lang, t } from "@/i18n/ui";
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const m = t(lang);
+---
+
+<section data-reveal class="mx-auto max-w-6xl px-6 py-24">
+	<h2 class="max-w-2xl text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+		{m.fit.title}
+	</h2>
+
+	<div class="mt-14 grid gap-12 md:grid-cols-2">
+		<div>
+			<h3 class="text-sm font-medium tracking-wide text-primary uppercase">
+				{m.fit.fitsTitle}
+			</h3>
+			<ul class="mt-6 space-y-4">
+				{
+					m.fit.fits.map((item) => (
+						<li class="flex gap-3 text-sm leading-relaxed">
+							<svg
+								width="16"
+								height="16"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2.5"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								aria-hidden="true"
+								class="mt-0.5 shrink-0 text-primary"
+							>
+								<path d="M20 6 9 17l-5-5" />
+							</svg>
+							<span>{item}</span>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+
+		<div>
+			<h3 class="text-sm font-medium tracking-wide text-muted-foreground uppercase">
+				{m.fit.notFitsTitle}
+			</h3>
+			<ul class="mt-6 space-y-4">
+				{
+					m.fit.notFits.map((item) => (
+						<li class="flex gap-3 text-sm leading-relaxed text-muted-foreground">
+							<svg
+								width="16"
+								height="16"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2.5"
+								stroke-linecap="round"
+								aria-hidden="true"
+								class="mt-0.5 shrink-0"
+							>
+								<path d="M18 6 6 18M6 6l12 12" />
+							</svg>
+							<span>{item}</span>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</div>
+</section>

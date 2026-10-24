@@ -1,33 +1,29 @@
 {
 	"name": "www-astercosm-com",
-	"version": "1.0.0",
 	"private": true,
 	"type": "module",
 	"license": "Apache-2.0",
-	"packageManager": "bun@1.4.0",
+	"workspaces": [
+		"apps/*",
+		"packages/*"
+	],
 	"scripts": {
-		"dev": "astro dev",
-		"build": "astro build",
-		"preview": "astro preview",
-		"check": "biome check . && astro check",
+		"dev:www": "bun --filter @astercosm/www dev",
+		"dev:drive": "bun --filter @astercosm/drive dev",
+		"build": "bun --filter @astercosm/www --filter @astercosm/drive build",
+		"preview:www": "bun --filter @astercosm/www preview",
+		"preview:drive": "bun --filter @astercosm/drive preview",
+		"check": "biome check . && bun --filter @astercosm/www --filter @astercosm/drive check",
 		"check:fix": "biome check --write .",
 		"format": "biome format --write .",
-		"capture:esap": "bun run scripts/capture-esap.mts"
-	},
-	"dependencies": {
-		"@astrojs/sitemap": "^3.7.3",
-		"astro": "^7.2.4"
+		"capture:esap": "bun --filter @astercosm/www capture:esap",
+		"capture:scenes": "bun --filter @astercosm/drive capture:scenes"
 	},
 	"devDependencies": {
-		"@astrojs/check": "^0.9.10",
-		"@biomejs/biome": "^2.5.10",
-		"@fontsource-variable/geist": "^5.3.0",
-		"@tailwindcss/vite": "^4.3.3",
-		"playwright": "^1.62.1",
-		"tailwindcss": "^4.3.3",
-		"typescript": "^6.0.3"
+		"@biomejs/biome": "^2.5.10"
 	},
 	"overrides": {
 		"sharp": "npm:imagemagick@0.1.3"
-	}
+	},
+	"packageManager": "bun@1.4.0"
 }

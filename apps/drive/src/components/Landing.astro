@@ -1,0 +1,33 @@
+---
+import ConnectorMatrix from "@/components/ConnectorMatrix.astro";
+import Cta from "@/components/Cta.astro";
+import Deploy from "@/components/Deploy.astro";
+import FeatureCoverage from "@/components/FeatureCoverage.astro";
+import FitBoundary from "@/components/FitBoundary.astro";
+import Footer from "@/components/Footer.astro";
+import Hero from "@/components/Hero.astro";
+import Nav from "@/components/Nav.astro";
+import Pillars from "@/components/Pillars.astro";
+import type { Lang } from "@/i18n/ui";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+<BaseLayout lang={lang}>
+	<Nav lang={lang} />
+	<main>
+		<Hero lang={lang} />
+		<Pillars lang={lang} />
+		<ConnectorMatrix lang={lang} />
+		<FeatureCoverage lang={lang} />
+		<Deploy lang={lang} />
+		<FitBoundary lang={lang} />
+		<Cta lang={lang} />
+	</main>
+	<Footer lang={lang} />
+</BaseLayout>

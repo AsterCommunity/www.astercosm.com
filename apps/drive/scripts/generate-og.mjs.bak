@@ -1,0 +1,26 @@
+/**
+ * 生成 public/og.png（1200x630）：应用图标底色（深石板 #0F172A）+ 居中 wordmark。
+ * wordmark 更新后重跑：bun run scripts/generate-og.mjs
+ */
+import { readFileSync } from "node:fs";
+import { Resvg } from "@resvg/resvg-js";
+
+const W = 1200;
+const H = 630;
+
+const wordmark = readFileSync("public/brand/asterdrive-light.svg", "utf8")
+	.replace(/^<\?xml[^>]*>\s*/, "")
+	.replace(/^<!--[^>]*-->\s*/, "")
+	.replace(/^<svg[^>]*>/, "")
+	.replace(/<\/svg>\s*$/, "");
+const ogSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
+<rect width="${W}" height="${H}" fill="#0f172a"/>
+<svg x="${(W - 560) / 2}" y="${(H - 219) / 2}" width="560" height="219" viewBox="0 0 3600 1408">${wordmark}</svg>
+</svg>`;
+
+await Bun.write(
+	"public/og.png",
+	Buffer.from(new Resvg(ogSvg).render().asPng()),
+);
+
+console.log("public/og.png generated");

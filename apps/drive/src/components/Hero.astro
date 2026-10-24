@@ -1,0 +1,72 @@
+---
+import heroDarkEn from "@/assets/scenes/hero-dark-en.webp";
+import heroDarkZh from "@/assets/scenes/hero-dark-zh.webp";
+import heroLightEn from "@/assets/scenes/hero-light-en.webp";
+import heroLightZh from "@/assets/scenes/hero-light-zh.webp";
+import { docsUrl, GITHUB_URL, type Lang, t } from "@/i18n/ui";
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const m = t(lang);
+const heroLight = lang === "zh" ? heroLightZh : heroLightEn;
+const heroDark = lang === "zh" ? heroDarkZh : heroDarkEn;
+---
+
+<section class="mx-auto max-w-6xl px-6 pt-20 lg:pt-28">
+	<div class="mx-auto max-w-3xl text-center">
+		<h1
+			class="text-4xl leading-[1.1] font-semibold tracking-tight text-balance sm:text-5xl lg:text-6xl"
+		>
+			{m.hero.title}
+		</h1>
+		<p class="mx-auto mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+			{m.hero.subtitle}
+		</p>
+		<div class="mt-9 flex flex-wrap items-center justify-center gap-3">
+			<a
+				href={docsUrl(lang, "/start/quick-trial/")}
+				class="inline-flex h-11 items-center rounded-lg bg-primary px-6 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+			>
+				{m.hero.primaryCta}
+			</a>
+			<a
+				href={GITHUB_URL}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="inline-flex h-11 items-center rounded-lg bg-surface-2 px-6 text-sm font-medium text-foreground transition-colors hover:bg-muted"
+			>
+				{m.hero.secondaryCta}
+			</a>
+		</div>
+	</div>
+
+	{/* 第一眼就要看到产品长什么样：全宽真实截图，底部 fade 融入背景。
+	    亮主题用亮色面板截图，暗主题用 D9 暖夜色实拍（沙盒实例截取） */}
+	<div class="hero-rise relative mt-16">
+		<div
+			class="overflow-hidden rounded-t-2xl [mask-image:linear-gradient(to_bottom,black_72%,transparent)] [filter:drop-shadow(0_24px_48px_rgba(0,0,0,0.18))] dark:[filter:drop-shadow(0_24px_56px_rgba(0,0,0,0.55))]"
+		>
+			<img
+				src={heroLight.src}
+				alt={m.hero.screenshotAlt}
+				width={1440}
+				height={900}
+				class="h-auto w-full dark:hidden"
+				loading="eager"
+				fetchpriority="high"
+			/>
+			<img
+				src={heroDark.src}
+				alt={m.hero.screenshotAlt}
+				width={1440}
+				height={900}
+				class="hidden h-auto w-full dark:block"
+				loading="eager"
+				fetchpriority="high"
+			/>
+		</div>
+	</div>
+</section>

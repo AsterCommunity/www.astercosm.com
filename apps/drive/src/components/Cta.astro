@@ -1,0 +1,36 @@
+---
+import { docsUrl, type Lang, t } from "@/i18n/ui";
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const m = t(lang);
+---
+
+<section data-reveal class="mx-auto max-w-6xl px-6 pt-8 pb-28 text-center">
+	<h2 class="text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
+		{m.cta.title}
+	</h2>
+	<p class="mx-auto mt-5 max-w-xl leading-relaxed text-muted-foreground">
+		{m.cta.subtitle}
+	</p>
+	<div class="mt-9 flex flex-wrap items-center justify-center gap-3">
+		<a
+			href={docsUrl(lang, "/start/quick-trial/")}
+			class="inline-flex h-11 items-center rounded-lg bg-primary px-6 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+		>
+			{m.cta.primary}
+		</a>
+		<a
+			href={docsUrl(lang, "/")}
+			class="inline-flex h-11 items-center rounded-lg bg-surface-2 px-6 text-sm font-medium text-foreground transition-colors hover:bg-muted"
+		>
+			{m.cta.secondary}
+		</a>
+	</div>
+	<p class="mx-auto mt-10 max-w-xl text-sm leading-relaxed text-muted-foreground">
+		{m.cta.license}
+	</p>
+</section>

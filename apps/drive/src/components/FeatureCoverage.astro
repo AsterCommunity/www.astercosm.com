@@ -1,0 +1,183 @@
+---
+import showcaseAdminEn from "@/assets/scenes/showcase-admin-en.webp";
+import showcaseAdminZh from "@/assets/scenes/showcase-admin-zh.webp";
+import showcaseEditorEn from "@/assets/scenes/showcase-editor-en.webp";
+import showcaseEditorZh from "@/assets/scenes/showcase-editor-zh.webp";
+import showcaseFilesEn from "@/assets/scenes/showcase-files-en.webp";
+import showcaseFilesZh from "@/assets/scenes/showcase-files-zh.webp";
+import showcaseShareEn from "@/assets/scenes/showcase-share-en.webp";
+import showcaseShareZh from "@/assets/scenes/showcase-share-zh.webp";
+import { type Lang, t } from "@/i18n/ui";
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const m = t(lang);
+
+const sceneImages =
+	lang === "zh"
+		? [showcaseFilesZh, showcaseShareZh, showcaseEditorZh, showcaseAdminZh]
+		: [showcaseFilesEn, showcaseShareEn, showcaseEditorEn, showcaseAdminEn];
+---
+
+<section id="coverage" class="mx-auto max-w-6xl scroll-mt-20 px-6 py-24">
+	<h2 class="max-w-2xl text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+		{m.coverage.title}
+	</h2>
+	<p class="mt-5 max-w-2xl leading-relaxed text-muted-foreground">
+		{m.coverage.subtitle}
+	</p>
+
+	{/* 默认（mobile / no-JS / reduced-motion）：静态四组清单 */}
+	<div id="coverage-static" class="mt-14 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+		{
+			m.coverage.groups.map((group) => (
+				<div>
+					<h3 class="text-sm font-medium">{group.title}</h3>
+					<ul class="mt-4 space-y-2.5">
+						{group.items.map((item) => (
+							<li class="flex items-baseline gap-2.5 text-sm text-muted-foreground">
+								<span
+									class="size-1 shrink-0 translate-y-[-2px] rounded-full bg-primary"
+									aria-hidden="true"
+								></span>
+								<span>{item}</span>
+							</li>
+						))}
+					</ul>
+				</div>
+			))
+		}
+	</div>
+
+	{/* 桌面端增强：sticky scroll 展示。左文字右图，滚动推进四组。 */}
+	<div id="coverage-showcase" class="mt-10 hidden">
+		<div id="coverage-track" class="relative" style="height: 380vh">
+			<div class="sticky top-16 flex h-[calc(100vh-4rem)] items-center">
+				<div class="grid w-full grid-cols-2 items-center gap-14">
+					{/* 左：文字面板（绝对堆叠，active 渐显） */}
+					<div class="relative min-h-[22rem]">
+						{
+							m.coverage.groups.map((group, i) => (
+								<div
+									data-panel
+									class="absolute inset-x-0 top-1/2 -translate-y-1/2 opacity-0 transition-all duration-500 [&[data-active]]:pointer-auto [&[data-active]]:translate-y-[-50%] [&[data-active]]:opacity-100"
+									data-active={i === 0 ? "" : undefined}
+								>
+									<span class="font-mono text-sm text-primary">
+										{String(i + 1).padStart(2, "0")}
+									</span>
+									<h3 class="mt-3 text-2xl font-semibold tracking-tight">{group.title}</h3>
+									<p class="mt-3 max-w-md leading-relaxed text-muted-foreground">{group.body}</p>
+									<ul class="mt-6 space-y-2.5">
+										{group.items.map((item) => (
+											<li class="flex items-baseline gap-2.5 text-sm text-muted-foreground">
+												<span
+													class="size-1 shrink-0 translate-y-[-2px] rounded-full bg-primary"
+													aria-hidden="true"
+												></span>
+												<span>{item}</span>
+											</li>
+										))}
+									</ul>
+								</div>
+							))
+						}
+					</div>
+
+					{/* 右：真实 UI 截图（绝对堆叠，交叉渐隐） */}
+					<div class="relative aspect-[8/5] overflow-hidden rounded-2xl bg-surface-2 shadow-2xl shadow-black/10 dark:shadow-black/40">
+						{
+							sceneImages.map((img, i) => (
+								<img
+									src={img.src}
+									alt={`${m.coverage.groups[i]?.title} — AsterDrive UI`}
+									width={1440}
+									height={900}
+									class="absolute inset-0 h-full w-full object-cover object-top opacity-0 transition-opacity duration-500 [&[data-active]]:opacity-100"
+									data-image
+									data-active={i === 0 ? "" : undefined}
+									loading="lazy"
+								/>
+							))
+						}
+					</div>
+				</div>
+
+				{/* 进度点 */}
+				<div class="absolute top-1/2 -left-10 flex -translate-y-1/2 flex-col gap-2" aria-hidden="true">
+					{
+						m.coverage.groups.map((_, i) => (
+							<span
+								data-dot
+								class="size-1.5 rounded-full bg-muted-foreground/30 transition-colors [&[data-active]]:bg-primary"
+								data-active={i === 0 ? "" : undefined}
+							/>
+						))
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+{/* 桌面 + 非 reduced-motion 时启用 sticky scroll；否则保留静态清单。
+    纯 sticky 吸附，不劫持滚动。 */}
+<script>
+	(() => {
+		if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+		const mq = matchMedia("(min-width: 1024px)");
+		const staticView = document.getElementById("coverage-static");
+		const showcase = document.getElementById("coverage-showcase");
+		const track = document.getElementById("coverage-track");
+		if (!staticView || !showcase || !track) return;
+
+		const panels = track.querySelectorAll("[data-panel]");
+		const images = track.querySelectorAll("[data-image]");
+		const dots = track.querySelectorAll("[data-dot]");
+		let active = -1;
+		let live = false;
+		let raf = 0;
+
+		const setActive = (idx: number) => {
+			if (idx === active) return;
+			active = idx;
+			for (const [i, el] of panels.entries()) el.toggleAttribute("data-active", i === idx);
+			for (const [i, el] of images.entries()) el.toggleAttribute("data-active", i === idx);
+			for (const [i, el] of dots.entries()) el.toggleAttribute("data-active", i === idx);
+		};
+
+		const update = () => {
+			raf = 0;
+			const r = track.getBoundingClientRect();
+			const total = r.height - window.innerHeight;
+			if (total <= 0) return;
+			const p = Math.min(1, Math.max(0, -r.top / total));
+			setActive(Math.min(panels.length - 1, Math.floor(p * panels.length)));
+		};
+
+		const onScroll = () => {
+			if (!raf) raf = requestAnimationFrame(update);
+		};
+
+		const apply = () => {
+			const shouldLive = mq.matches;
+			if (shouldLive === live) return;
+			live = shouldLive;
+			staticView.classList.toggle("hidden", live);
+			showcase.classList.toggle("hidden", !live);
+			if (live) {
+				active = -1;
+				update();
+				window.addEventListener("scroll", onScroll, { passive: true });
+			} else {
+				window.removeEventListener("scroll", onScroll);
+			}
+		};
+
+		mq.addEventListener("change", apply);
+		apply();
+	})();
+</script>
