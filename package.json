@@ -20,7 +20,7 @@
 		"capture:scenes": "bun --filter @astercosm/drive capture:scenes"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^2.5.10",
+		"@biomejs/biome": "^2.6.2",
 		"wrangler": "^4.152.0"
 	},
 	"overrides": {

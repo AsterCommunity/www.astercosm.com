@@ -14,9 +14,9 @@
 
 ## 站点
 
-| 站点 | 目录 | 域名 |
-| --- | --- | --- |
-| 组织门面 | `apps/www` | [www.astercosm.com](https://www.astercosm.com) |
+| 站点                  | 目录         | 域名                                               |
+| --------------------- | ------------ | -------------------------------------------------- |
+| 组织门面              | `apps/www`   | [www.astercosm.com](https://www.astercosm.com)     |
 | AsterDrive 产品落地页 | `apps/drive` | [drive.astercosm.com](https://drive.astercosm.com) |
 
 `packages/tokens` 是 `apps/drive` 使用的 AsterDrive D9 设计 token。

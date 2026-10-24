@@ -6,7 +6,6 @@ AsterDrive D9 设计 token 的 landing 分发包。
 
 色值的唯一事实源是 [AsterDrive](https://github.com/AsterCommunity/AsterDrive) 仓库的
 `frontend-panel/src/index.css`（D9 无框化设计体系）。本包：
-
 - 保留 panel 的 oklch 色值，只做语义重命名（`surface-1/2/3` 三级明度台阶）。一处有意的偏离：
   亮色 `surface-2` 取 panel 的 `muted`（0.955）而非 `sidebar`（0.972）——sidebar 是持久区域的
   低对比分区，landing 大色带需要可辨的明度台阶

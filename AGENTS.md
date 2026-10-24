@@ -28,7 +28,8 @@ bun run capture:scenes -- --binary /path/to/aster_drive   # drive 的截图管�
 ```
 
 工程要点：
-
+- `bunfig.toml` 设了 `install.minimumReleaseAge = 86400`：发布不满 24 小时的 npm
+  版本不装（供应链冷静期）；豁免走 `minimumReleaseAgeExcludes`，别删这条。
 - `packageManager` 的 bun 版本必须与本地工具链对齐：bun 1.4 生成的 `bun.lock`
   （lockfileVersion 2）不被 bun ≤1.3 识别，CI 的 `oven-sh/setup-bun` 按 `packageManager`
   字段装版本，错位直接炸 `--frozen-lockfile`。
@@ -44,7 +45,6 @@ bun run capture:scenes -- --binary /path/to/aster_drive   # drive 的截图管�
 ## 设计与内容不变量
 
 两站同源的已确立决策，任何页面文案与视觉修改都要守住：
-
 1. **面向用户，不是面向工程师**。第一屏只允许用户语言：禁止版本号、技术栈、协议名、
    内部代号、许可证罗列。工程深度随滚动展开。
 2. **物料必须产品原生**。只用真实 UI 截图、真实命令、真实后端列表与自绘品牌元素。
@@ -57,7 +57,6 @@ bun run capture:scenes -- --binary /path/to/aster_drive   # drive 的截图管�
    的 `src/i18n/ui.ts`；语言切换保持当前页并写 `localStorage.lang`。
 
 app 差异：
-
 - **apps/www**：站点无 JS 框架运行时（无 React/Vue 岛屿），确需交互组件时先论证
   vanilla 为何不够；视觉 token 唯一事实源 `src/styles/tokens.css`（D9 骨架 + ESAP
   三色 accent，色值不发明，见文件头注释）；`/projects/` 是策展视图（完整列表在 GitHub
@@ -73,14 +72,14 @@ app 差异：
 
 以下素材从 AsterDrive 仓库复制，更新时手工同步并在 commit message 注明对应 revision：
 
-| 本站路径 | 来源 |
-| --- | --- |
-| `apps/drive/public/brand/` | `frontend-panel/public/static/asterdrive/` |
-| `apps/drive/public/connectors/` | `frontend-panel/public/static/storage/`（厂商 logo，后期统一徽标后随源更新） |
-| `apps/drive/public/.well-known/security.txt` | `docs/public/.well-known/security.txt` |
-| `apps/drive/src/i18n/connectors.ts` | `docs/generated/storage-connectors.json` + `src/storage/connectors/*.rs`（badge_rgb） |
-| `apps/drive/public/favicon.svg` | `frontend-panel/public/favicon.svg` 的**本地变体**（背景圆→方，rx=64）；源图标改版时需手工同步 |
-| `apps/drive/public/connectors/asterfollower.svg`、`local-disk.svg`、`sftp-server.svg` | landing 自绘 |
+| 本站路径                                                                              | 来源                                                                                           |
+| ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `apps/drive/public/brand/`                                                            | `frontend-panel/public/static/asterdrive/`                                                     |
+| `apps/drive/public/connectors/`                                                       | `frontend-panel/public/static/storage/`（厂商 logo，后期统一徽标后随源更新）                   |
+| `apps/drive/public/.well-known/security.txt`                                          | `docs/public/.well-known/security.txt`                                                         |
+| `apps/drive/src/i18n/connectors.ts`                                                   | `docs/generated/storage-connectors.json` + `src/storage/connectors/*.rs`（badge_rgb）          |
+| `apps/drive/public/favicon.svg`                                                       | `frontend-panel/public/favicon.svg` 的**本地变体**（背景圆→方，rx=64）；源图标改版时需手工同步 |
+| `apps/drive/public/connectors/asterfollower.svg`、`local-disk.svg`、`sftp-server.svg` | landing 自绘                                                                                   |
 
 截图资产管线（`apps/drive/src/assets/scenes/`）：由 `scripts/capture-scenes.mts` 生成，
 AsterDrive 前端更新后 `bun run capture:scenes -- --binary /path/to/aster_drive` 一键刷新；
@@ -88,11 +87,11 @@ AsterDrive 前端更新后 `bun run capture:scenes -- --binary /path/to/aster_dr
 
 ### apps/www
 
-| 本站路径 | 来源 |
-| --- | --- |
-| `apps/www/src/assets/scenes/hero-*-*.webp` | 复制自 `apps/drive/src/assets/scenes/`（同仓；drive 截图管线刷新后重新复制） |
+| 本站路径                                           | 来源                                                                                                                                                  |
+| -------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `apps/www/src/assets/scenes/hero-*-*.webp`         | 复制自 `apps/drive/src/assets/scenes/`（同仓；drive 截图管线刷新后重新复制）                                                                          |
 | `apps/www/src/assets/scenes/esap-home-dark-*.webp` | 本 app `scripts/capture-esap.mts` 从线上 weare.esaps.net 实拍；WeAreESAP 前端更新后重跑 `bun run capture:esap`，并在 commit message 注明对方 revision |
-| `apps/www/public/og.png`、`apple-touch-icon.png` | 已入库的静态品牌素材；改版时直接替换产物并保留尺寸/品牌 token 约束 |
+| `apps/www/public/og.png`、`apple-touch-icon.png`   | 已入库的静态品牌素材；改版时直接替换产物并保留尺寸/品牌 token 约束                                                                                    |
 
 ## 部署
 

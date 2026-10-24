@@ -14,9 +14,9 @@
 
 ## Sites
 
-| Site | Directory | Domain |
-| --- | --- | --- |
-| Organization homepage | `apps/www` | [www.astercosm.com](https://www.astercosm.com) |
+| Site                    | Directory    | Domain                                             |
+| ----------------------- | ------------ | -------------------------------------------------- |
+| Organization homepage   | `apps/www`   | [www.astercosm.com](https://www.astercosm.com)     |
 | AsterDrive landing page | `apps/drive` | [drive.astercosm.com](https://drive.astercosm.com) |
 
 `packages/tokens` holds the AsterDrive D9 design tokens shared by `apps/drive`.
