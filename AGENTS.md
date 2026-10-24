@@ -69,15 +69,40 @@ app 差异：
 
 ## 素材同步
 
-从 AsterDrive 主仓库复制的素材、自绘图标、两条截图管线的完整清单和刷新流程见
-[README.md](README.md)「素材同步约定」。
+### apps/drive（来源：AsterDrive 主仓库）
+
+以下素材从 AsterDrive 仓库复制，更新时手工同步并在 commit message 注明对应 revision：
+
+| 本站路径 | 来源 |
+| --- | --- |
+| `apps/drive/public/brand/` | `frontend-panel/public/static/asterdrive/` |
+| `apps/drive/public/connectors/` | `frontend-panel/public/static/storage/`（厂商 logo，后期统一徽标后随源更新） |
+| `apps/drive/public/.well-known/security.txt` | `docs/public/.well-known/security.txt` |
+| `apps/drive/src/i18n/connectors.ts` | `docs/generated/storage-connectors.json` + `src/storage/connectors/*.rs`（badge_rgb） |
+| `apps/drive/public/favicon.svg` | `frontend-panel/public/favicon.svg` 的**本地变体**（背景圆→方，rx=64）；源图标改版时需手工同步 |
+| `apps/drive/public/connectors/asterfollower.svg`、`local-disk.svg`、`sftp-server.svg` | landing 自绘 |
+
+截图资产管线（`apps/drive/src/assets/scenes/`）：由 `scripts/capture-scenes.mts` 生成，
+AsterDrive 前端更新后 `bun run capture:scenes -- --binary /path/to/aster_drive` 一键刷新；
+截图脚本使用本机 ImageMagick 做格式转换，部署构建不需要图像处理运行时。
+
+### apps/www
+
+| 本站路径 | 来源 |
+| --- | --- |
+| `apps/www/src/assets/scenes/hero-*-*.webp` | 复制自 `apps/drive/src/assets/scenes/`（同仓；drive 截图管线刷新后重新复制） |
+| `apps/www/src/assets/scenes/esap-home-dark-*.webp` | 本 app `scripts/capture-esap.mts` 从线上 weare.esaps.net 实拍；WeAreESAP 前端更新后重跑 `bun run capture:esap`，并在 commit message 注明对方 revision |
+| `apps/www/public/og.png`、`apple-touch-icon.png` | 已入库的静态品牌素材；改版时直接替换产物并保留尺寸/品牌 token 约束 |
 
 ## 部署
 
 `main` 推送 → GitHub Actions 构建全部站点 → `wrangler deploy` 到 Cloudflare Workers
 （`astercosm-www` → www.astercosm.com，`asterdrive-landing` → drive.astercosm.com）。
 Worker 与自定义域名配置在各自 `wrangler.jsonc`，不手动编辑生成产物；DNS、zone 与
-Cloudflare 账号侧设置由仓库所有者管理，首次迁移切换清单见 README「部署」。
+Cloudflare 账号侧设置由仓库所有者管理。前置：GitHub secrets `CLOUDFLARE_API_TOKEN`
+（Account → Workers Scripts → Admin + Zone → DNS → Write + Workers Routes → Write）与
+`CLOUDFLARE_ACCOUNT_ID`。接入新站点：新建 `apps/<name>/`（Astro 站点 + `wrangler.jsonc`），
+在 `deploy.yml` 加一个部署步骤即可。
 
 ## License
 
