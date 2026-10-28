@@ -10,6 +10,7 @@
   <a href="https://www.astercosm.com/"><img alt="Website" src="https://img.shields.io/badge/site-www.astercosm.com-2563EB?style=for-the-badge"></a>
   <a href="https://drive.astercosm.com/"><img alt="AsterDrive" src="https://img.shields.io/badge/site-drive.astercosm.com-7C3AED?style=for-the-badge"></a>
   <a href="https://gate.astercosm.com/"><img alt="AsterGate" src="https://img.shields.io/badge/site-gate.astercosm.com-3B82F6?style=for-the-badge"></a>
+  <a href="https://forge.astercosm.com/"><img alt="AsterForge" src="https://img.shields.io/badge/site-forge.astercosm.com-0F766E?style=for-the-badge"></a>
   <a href="README.zh.md"><img alt="中文 README" src="https://img.shields.io/badge/README-中文-E11D48?style=for-the-badge"></a>
 </p>
 
@@ -20,8 +21,10 @@
 | Organization homepage   | `apps/www`   | [www.astercosm.com](https://www.astercosm.com)     |
 | AsterDrive landing page | `apps/drive` | [drive.astercosm.com](https://drive.astercosm.com) |
 | AsterGate teaser page   | `apps/gate`  | [gate.astercosm.com](https://gate.astercosm.com)   |
+| AsterForge landing page | `apps/forge` | [forge.astercosm.com](https://forge.astercosm.com) |
 
 `packages/tokens` holds the AsterDrive D9 design tokens shared by `apps/drive` and `apps/gate`.
+`apps/forge` carries AsterForge's own brand palette in its own `src/styles/tokens.css`.
 
 These are marketing surfaces, not product code — the products live in
 [AsterDrive](https://github.com/AsterCommunity/AsterDrive). Engineering and content
@@ -31,10 +34,11 @@ guidelines are documented in [AGENTS.md](AGENTS.md).
 
 ```bash
 bun install
-bun run dev            # all three sites in parallel: www 4321 / drive 4322 / gate 4323
+bun run dev            # all four sites in parallel: www 4321 / drive 4322 / gate 4323 / forge 4324
 bun run dev:www        # www only
 bun run dev:drive      # drive only
 bun run dev:gate       # gate only
+bun run dev:forge      # forge only
 bun run build          # build all sites into apps/*/dist
 bun run check          # biome + astro check for every app, all green or nothing
 bun run capture:esap    # ESAP screenshot pipeline (needs local ImageMagick)

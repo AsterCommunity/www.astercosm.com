@@ -1,0 +1,73 @@
+/**
+ * AsterForge 落地页设计 token。
+ *
+ * 事实源：AsterForge 主仓库 docs/.vitepress/theme/custom.css 的品牌色板与
+ * docs/public/favicon.svg 的标识色（2026-10 快照）。
+ *
+ * 与另两站的关系：本文件只负责 AsterForge 自己的品牌色相（青 teal + 琥珀 amber），
+ * 不复用 @astercosm/tokens 的 D9 蓝——那是 AsterDrive 的色板。AsterForge 有自己的
+ * 标识色（青 + 琥珀），用别的色相会与本站 logo 打架。
+ *
+ * 层级命名（surface-1/2/3、foreground、muted-foreground、border、ring、radius）
+ * 与另两站保持同构，组件写法可以互相参照。
+ *
+ * 色值换算：源文件用十六进制，本文件统一转成 oklch，注释里保留原始 hex 便于回溯。
+ */
+
+:root {
+	color-scheme: light;
+
+	/* 中性层：带极轻的青绿倾向，跟随品牌而不是纯灰 */
+	--surface-1: oklch(0.9848 0.0044 179.74); /* #f7fbfa */
+	--surface-2: oklch(0.9636 0.0089 179.6); /* #edf5f3 */
+	--surface-3: oklch(1 0 0); /* #ffffff */
+
+	--foreground: oklch(0.2101 0.0318 264.66); /* #111827 */
+	--muted: oklch(0.9636 0.0089 179.6); /* #edf5f3 */
+	--muted-foreground: oklch(0.4455 0.0374 257.28); /* #475569 */
+	--faint-foreground: oklch(0.5544 0.0407 257.42); /* #64748b */
+
+	/* 品牌主色：teal。深浅两档分别取自文档站的 brand-1 */
+	--primary: oklch(0.5109 0.0861 186.39); /* #0f766e */
+	--primary-hover: oklch(0.6002 0.1038 184.7); /* #0d9488 */
+	--primary-strong: oklch(0.3861 0.059 188.42); /* #134e4a */
+	--primary-foreground: oklch(1 0 0); /* #ffffff */
+
+	/* 品牌辅色：amber，只用于点缀，不做大面积背景 */
+	--accent: oklch(0.5553 0.1455 49); /* #b45309 */
+	--accent-bright: oklch(0.7686 0.1647 70.08); /* #f59e0b */
+	--accent-foreground: oklch(1 0 0);
+
+	--destructive: oklch(0.577 0.245 27.325);
+
+	--border: oklch(0.885 0.014 179.6); /* teal 调 12% */
+	--ring: oklch(0.5109 0.0861 186.39);
+
+	--radius: 0.75rem;
+}
+
+.dark {
+	color-scheme: dark;
+
+	/* 墨绿黑：与标识同色系，浅色标识浮在深底上 */
+	--surface-1: oklch(0.1634 0.0142 187.4); /* #07100f */
+	--surface-2: oklch(0.1937 0.0161 188.76); /* #0c1716 */
+	--surface-3: oklch(0.2155 0.0159 189); /* #111c1b */
+
+	--foreground: oklch(0.9823 0.0078 177.33); /* #f4fbf9 */
+	--muted: oklch(0.1937 0.0161 188.76);
+	--muted-foreground: oklch(0.8662 0.0177 183.47); /* #c7d7d4 */
+	--faint-foreground: oklch(0.7107 0.0351 256.79); /* #94a3b8 */
+
+	--primary: oklch(0.7845 0.1325 181.91); /* #2dd4bf */
+	--primary-hover: oklch(0.8549 0.1251 181.07); /* #5eead4 */
+	--primary-strong: oklch(0.91 0.0927 180.43); /* #99f6e4 */
+	--primary-foreground: oklch(0.1634 0.0142 187.4); /* #07100f */
+
+	--accent: oklch(0.7686 0.1647 70.08); /* #f59e0b */
+	--accent-bright: oklch(0.7686 0.1647 70.08);
+	--accent-foreground: oklch(0.1634 0.0142 187.4);
+
+	--border: oklch(1 0 0 / 14%);
+	--ring: oklch(0.7845 0.1325 181.91);
+}

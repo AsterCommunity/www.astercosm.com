@@ -1,0 +1,19 @@
+// Cloudflare Workers 静态资产配置（assets-only Worker，无运行时代码）。
+// 自定义域名走 custom_domain 路由，要求 astercosm.com zone 已接入同一 Cloudflare 账号；
+// 部署由根 .github/workflows/deploy.yml 用 CLOUDFLARE_API_TOKEN / CLOUDFLARE_ACCOUNT_ID 驱动。
+// public/_redirects 把 /guide、/crates、/en 的旧文档书签 301 到 forge.docs.astercosm.com。
+{
+	"name": "asterforge-landing",
+	"compatibility_date": "2026-10-01",
+	"assets": {
+		"directory": "./dist",
+		"html_handling": "auto-trailing-slash",
+		"not_found_handling": "404-page"
+	},
+	"routes": [
+		{
+			"pattern": "forge.astercosm.com",
+			"custom_domain": true
+		}
+	]
+}

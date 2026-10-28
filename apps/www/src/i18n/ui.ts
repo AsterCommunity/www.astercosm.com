@@ -18,6 +18,8 @@ export const YGGDRASIL_URL = "https://github.com/AsterCommunity/AsterYggdrasil";
 export const ASTERGIT_URL = "https://github.com/AsterCommunity/AsterGit";
 export const ASTERGATE_URL = "https://github.com/AsterCommunity/AsterGate";
 export const GATE_URL = "https://gate.astercosm.com";
+export const FORGE_URL = "https://forge.astercosm.com";
+export const FORGE_DOCS_URL = "https://forge.docs.astercosm.com";
 
 /** 站内语言切换目标路径（根页） */
 export function localizedPath(lang: Lang): string {
@@ -181,6 +183,7 @@ const en = {
 						tagline:
 							"Shared Rust runtime foundation and infrastructure kernel for Aster services.",
 						href: "https://github.com/AsterCommunity/AsterForge",
+						site: FORGE_URL,
 						tech: "Rust",
 					},
 					{
@@ -384,6 +387,8 @@ const en = {
 			archive: "Archive",
 			driveSite: "AsterDrive",
 			driveDocs: "AsterDrive docs",
+			forgeSite: "AsterForge",
+			forgeDocs: "AsterForge docs",
 			source: "Site source",
 			github: "GitHub",
 			characterArchive: "Character archive",
@@ -539,6 +544,7 @@ const zh: Messages = {
 						name: "AsterForge",
 						tagline: "Aster 服务共享的 Rust 运行时底座与基础设施内核",
 						href: "https://github.com/AsterCommunity/AsterForge",
+						site: FORGE_URL,
 						tech: "Rust",
 					},
 					{
@@ -732,6 +738,8 @@ const zh: Messages = {
 			archive: "档案",
 			driveSite: "AsterDrive",
 			driveDocs: "AsterDrive 文档",
+			forgeSite: "AsterForge",
+			forgeDocs: "AsterForge 文档",
 			source: "本站源码",
 			github: "GitHub",
 			characterArchive: "角色档案",

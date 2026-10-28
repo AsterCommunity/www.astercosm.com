@@ -1,0 +1,64 @@
+---
+import { DOCS_URL, type Lang, t } from "@/i18n/ui";
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const m = t(lang);
+
+const referenceUrl =
+	lang === "zh"
+		? `${DOCS_URL}/guide/reference-projects`
+		: `${DOCS_URL}/en/guide/reference-projects`;
+---
+
+<section data-reveal class="mx-auto max-w-6xl px-6 py-20 lg:py-24">
+	<div class="max-w-3xl">
+		<p class="font-mono text-sm text-primary">{m.reference.kicker}</p>
+		<h2 class="mt-4 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+			{m.reference.title}
+		</h2>
+		<p class="mt-5 leading-relaxed text-muted-foreground">{m.reference.body}</p>
+	</div>
+
+	<div class="mt-12 grid gap-6 md:grid-cols-2">
+		{
+			m.reference.items.map((item) => (
+				<a
+					href={item.href}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="group flex flex-col justify-between rounded-xl border border-border bg-surface-2 p-7 transition-colors hover:border-primary/40"
+				>
+					<div>
+						<h3 class="flex items-center justify-between gap-3 text-2xl font-semibold tracking-tight">
+							{item.name}
+							<span
+								class="text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-primary motion-reduce:transform-none"
+								aria-hidden="true"
+							>
+								↗
+							</span>
+						</h3>
+						<p class="mt-4 text-sm leading-relaxed text-muted-foreground">{item.body}</p>
+					</div>
+					<p class="mt-8 font-mono text-xs text-faint-foreground">
+						github.com/AsterCommunity/{item.name}
+					</p>
+				</a>
+			))
+		}
+	</div>
+
+	<a
+		href={referenceUrl}
+		target="_blank"
+		rel="noopener noreferrer"
+		class="mt-8 inline-flex items-center gap-1.5 text-sm text-primary transition-opacity hover:opacity-80"
+	>
+		{m.reference.cta}
+		<span aria-hidden="true">↗</span>
+	</a>
+</section>

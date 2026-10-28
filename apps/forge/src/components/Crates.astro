@@ -1,0 +1,79 @@
+---
+import { crateGroups, DOCS_URL, type Lang, t } from "@/i18n/ui";
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const m = t(lang);
+
+/**
+ * 组件链接指向 rustdoc 的真实 crate 页面（/crates/rustdoc/<crate>/），
+ * 而不是文档站的 /crates/<crate>——后者只有中文版，且讲的是用法不是 API。
+ * rustdoc 由 docs 构建脚本 publish-rustdoc.mjs 生成，路径稳定。
+ */
+const crateDocUrl = (name: string) => `${DOCS_URL}/crates/rustdoc/${name}/`;
+
+const groups = [
+	{ key: "runtime", items: crateGroups.runtime.items },
+	{ key: "web", items: crateGroups.web.items },
+	{ key: "data", items: crateGroups.data.items },
+	{ key: "storage", items: crateGroups.storage.items },
+	{ key: "utilities", items: crateGroups.utilities.items },
+	{ key: "auth", items: crateGroups.auth.items },
+] as const;
+---
+
+<section id="crates" data-reveal class="scroll-mt-16 bg-surface-2">
+	<div class="mx-auto max-w-6xl px-6 py-20 lg:py-24">
+		{/* 标题与说明并排在顶部，目录整块铺开——目录本身才是这一节的内容 */}
+		<div class="grid gap-6 lg:grid-cols-2 lg:items-end lg:gap-16">
+			<div>
+				<p class="font-mono text-sm text-primary">{m.crates.kicker}</p>
+				<h2 class="mt-4 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+					{m.crates.title}
+				</h2>
+			</div>
+			<div>
+				<p class="leading-relaxed text-muted-foreground">{m.crates.body}</p>
+				<a
+					href={`${DOCS_URL}/crates/rustdoc/`}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="mt-5 inline-flex items-center gap-1.5 text-sm text-primary transition-opacity hover:opacity-80"
+				>
+					{m.crates.docsCta}
+					<span aria-hidden="true">↗</span>
+				</a>
+			</div>
+		</div>
+
+		{/* 目录按 README 的 Areas 分组，名字与数量取自 Cargo.toml workspace */}
+		<div class="mt-14 grid gap-x-10 gap-y-8 sm:grid-cols-2 xl:grid-cols-3">
+			{
+				groups.map((group) => (
+					<div class="min-w-0">
+						<h3 class="font-mono text-xs tracking-wide text-muted-foreground uppercase">
+							{m.crates.groups[group.key]}
+						</h3>
+						<ul class="mt-4 space-y-2">
+							{group.items.map((item) => (
+								<li>
+									<a
+										href={crateDocUrl(item.name)}
+										target="_blank"
+										rel="noopener noreferrer"
+										class="block font-mono text-[13px] break-all text-foreground transition-colors hover:text-primary"
+									>
+										{item.name}
+									</a>
+								</li>
+							))}
+						</ul>
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>

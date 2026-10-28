@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <title>AsterForge</title>
+  <rect width="1200" height="630" fill="#07100f"/>
+
+  <!-- 双色发丝线：与首屏 brand-rule 同一组色 -->
+  <rect x="0" y="0" width="600" height="4" fill="#2dd4bf"/>
+  <rect x="600" y="0" width="600" height="4" fill="#f59e0b"/>
+
+  <g transform="translate(80 92) scale(1.75)">
+    <rect width="64" height="64" rx="14" fill="#0c1716"/>
+    <path d="M18 45V17h30v8H27v5h18v8H27v7z" fill="#5eead4"/>
+    <path d="M18 45h30v-8H27v-5H18z" fill="#f59e0b"/>
+  </g>
+
+  <g font-family="Helvetica, Arial, sans-serif">
+    <text x="80" y="290" fill="#5eead4" font-size="34" font-weight="700" letter-spacing="2">ASTERFORGE</text>
+    <text x="80" y="378" fill="#f4fbf9" font-size="66" font-weight="700">Shared runtime for</text>
+    <text x="80" y="456" fill="#f4fbf9" font-size="66" font-weight="700">Aster services.</text>
+    <path d="M80 500H1120" stroke="#5eead4" stroke-opacity="0.28"/>
+    <text x="80" y="556" fill="#c7d7d4" font-size="26">forge.astercosm.com</text>
+    <text x="1120" y="556" text-anchor="end" fill="#f59e0b" font-size="24">AsterCosmos</text>
+  </g>
+</svg>

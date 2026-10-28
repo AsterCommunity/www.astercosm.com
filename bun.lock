@@ -31,6 +31,21 @@
         "typescript": "^6.0.3",
       },
     },
+    "apps/forge": {
+      "name": "@astercosm/forge",
+      "version": "0.1.0",
+      "dependencies": {
+        "@astrojs/sitemap": "^3.7.4",
+        "astro": "^7.4.2",
+      },
+      "devDependencies": {
+        "@astrojs/check": "^0.9.12",
+        "@fontsource-variable/geist": "^5.3.0",
+        "@tailwindcss/vite": "^4.3.3",
+        "tailwindcss": "^4.3.3",
+        "typescript": "^6.0.3",
+      },
+    },
     "apps/gate": {
       "name": "@astercosm/gate",
       "version": "0.1.0",
@@ -73,6 +88,8 @@
   },
   "packages": {
     "@astercosm/drive": ["@astercosm/drive@workspace:apps/drive"],
+
+    "@astercosm/forge": ["@astercosm/forge@workspace:apps/forge"],
 
     "@astercosm/gate": ["@astercosm/gate@workspace:apps/gate"],
 

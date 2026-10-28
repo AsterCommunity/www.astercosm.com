@@ -1,0 +1,65 @@
+---
+import CodeBlock from "@/components/CodeBlock.astro";
+import { entrypointLines } from "@/i18n/code";
+import { DOCS_URL, type Lang, t } from "@/i18n/ui";
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const m = t(lang);
+const docsHome = lang === "zh" ? `${DOCS_URL}/` : `${DOCS_URL}/en/`;
+---
+
+<section class="mx-auto max-w-6xl px-6 pt-20 pb-16 lg:pt-28 lg:pb-20">
+	<div class="mx-auto max-w-3xl text-center">
+		{/* 品牌双色标记：青 + 琥珀，与 logo 同源，不是插画 */}
+		<p class="flex items-center justify-center gap-2 font-mono text-sm text-muted-foreground">
+			<span class="inline-block size-1.5 rounded-full bg-primary" aria-hidden="true"></span>
+			<span class="inline-block size-1.5 rounded-full bg-accent-bright" aria-hidden="true"></span>
+			<span class="ml-2">{m.hero.kicker}</span>
+		</p>
+
+		<h1
+			class="mt-6 text-4xl leading-[1.08] font-semibold tracking-tight text-balance sm:text-5xl lg:text-6xl"
+		>
+			{m.hero.title}
+		</h1>
+		<p class="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+			{m.hero.subtitle}
+		</p>
+
+		<div class="mt-9 flex flex-wrap items-center justify-center gap-3">
+			<a
+				href={docsHome}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="inline-flex h-11 items-center gap-2 rounded-lg bg-primary px-6 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary-hover"
+			>
+				{m.hero.primaryCta}
+				<span aria-hidden="true">↗</span>
+			</a>
+			<a
+				href="#crates"
+				class="inline-flex h-11 items-center rounded-lg bg-surface-2 px-6 text-sm font-medium text-foreground transition-colors hover:bg-muted"
+			>
+				{m.hero.secondaryCta}
+			</a>
+		</div>
+
+		<p class="mt-8 font-mono text-xs text-faint-foreground">{m.hero.note}</p>
+	</div>
+
+	{/* 物料必须产品原生：库没有 UI，它的原生物料就是代码。
+	    这里放 README 里的真实入口示例，而不是示意图或 mockup。 */}
+	<div class="hero-rise mt-16 lg:mt-20">
+		<div class="mx-auto w-fit max-w-full">
+			<div class="mb-3 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+				<p class="font-mono text-xs text-muted-foreground">{m.code.label}</p>
+				<p class="text-xs text-faint-foreground">{m.code.caption}</p>
+			</div>
+			<CodeBlock lines={entrypointLines} label={m.code.label} />
+		</div>
+	</div>
+</section>

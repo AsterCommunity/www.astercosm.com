@@ -1,0 +1,31 @@
+---
+import Boundary from "@/components/Boundary.astro";
+import Crates from "@/components/Crates.astro";
+import Cta from "@/components/Cta.astro";
+import Footer from "@/components/Footer.astro";
+import Hero from "@/components/Hero.astro";
+import Nav from "@/components/Nav.astro";
+import Reference from "@/components/Reference.astro";
+import Start from "@/components/Start.astro";
+import type { Lang } from "@/i18n/ui";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+<BaseLayout lang={lang}>
+	<Nav lang={lang} />
+	<main id="main">
+		<Hero lang={lang} />
+		<Crates lang={lang} />
+		<Boundary lang={lang} />
+		<Start lang={lang} />
+		<Reference lang={lang} />
+		<Cta lang={lang} />
+	</main>
+	<Footer lang={lang} />
+</BaseLayout>

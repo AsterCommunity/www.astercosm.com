@@ -14,6 +14,7 @@
 apps/www/           @astercosm/www — www.astercosm.com 组织门面（无 JS 框架运行时）
 apps/drive/         @astercosm/drive — drive.astercosm.com 产品落地页（React 折叠线以下岛屿）
 apps/gate/          @astercosm/gate — gate.astercosm.com AsterGate 预告页（无 JS 框架运行时）
+apps/forge/         @astercosm/forge — forge.astercosm.com AsterForge 落地页（无 JS 框架运行时）
 packages/tokens/    @astercosm/tokens — AsterDrive D9 设计 token 语义映射（drive、gate 依赖）
 ```
 
@@ -21,8 +22,8 @@ packages/tokens/    @astercosm/tokens — AsterDrive D9 设计 token 语义映�
 
 ```bash
 bun install
-bun run dev                   # 三站并行：www 4321 / drive 4322 / gate 4323
-bun run dev:www / dev:drive / dev:gate   # 单独拉起某一站
+bun run dev                   # 四站并行：www 4321 / drive 4322 / gate 4323 / forge 4324
+bun run dev:www / dev:drive / dev:gate / dev:forge   # 单独拉起某一站
 bun run build                 # 构建全部站点
 bun run check                 # biome + 全部 app 的 astro check（必须全绿才算完）
 bun run capture:esap          # www 的 ESAP 实拍管线（见 README）
@@ -69,6 +70,11 @@ app 差异：
   源是 AsterDrive `frontend-panel/src/index.css`（D9 体系），`packages/tokens` 只做
   语义映射与裁剪，色值不发明；connector 展示数据 `src/i18n/connectors.ts`（快照来源
   见文件头注释）。
+- **apps/forge**：视觉 token 唯一事实源 `src/styles/tokens.css`，取自 AsterForge 主仓库
+  `docs/.vitepress/theme/custom.css` 的自有品牌色板（青 teal + 琥珀 amber，墨绿黑底）。
+  **不共用 `packages/tokens` 的 D9 蓝**——那是 AsterDrive 的色板，与 Forge 自己的标识
+  冲突。物料例外：库没有 UI，其原生物料是代码与 crate 目录，代码样例在
+  `src/i18n/code.ts`（事实源为 Forge 仓库 README，token 手工标注，不跑高亮器）。
 
 ## 素材同步
 
@@ -97,15 +103,31 @@ AsterDrive 前端更新后 `bun run capture:scenes -- --binary /path/to/aster_dr
 | `apps/www/src/assets/scenes/esap-home-dark-*.webp` | 本 app `scripts/capture-esap.mts` 从线上 weare.esaps.net 实拍；WeAreESAP 前端更新后重跑 `bun run capture:esap`，并在 commit message 注明对方 revision |
 | `apps/www/public/og.png`、`apple-touch-icon.png`   | 已入库的静态品牌素材；改版时直接替换产物并保留尺寸/品牌 token 约束                                                                                    |
 
+### apps/forge（来源：AsterForge 主仓库）
+
+| 本站路径                           | 来源                                                                                         |
+| ---------------------------------- | -------------------------------------------------------------------------------------------- |
+| `apps/forge/public/favicon.svg`    | `docs/public/favicon.svg`（Forge 自有标识：青 + 琥珀，墨绿黑底）                             |
+| `apps/forge/src/styles/tokens.css` | `docs/.vitepress/theme/custom.css` 的品牌色板（hex→oklch 换算，文件头保留原值）              |
+| `apps/forge/src/i18n/code.ts`      | 仓库 README 的入口示例与 `cargo generate` 命令（逐 token 手工标注）                          |
+| `apps/forge/src/i18n/ui.ts`        | crate 目录取自 `Cargo.toml` workspace members（32 个）；分组沿用 README 的 Areas 口径        |
+| `apps/forge/public/og.svg`、`.png` | 自绘：复用 `docs/public/favicon.svg` 的标识形状与品牌色，PNG 由 `rsvg-convert` 渲染 1200×630 |
+
 ## 部署
 
 `main` 推送 → GitHub Actions 构建全部站点 → `wrangler deploy` 到 Cloudflare Workers
-（`astercosm-www` → www.astercosm.com，`asterdrive-landing` → drive.astercosm.com）。
+（`astercosm-www` → www.astercosm.com，`asterdrive-landing` → drive.astercosm.com，
+`astergate-landing` → gate.astercosm.com，`asterforge-landing` → forge.astercosm.com）。
 Worker 与自定义域名配置在各自 `wrangler.jsonc`，不手动编辑生成产物；DNS、zone 与
 Cloudflare 账号侧设置由仓库所有者管理。前置：GitHub secrets `CLOUDFLARE_API_TOKEN`
 （Account → Workers Scripts → Admin + Zone → DNS → Write + Workers Routes → Write）与
 `CLOUDFLARE_ACCOUNT_ID`。接入新站点：新建 `apps/<name>/`（Astro 站点 + `wrangler.jsonc`），
 在 `deploy.yml` 加一个部署步骤即可。
+
+`forge.astercosm.com` 此前承载 AsterForge 文档站（GitHub Pages），文档已于 Forge 仓库
+`fd06ec4` 迁至 `forge.docs.astercosm.com`。因此旧文档书签路径（`/guide`、`/crates`、
+`/en`）在本域名下已无对应内容；按当前决定不保留跳转（不做 `_redirects`），站内所有
+文档链接一律指向 `forge.docs.astercosm.com`。
 
 ## License
 

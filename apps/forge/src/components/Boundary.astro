@@ -1,0 +1,79 @@
+---
+import { DOCS_URL, type Lang, t } from "@/i18n/ui";
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const m = t(lang);
+
+const principlesUrl =
+	lang === "zh"
+		? `${DOCS_URL}/guide/integration-principles`
+		: `${DOCS_URL}/en/guide/`;
+---
+
+<section id="boundary" data-reveal class="scroll-mt-16">
+	<div class="mx-auto max-w-6xl px-6 py-20 lg:py-24">
+		{/* 通栏标题 + 左右对开的硬边界。左边是底座（品牌色），
+		    右边是产品（中性色），两栏之间不留模糊地带。 */}
+		<div class="max-w-3xl">
+			<p class="font-mono text-sm text-primary">{m.boundary.kicker}</p>
+			<h2 class="mt-4 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+				{m.boundary.title}
+			</h2>
+			<p class="mt-5 leading-relaxed text-muted-foreground">{m.boundary.body}</p>
+		</div>
+
+		<div class="mt-12 grid gap-6 sm:grid-cols-2">
+			<div class="rounded-xl border border-primary/25 bg-surface-2 p-6">
+				<h3 class="font-mono text-xs tracking-wide text-primary uppercase">
+					{m.boundary.ours.title}
+				</h3>
+				<ul class="mt-5 space-y-3">
+					{
+						m.boundary.ours.items.map((item) => (
+							<li class="flex gap-3 text-sm leading-relaxed">
+								<span
+									class="mt-[7px] size-1.5 shrink-0 rounded-full bg-primary"
+									aria-hidden="true"
+								/>
+								<span>{item}</span>
+							</li>
+						))
+					}
+				</ul>
+			</div>
+
+			<div class="rounded-xl border border-border bg-surface-2 p-6">
+				<h3 class="font-mono text-xs tracking-wide text-muted-foreground uppercase">
+					{m.boundary.yours.title}
+				</h3>
+				<ul class="mt-5 space-y-3">
+					{
+						m.boundary.yours.items.map((item) => (
+							<li class="flex gap-3 text-sm leading-relaxed">
+								<span
+									class="mt-[7px] size-1.5 shrink-0 rounded-full bg-faint-foreground"
+									aria-hidden="true"
+								/>
+								<span>{item}</span>
+							</li>
+						))
+					}
+				</ul>
+			</div>
+		</div>
+
+		<a
+			href={principlesUrl}
+			target="_blank"
+			rel="noopener noreferrer"
+			class="mt-8 inline-flex items-center gap-1.5 text-sm text-primary transition-opacity hover:opacity-80"
+		>
+			{m.boundary.cta}
+			<span aria-hidden="true">↗</span>
+		</a>
+	</div>
+</section>

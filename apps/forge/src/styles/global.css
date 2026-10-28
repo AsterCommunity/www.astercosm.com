@@ -1,0 +1,150 @@
+@import "tailwindcss";
+@import "@fontsource-variable/geist";
+@import "./tokens.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+	--font-sans:
+		"Geist Variable", ui-sans-serif, system-ui, "PingFang SC",
+		"Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+
+	--color-surface-1: var(--surface-1);
+	--color-surface-2: var(--surface-2);
+	--color-surface-3: var(--surface-3);
+	--color-foreground: var(--foreground);
+	--color-muted: var(--muted);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-faint-foreground: var(--faint-foreground);
+	--color-primary: var(--primary);
+	--color-primary-hover: var(--primary-hover);
+	--color-primary-strong: var(--primary-strong);
+	--color-primary-foreground: var(--primary-foreground);
+	--color-accent: var(--accent);
+	--color-accent-bright: var(--accent-bright);
+	--color-accent-foreground: var(--accent-foreground);
+	--color-destructive: var(--destructive);
+	--color-border: var(--border);
+	--color-ring: var(--ring);
+
+	--radius-sm: calc(var(--radius) * 0.6);
+	--radius-md: calc(var(--radius) * 0.8);
+	--radius-lg: var(--radius);
+	--radius-xl: calc(var(--radius) * 1.4);
+	--radius-2xl: calc(var(--radius) * 1.8);
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+}
+
+body {
+	background-color: var(--surface-1);
+	color: var(--foreground);
+	font-family: var(--font-sans);
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+}
+
+::selection {
+	background-color: var(--primary);
+	color: var(--primary-foreground);
+}
+
+:focus-visible {
+	outline: 2px solid var(--ring);
+	outline-offset: 2px;
+}
+
+@keyframes hero-rise {
+	from {
+		opacity: 0;
+		transform: translateY(24px);
+	}
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.hero-rise {
+		animation: hero-rise 0.7s ease-out both;
+	}
+
+	/* 区块滚动入场：只在 JS 可用时先隐藏，无 JS 直接可见 */
+	.js [data-reveal] {
+		opacity: 0;
+		transform: translateY(14px);
+		transition:
+			opacity 0.55s ease-out,
+			transform 0.55s ease-out;
+	}
+
+	.js [data-reveal].revealed {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+/* 品牌色带：青 → 琥珀，标识里的双色 */
+.brand-rule {
+	background-image: linear-gradient(
+		to right,
+		var(--primary),
+		var(--accent-bright)
+	);
+}
+
+/* 代码块：始终深底（代码天然属于暗色语境）。
+   浅色主题下深底与页面形成强对比；深色主题下若还用同色底会整块融进页面，
+   改用 surface-3 提亮一档，保持「浮起的代码块」这一读法。 */
+.code-panel {
+	background-color: oklch(0.1634 0.0142 187.4);
+	border: 1px solid oklch(1 0 0 / 12%);
+}
+
+.dark .code-panel {
+	background-color: var(--surface-3);
+	border-color: oklch(1 0 0 / 16%);
+}
+
+/* 关键字：品牌主色 */
+.code-panel .tok-key {
+	color: oklch(0.8549 0.1251 181.07);
+}
+
+/* 函数名：主色的高亮档 */
+.code-panel .tok-fn {
+	color: oklch(0.91 0.0927 180.43);
+}
+
+/* 类型与 crate 路径：琥珀，与主色拉开距离 */
+.code-panel .tok-type {
+	color: oklch(0.7686 0.1647 70.08);
+}
+
+/* 字符串：偏绿的第三色相，用于跟 type 再分一层 */
+.code-panel .tok-str {
+	color: oklch(0.78 0.13 150);
+}
+
+.code-panel .tok-num {
+	color: oklch(0.82 0.11 70);
+}
+
+.code-panel .tok-punct {
+	color: oklch(0.66 0.03 256);
+}
+
+.code-panel .tok-comment {
+	color: oklch(0.6 0.02 256);
+	font-style: italic;
+}
+
+/* 普通文本：前景色的弱化档 */
+.code-panel .tok-plain {
+	color: oklch(0.8662 0.0177 183.47);
+}

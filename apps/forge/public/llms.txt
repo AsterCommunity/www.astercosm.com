@@ -1,0 +1,18 @@
+# AsterForge
+
+> Shared runtime foundation and infrastructure kernel for Aster services.
+> Forge owns reusable runtime mechanics; products own business rules,
+> permissions, and product-specific migrations.
+
+## Links
+
+- [Homepage (EN)](https://forge.astercosm.com/)
+- [首页（中文）](https://forge.astercosm.com/zh/)
+- [Documentation (EN)](https://forge.docs.astercosm.com/en/)
+- [文档（中文）](https://forge.docs.astercosm.com/)
+- [Rust API reference](https://forge.docs.astercosm.com/crates/rustdoc/)
+- [New project integration guide](https://forge.docs.astercosm.com/guide/new-project-integration)
+- [Integration principles](https://forge.docs.astercosm.com/guide/integration-principles)
+- [Reference projects](https://forge.docs.astercosm.com/guide/reference-projects)
+- [Repository](https://github.com/AsterCommunity/AsterForge)
+- [AsterCosmos](https://www.astercosm.com/)
