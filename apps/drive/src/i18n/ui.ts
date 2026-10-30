@@ -50,7 +50,7 @@ const en = {
 		items: [
 			{
 				title: "Storage control",
-				body: "Route uploads to local disk, S3-compatible buckets, Azure Blob, Tencent COS, Alibaba OSS, Qiniu Kodo, OneDrive, SFTP, or remote follower nodes — by user, team, and file size. Policies decide where bytes live; you decide the policies.",
+				body: "Route uploads to local disk, S3-compatible buckets, Azure Blob, Tencent COS, Alibaba OSS, Huawei OBS, Qiniu Kodo, OneDrive, Google Drive, SFTP, or remote follower nodes — by user, team, and file size. Policies decide where bytes live; you decide the policies.",
 			},
 			{
 				title: "Large files, first class",
@@ -63,7 +63,7 @@ const en = {
 		],
 	},
 	connectors: {
-		title: "Nine backends, one contract",
+		title: "{count} backends, one contract",
 		subtitle:
 			"Every storage backend implements the same connector contract: descriptor-driven admin UI, versioned typed config, encrypted credentials. Adding a provider no longer means forking the core.",
 		docsCta: "Storage backend guides",
@@ -207,7 +207,7 @@ const zh: Messages = {
 		items: [
 			{
 				title: "存储控制",
-				body: "按用户、团队和文件大小，把上传路由到本机磁盘、S3 兼容存储、Azure Blob、腾讯云 COS、阿里云 OSS、七牛 Kodo、OneDrive、SFTP 或远程从节点。策略决定字节的落点，你决定策略",
+				body: "按用户、团队和文件大小，把上传路由到本机磁盘、S3 兼容存储、Azure Blob、腾讯云 COS、阿里云 OSS、华为云 OBS、七牛 Kodo、OneDrive、Google Drive、SFTP 或远程从节点。策略决定字节的落点，你决定策略",
 			},
 			{
 				title: "大文件是一等公民",
@@ -220,7 +220,7 @@ const zh: Messages = {
 		],
 	},
 	connectors: {
-		title: "九个后端，一个契约",
+		title: "{count} 个后端，一个契约",
 		subtitle:
 			"每个存储后端实现同一套 connector 契约：descriptor 驱动的管理界面、版本化类型配置、加密凭据。新增 provider 不再需要改动核心",
 		docsCta: "存储后端指南",

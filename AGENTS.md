@@ -82,14 +82,13 @@ app 差异：
 
 以下素材从 AsterDrive 仓库复制，更新时手工同步并在 commit message 注明对应 revision：
 
-| 本站路径                                                                              | 来源                                                                                           |
-| ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `apps/drive/public/brand/`                                                            | `frontend-panel/public/static/asterdrive/`                                                     |
-| `apps/drive/public/connectors/`                                                       | `frontend-panel/public/static/storage/`（厂商 logo，后期统一徽标后随源更新）                   |
-| `apps/drive/public/.well-known/security.txt`                                          | `docs/public/.well-known/security.txt`                                                         |
-| `apps/drive/src/i18n/connectors.ts`                                                   | `docs/generated/storage-connectors.json` + `src/storage/connectors/*.rs`（badge_rgb）          |
-| `apps/drive/public/favicon.svg`                                                       | `frontend-panel/public/favicon.svg` 的**本地变体**（背景圆→方，rx=64）；源图标改版时需手工同步 |
-| `apps/drive/public/connectors/asterfollower.svg`、`local-disk.svg`、`sftp-server.svg` | landing 自绘                                                                                   |
+| 本站路径                                     | 来源                                                                                                             |
+| -------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `apps/drive/public/brand/`                   | `frontend-panel/public/static/asterdrive/`                                                                       |
+| `apps/drive/public/connectors/`              | `src/storage/connectors/assets/`（后端拥有的 connector 图标，与产品管理端同源）                                  |
+| `apps/drive/public/.well-known/security.txt` | `docs/public/.well-known/security.txt`                                                                           |
+| `apps/drive/src/i18n/connectors.ts`          | `docs/generated/storage-connectors.json` + `src/storage/connectors/` 下各 Rust descriptor（badge_rgb，含子目录） |
+| `apps/drive/public/favicon.svg`              | `frontend-panel/public/favicon.svg` 的**本地变体**（背景圆→方，rx=64）；源图标改版时需手工同步                   |
 
 截图资产管线（`apps/drive/src/assets/scenes/`）：由 `scripts/capture-scenes.mts` 生成，
 AsterDrive 前端更新后 `bun run capture:scenes -- --binary /path/to/aster_drive` 一键刷新；

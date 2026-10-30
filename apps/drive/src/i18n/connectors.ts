@@ -1,10 +1,11 @@
 import type { Lang } from "./ui";
 
 /**
- * Connector 展示数据：名称与 bestFor 快照自 AsterDrive 仓库
- * docs/generated/storage-connectors.json（对应 v0.5.0-rc.1）；
- * badgeRgb 取自各 connector 的 Rust descriptor（src/storage/connectors/*.rs
- * 的 badge_rgb），与产品管理端徽章同源。同步约定见仓库根 README「素材同步约定」。
+ * Connector 展示数据：名称与适用场景基于 AsterDrive 仓库
+ * docs/generated/storage-connectors.json（revision 9b4ec47d37276d625663f897def2fda0f8e3eb9c），
+ * 中文按落地页语气整理；badgeRgb 取自 src/storage/connectors/ 下各 connector
+ * Rust descriptor 的 badge_rgb，logo 复制自同目录的 assets/，与产品管理端同源。
+ * 同步约定见仓库根 AGENTS.md「素材同步」。
  */
 export type Connector = {
 	id: string;
@@ -14,7 +15,7 @@ export type Connector = {
 	badgeRgb: [number, number, number];
 	/** 徽章内缩写（locale 无关） */
 	glyph: string;
-	/** 厂商 logo（public/connectors/）；无厂商的（本机/SFTP）为 undefined，回退徽章 */
+	/** 产品原生图标（public/connectors/）；未提供时回退徽章 */
 	logo?: string;
 };
 
@@ -64,6 +65,17 @@ export const connectors: Connector[] = [
 		logo: "/connectors/tencent-cloud-cos.webp",
 	},
 	{
+		id: "asterdrive.storage.huawei_obs",
+		name: { en: "Huawei Cloud OBS", zh: "华为云 OBS" },
+		bestFor: {
+			en: "Huawei Cloud OBS with native OBS signing and regional or custom-domain endpoints",
+			zh: "华为云 OBS：原生 OBS 签名、区域 endpoint 或自定义域名",
+		},
+		badgeRgb: [239, 68, 68],
+		glyph: "OBS",
+		logo: "/connectors/huaweicloud-obs.webp",
+	},
+	{
 		id: "asterdrive.storage.qiniu",
 		name: { en: "Qiniu Kodo", zh: "七牛云 Kodo" },
 		bestFor: {
@@ -95,6 +107,17 @@ export const connectors: Connector[] = [
 		badgeRgb: [59, 130, 246],
 		glyph: "OD",
 		logo: "/connectors/onedrive.svg",
+	},
+	{
+		id: "asterdrive.storage.google_drive",
+		name: { en: "Google Drive", zh: "Google Drive" },
+		bestFor: {
+			en: "Administrator-managed Google Drive and shared drive blob pools",
+			zh: "管理员托管的 Google Drive 与共享盘对象存储池",
+		},
+		badgeRgb: [52, 168, 83],
+		glyph: "GD",
+		logo: "/connectors/google_drive.svg",
 	},
 	{
 		id: "asterdrive.storage.sftp",

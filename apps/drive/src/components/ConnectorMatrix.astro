@@ -13,7 +13,7 @@ const m = t(lang);
 <section id="storage" data-reveal class="scroll-mt-20 bg-surface-2">
 	<div class="mx-auto max-w-6xl px-6 py-24">
 		<h2 class="max-w-2xl text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
-			{m.connectors.title}
+			{m.connectors.title.replace("{count}", String(connectors.length))}
 		</h2>
 		<p class="mt-5 max-w-2xl leading-relaxed text-muted-foreground">
 			{m.connectors.subtitle}
