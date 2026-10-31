@@ -7,6 +7,7 @@ export type Lang = keyof typeof languages;
 export const defaultLang: Lang = "en";
 
 export const GITHUB_URL = "https://github.com/AsterCommunity/AsterDrive";
+export const WWW_URL = "https://www.astercosm.com";
 
 /** docs 站 zh 在根、en 在 /en/ 前缀下 */
 export function docsUrl(lang: Lang, path: string): string {
@@ -170,7 +171,9 @@ const en = {
 		releases: "Releases",
 		security: "Security",
 		license: "MIT OR Apache-2.0",
-		copyright: "© 2026 AsterCommunity & AptS-1547",
+		copyright: "© 2026 AsterCosmos & AptS:1547",
+		licenseNotice:
+			"Code: Apache 2.0 · Content: CC-BY 4.0 · Brand: all rights reserved",
 	},
 };
 
@@ -325,7 +328,8 @@ const zh: Messages = {
 		releases: "版本发布",
 		security: "安全",
 		license: "MIT OR Apache-2.0",
-		copyright: "© 2026 AsterCommunity & AptS-1547",
+		copyright: "© 2026 AsterCosmos & AptS:1547",
+		licenseNotice: "代码：Apache 2.0 · 内容：CC-BY 4.0 · 品牌：保留所有权利",
 	},
 };
 

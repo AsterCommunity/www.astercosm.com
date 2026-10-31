@@ -1,5 +1,5 @@
 ---
-import { docsUrl, GITHUB_URL, type Lang, t } from "@/i18n/ui";
+import { docsUrl, GITHUB_URL, type Lang, t, WWW_URL } from "@/i18n/ui";
 
 interface Props {
 	lang: Lang;
@@ -24,6 +24,7 @@ const columns = [
 	{
 		heading: m.footer.community,
 		links: [
+			{ label: "AsterCosmos", href: WWW_URL },
 			{ label: "GitHub", href: GITHUB_URL },
 			{ label: m.footer.issues, href: `${GITHUB_URL}/issues` },
 			{ label: m.footer.releases, href: `${GITHUB_URL}/releases` },
@@ -73,6 +74,9 @@ const columns = [
 			}
 		</div>
 
-		<p class="mt-12 text-xs text-muted-foreground">{m.footer.copyright}</p>
+		<div class="mt-12 space-y-1 text-xs text-muted-foreground">
+			<p>{m.footer.copyright}</p>
+			<p>{m.footer.licenseNotice}</p>
+		</div>
 	</div>
 </footer>
