@@ -12,14 +12,19 @@ const m = t(lang);
 {/* ESAP 关系条带：双组织叙事是品牌核心，首页不能只靠入口卡一句话 */}
 <section data-reveal class="mx-auto max-w-6xl px-6 pb-16">
 	<div class="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-center">
-		<span class="inline-block size-1.5 rounded-full bg-esap-pink" aria-hidden="true"></span>
-		<p class="text-sm text-muted-foreground">{m.home.relation.text}</p>
+		{/* 点与文字同段同行（窄屏换行不落孤点），段内用 flex 做数学居中，
+		    不靠 inline 对齐模式猜基线 */}
+		<p class="flex items-center gap-2.5 text-sm text-muted-foreground">
+			<span class="inline-block size-1.5 shrink-0 rounded-full bg-esap-pink" aria-hidden="true"></span>
+			{m.home.relation.text}
+		</p>
 		<a
 			href={navPath(lang, "archive")}
-			class="inline-flex items-center gap-1 text-sm font-medium text-esap-pink-strong transition-opacity hover:opacity-80"
+			class="text-sm font-medium text-esap-pink-strong transition-opacity hover:opacity-80"
 		>
 			{m.home.relation.cta}
-			<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+			{/* 行内跟随文字，不用 inline-flex：flex 容器自算 baseline 会浮起 */}
+			<svg class="ml-1 inline-block align-[-1.5px]" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 				<path d="M5 12h14" />
 				<path d="m12 5 7 7-7 7" />
 			</svg>

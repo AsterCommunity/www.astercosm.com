@@ -71,22 +71,37 @@ body {
 	}
 }
 
+@keyframes reveal-in {
+	from {
+		opacity: 0;
+		transform: translateY(14px);
+		filter: blur(4px);
+	}
+}
+
 @media (prefers-reduced-motion: no-preference) {
 	.hero-rise {
 		animation: hero-rise 0.7s ease-out both;
 	}
 
-	/* 区块滚动入场：只在 JS 可用时先隐藏，无 JS 直接可见 */
-	.js [data-reveal] {
+	/* 区块滚动入场：keyframe 动画而非 transition——transition 的属性/延时
+	   会泄漏到 hover 等后续状态变化（CSS 按 after-change 读 transition 配置），
+	   动画的 delay 与 hover 的 transition 互不干扰。只在 JS 可用时先隐藏，
+	   无 JS 直接可见 */
+	.js [data-reveal]:not(.revealed) {
 		opacity: 0;
-		transform: translateY(14px);
-		transition:
-			opacity 0.55s ease-out,
-			transform 0.55s ease-out;
 	}
 
 	.js [data-reveal].revealed {
-		opacity: 1;
-		transform: none;
+		animation: reveal-in 0.55s ease-out both;
+	}
+
+	/* 卡片级 stagger：同一区块内子卡依次入场 */
+	.js .reveal-stagger > [data-reveal]:nth-child(2) {
+		animation-delay: 90ms;
+	}
+
+	.js .reveal-stagger > [data-reveal]:nth-child(3) {
+		animation-delay: 180ms;
 	}
 }

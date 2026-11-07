@@ -9,14 +9,17 @@ const { lang } = Astro.props;
 const m = t(lang);
 ---
 
-<section data-reveal class="mx-auto max-w-6xl px-6 pb-24">
-	<p class="font-mono text-sm text-muted-foreground">{m.home.entries.kicker}</p>
-	<div class="mt-6 grid gap-px overflow-hidden rounded-2xl bg-border sm:grid-cols-3">
+<section class="mx-auto max-w-6xl px-6 pb-24">
+	<p data-reveal class="font-mono text-sm text-muted-foreground">{m.home.entries.kicker}</p>
+	{/* stagger 入场 + 卡内 hairline 由 bg-border 缝隙模拟；overflow-hidden 会裁掉外侧卡片的
+	    焦点环，故卡片聚焦时用 inset ring 自绘 */}
+	<div class="reveal-stagger mt-6 grid gap-px overflow-hidden rounded-2xl bg-border sm:grid-cols-3">
 		{
 			m.home.entries.cards.map((card) => (
 				<a
 					href={navPath(lang, card.page)}
-					class="group flex flex-col bg-surface-3 p-7 transition-colors hover:bg-surface-2"
+					data-reveal
+					class="group flex flex-col bg-surface-3 p-7 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring hover:bg-surface-2"
 				>
 					<h2 class="text-lg font-semibold tracking-tight">{card.title}</h2>
 					<p class="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{card.body}</p>

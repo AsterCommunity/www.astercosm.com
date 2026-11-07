@@ -63,13 +63,10 @@ const sceneImages =
 							m.coverage.groups.map((group, i) => (
 								<div
 									data-panel
-									class="absolute inset-x-0 top-1/2 -translate-y-1/2 opacity-0 transition-all duration-500 [&[data-active]]:pointer-auto [&[data-active]]:translate-y-[-50%] [&[data-active]]:opacity-100"
+									class="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-[calc(50%_-_8px)] opacity-0 transition-all duration-500 [&[data-active]]:pointer-events-auto [&[data-active]]:translate-y-[-50%] [&[data-active]]:opacity-100"
 									data-active={i === 0 ? "" : undefined}
 								>
-									<span class="font-mono text-sm text-primary">
-										{String(i + 1).padStart(2, "0")}
-									</span>
-									<h3 class="mt-3 text-2xl font-semibold tracking-tight">{group.title}</h3>
+									<h3 class="text-2xl font-semibold tracking-tight">{group.title}</h3>
 									<p class="mt-3 max-w-md leading-relaxed text-muted-foreground">{group.body}</p>
 									<ul class="mt-6 space-y-2.5">
 										{group.items.map((item) => (
@@ -106,8 +103,8 @@ const sceneImages =
 					</div>
 				</div>
 
-				{/* 进度点 */}
-				<div class="absolute top-1/2 -left-10 flex -translate-y-1/2 flex-col gap-2" aria-hidden="true">
+				{/* 进度点：纯装饰提示，xl 以下侧边空间会被视口裁掉，直接不显示 */}
+				<div class="absolute top-1/2 -left-10 hidden -translate-y-1/2 flex-col gap-2 xl:flex" aria-hidden="true">
 					{
 						m.coverage.groups.map((_, i) => (
 							<span

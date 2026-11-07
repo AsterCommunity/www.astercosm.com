@@ -75,7 +75,7 @@ const en = {
 		},
 		featured: {
 			kicker: "Featured system",
-			title: "AsterDrive — self-hosted file infrastructure",
+			title: "AsterDrive — self‑hosted file infrastructure",
 			body: "Reliable uploads, storage policies across S3 and remote-node backends, WebDAV/WOPI, and first-class ops tooling. The reference for how AsterCosmos builds and runs software.",
 			alt: "AsterDrive web panel screenshot",
 			cta: "Visit AsterDrive",
