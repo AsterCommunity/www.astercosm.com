@@ -23,14 +23,18 @@ const stateStyles = {
 	<main id="main">
 	<Hero lang={lang} />
 
-	<section id="plan" data-reveal class="mx-auto max-w-6xl px-6 py-20">
-		<h2 class="text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+	<section id="plan" class="mx-auto max-w-6xl px-6 py-20">
+		<h2 data-reveal class="text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
 			{m.pillars.title}
 		</h2>
-		<div class="mt-10 grid gap-5 md:grid-cols-3">
+		{/* 卡片 stagger 入场：动画式 delay 不碰卡片上可能有的 hover transition */}
+		<div class="reveal-stagger mt-10 grid gap-5 md:grid-cols-3">
 			{
 				m.pillars.items.map((item) => (
-					<div class="rounded-xl border border-border bg-surface-2 p-6">
+					<div
+						data-reveal
+						class="rounded-xl bg-surface-3 p-6"
+					>
 						<h3 class="text-lg font-semibold tracking-tight">{item.title}</h3>
 						<p class="mt-3 text-sm leading-relaxed text-muted-foreground">{item.body}</p>
 					</div>
@@ -39,7 +43,7 @@ const stateStyles = {
 		</div>
 	</section>
 
-	<section id="status" data-reveal class="border-y border-border bg-surface-2">
+	<section id="status" data-reveal class="bg-surface-2">
 		<div class="mx-auto max-w-6xl px-6 py-20">
 			<p class="text-sm font-medium text-primary">{m.status.kicker}</p>
 			<h2 class="mt-3 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
@@ -49,7 +53,7 @@ const stateStyles = {
 			<ul class="mt-10 grid gap-3 md:grid-cols-2">
 				{
 					m.status.items.map((item) => (
-						<li class="flex items-center justify-between gap-4 rounded-lg border border-border bg-surface-1 px-5 py-4">
+						<li class="flex items-center justify-between gap-4 rounded-lg bg-surface-3 px-5 py-4">
 							<span class="text-sm leading-relaxed">{item.label}</span>
 							<span
 								class={`shrink-0 rounded-full px-3 py-1 text-xs font-medium ${stateStyles[item.state]}`}
