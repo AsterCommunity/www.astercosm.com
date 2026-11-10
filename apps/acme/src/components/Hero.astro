@@ -1,0 +1,70 @@
+---
+import CodeBlock from "@/components/CodeBlock.astro";
+import { registerLines } from "@/i18n/code";
+import { GITHUB_URL, type Lang, t } from "@/i18n/ui";
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const m = t(lang);
+---
+
+<section class="mx-auto max-w-6xl px-6 pt-20 pb-16 lg:pt-28 lg:pb-20">
+	<div class="mx-auto max-w-3xl text-center">
+		{/* gate 同款状态 pill：ping 动画点 + 进行时状态，不重复 subtitle 的信息 */}
+		<p
+			class="inline-flex items-center gap-2 rounded-full bg-surface-2 px-4 py-1.5 text-sm text-muted-foreground"
+		>
+			<span class="relative flex size-2" aria-hidden="true">
+				<span
+					class="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-60 motion-reduce:animate-none"
+				></span>
+				<span class="relative inline-flex size-2 rounded-full bg-primary"></span>
+			</span>
+			{m.hero.status}
+		</p>
+
+		<h1
+			class="mt-7 text-4xl leading-[1.08] font-semibold tracking-tight text-balance sm:text-5xl lg:text-6xl"
+		>
+			{m.hero.title}
+		</h1>
+		<p class="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+			{m.hero.subtitle}
+		</p>
+
+		<div class="mt-9 flex flex-wrap items-center justify-center gap-3">
+			<a
+				href={GITHUB_URL}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="inline-flex h-11 items-center gap-2 rounded-lg bg-primary px-6 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+			>
+				{m.hero.primaryCta}
+				<span aria-hidden="true">↗</span>
+			</a>
+			<a
+				href="#crates"
+				class="inline-flex h-11 items-center rounded-lg bg-surface-2 px-6 text-sm font-medium text-foreground transition-colors hover:bg-muted"
+			>
+				{m.hero.secondaryCta}
+			</a>
+		</div>
+
+		<p class="mt-8 font-mono text-xs text-muted-foreground">{m.hero.note}</p>
+	</div>
+
+	{/* 物料必须产品原生：库/CLI 没有截图 UI，它的原生物料就是真实命令。
+	    这里放 CLI README 里的真实注册命令，而不是示意图或 mockup。 */}
+	<div class="hero-rise mt-16 lg:mt-20">
+		<div class="mx-auto w-fit max-w-full">
+			<div class="mb-3 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+				<p class="font-mono text-xs text-muted-foreground">{m.code.label}</p>
+				<p class="text-xs text-muted-foreground">{m.code.caption}</p>
+			</div>
+			<CodeBlock lines={registerLines} label={m.code.label} />
+		</div>
+	</div>
+</section>

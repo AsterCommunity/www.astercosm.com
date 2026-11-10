@@ -1,0 +1,55 @@
+---
+import { CRATES_TREE_URL, crates, type Lang, t } from "@/i18n/ui";
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const m = t(lang);
+---
+
+<section id="crates" class="scroll-mt-16 bg-surface-2">
+	<div class="mx-auto max-w-6xl px-6 py-20 lg:py-24">
+		{/* 标题通栏 + 仓库链接，目录网格是这一节的内容本体 */}
+		<div data-reveal class="max-w-2xl">
+			<p class="font-mono text-sm text-primary">{m.cratesSection.kicker}</p>
+			<h2 class="mt-4 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+				{m.cratesSection.title}
+			</h2>
+			<a
+				href={CRATES_TREE_URL}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="mt-5 inline-flex items-center gap-1.5 text-sm text-primary transition-opacity hover:opacity-80"
+			>
+				{m.cratesSection.docsCta}
+				<span aria-hidden="true">↗</span>
+			</a>
+		</div>
+
+		{/* crate 卡片按依赖方向排列，名字与说明取自各 crate README；stagger 入场 */}
+		<div class="reveal-stagger mt-14 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+			{
+				crates.map((crate) => (
+					<a
+						href={`${CRATES_TREE_URL}/${crate.name}`}
+						target="_blank"
+						rel="noopener noreferrer"
+						data-reveal
+						class="group flex flex-col rounded-xl bg-surface-3 p-6 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/10 dark:hover:shadow-black/30"
+					>
+						<h3
+							class="font-mono text-[13px] break-all text-primary transition-opacity group-hover:opacity-80"
+						>
+							{crate.name}
+						</h3>
+						<p class="mt-3 text-sm leading-relaxed text-muted-foreground">
+							{crate.body[lang]}
+						</p>
+					</a>
+				))
+			}
+		</div>
+	</div>
+</section>

@@ -18,6 +18,8 @@ export const YGGDRASIL_URL = "https://github.com/AsterCommunity/AsterYggdrasil";
 export const ASTERGIT_URL = "https://github.com/AsterCommunity/AsterGit";
 export const ASTERGATE_URL = "https://github.com/AsterCommunity/AsterGate";
 export const GATE_URL = "https://gate.astercosm.com";
+export const ASTERACME_URL = "https://github.com/AsterCommunity/AsterACME";
+export const ACME_URL = "https://acme.astercosm.com";
 export const FORGE_URL = "https://forge.astercosm.com";
 export const FORGE_DOCS_URL = "https://forge.docs.astercosm.com";
 
@@ -84,6 +86,7 @@ const en = {
 				label: "Also running",
 				items: [
 					{ name: "AsterGate", href: GATE_URL },
+					{ name: "AsterACME", href: ACME_URL },
 					{ name: "AsterPulse", href: PULSE_URL },
 					{ name: "AsterYggdrasil", href: YGGDRASIL_URL },
 					{ name: "AsterGit", href: ASTERGIT_URL },
@@ -144,6 +147,14 @@ const en = {
 							"Self-hosted identity and authorization platform: accounts, organizations, and OAuth/OIDC for the services you run. In active development.",
 						href: ASTERGATE_URL,
 						site: GATE_URL,
+						tech: "Rust",
+					},
+					{
+						name: "AsterACME",
+						tagline:
+							"Rust ACME client and CLI: the full account lifecycle against real CAs today; certificate issuance is on the way.",
+						href: ASTERACME_URL,
+						site: ACME_URL,
 						tech: "Rust",
 					},
 					{
@@ -443,6 +454,7 @@ const zh: Messages = {
 				label: "同样在运行",
 				items: [
 					{ name: "AsterGate", href: GATE_URL },
+					{ name: "AsterACME", href: ACME_URL },
 					{ name: "AsterPulse", href: PULSE_URL },
 					{ name: "AsterYggdrasil", href: YGGDRASIL_URL },
 					{ name: "AsterGit", href: ASTERGIT_URL },
@@ -503,6 +515,14 @@ const zh: Messages = {
 							"自托管身份与授权平台：为你运行的服务提供账号、组织与 OAuth/OIDC。正在积极构建中",
 						href: ASTERGATE_URL,
 						site: GATE_URL,
+						tech: "Rust",
+					},
+					{
+						name: "AsterACME",
+						tagline:
+							"Rust ACME 客户端与 CLI：账户生命周期今天就能对接真实 CA，证书签发在路上",
+						href: ASTERACME_URL,
+						site: ACME_URL,
 						tech: "Rust",
 					},
 					{

@@ -15,15 +15,16 @@ apps/www/           @astercosm/www — www.astercosm.com 组织门面（无 JS �
 apps/drive/         @astercosm/drive — drive.astercosm.com 产品落地页（React 折叠线以下岛屿）
 apps/gate/          @astercosm/gate — gate.astercosm.com AsterGate 预告页（无 JS 框架运行时）
 apps/forge/         @astercosm/forge — forge.astercosm.com AsterForge 落地页（无 JS 框架运行时）
-packages/tokens/    @astercosm/tokens — AsterDrive D9 设计 token 语义映射（drive、gate 依赖）
+apps/acme/          @astercosm/acme — acme.astercosm.com AsterACME 落地页（无 JS 框架运行时）
+packages/tokens/    @astercosm/tokens — AsterDrive D9 设计 token 事实源在 AsterDrive（drive、gate、acme 依赖）
 ```
 
 `apps/drive` 迁移自 AsterDriveLanding@`250df1d`（原仓库归档，其 AGENTS.md 约束已并入本文）。
 
 ```bash
 bun install
-bun run dev                   # 四站并行：www 4321 / drive 4322 / gate 4323 / forge 4324
-bun run dev:www / dev:drive / dev:gate / dev:forge   # 单独拉起某一站
+bun run dev                   # 五站并行：www 4321 / drive 4322 / gate 4323 / forge 4324 / acme 4325
+bun run dev:www / dev:drive / dev:gate / dev:forge / dev:acme   # 单独拉起某一站
 bun run build                 # 构建全部站点
 bun run check                 # biome + 全部 app 的 astro check（必须全绿才算完）
 bun run capture:esap          # www 的 ESAP 实拍管线（见 README）
@@ -38,11 +39,11 @@ bun run capture:scenes -- --binary /path/to/aster_drive   # drive 的截图管�
   字段装版本，错位直接炸 `--frozen-lockfile`。
 - CI 显式用 `actions/setup-node@v7` 装 Node 24：astro 7.4 要求 node ≥ 22.23.4，而
   runner 系统路径和工具缓存里的 22.x 都不满足；降 Node 版本前先对 astro 的 engines。
-- `astro check` 与 TypeScript 7 不兼容，两个 app 都锁 `typescript@^6`，勿升。
+- `astro check` 与 TypeScript 7 不兼容，各 app 都锁 `typescript@^6`，勿升。
 - biome 对 `*.astro` 关闭了 `noUnusedImports/noUnusedVariables`（模板引用 frontmatter
   变量会误报），不要在 overrides 里再放宽别的规则。
-- 根 `overrides` 把 `sharp` 锁到 `npm:imagemagick@0.1.3`（两个 app 共用），避免解析带
-  LGPL libvips 的平台包；两个 app 的 Astro image service 都是显式 no-op，勿动。
+- 根 `overrides` 把 `sharp` 锁到 `npm:imagemagick@0.1.3`（各 app 共用），避免解析带
+  LGPL libvips 的平台包；各 app 的 Astro image service 都是显式 no-op，勿动。
 - 每个站点一个 assets-only Worker：配置在各自 `apps/*/wrangler.jsonc`（assets 目录、
   404 处理、custom domain routes）。加新站 = 新 app 目录 + `wrangler.jsonc` +
   `deploy.yml` 加一步。
@@ -71,10 +72,18 @@ app 差异：
   语义映射与裁剪，色值不发明；connector 展示数据 `src/i18n/connectors.ts`（快照来源
   见文件头注释）。
 - **apps/forge**：视觉 token 唯一事实源 `src/styles/tokens.css`，取自 AsterForge 主仓库
-  `docs/.vitepress/theme/custom.css` 的自有品牌色板（青 teal + 琥珀 amber，墨绿黑底）。
+  `docs/.vitepress/theme/custom.css` 色板（青 teal + 琥珀 amber，墨绿黑底）。
   **不共用 `packages/tokens` 的 D9 蓝**——那是 AsterDrive 的色板，与 Forge 自己的标识
   冲突。物料例外：库没有 UI，其原生物料是代码与 crate 目录，代码样例在
   `src/i18n/code.ts`（事实源为 Forge 仓库 README，token 手工标注，不跑高亮器）。
+- **apps/acme**：视觉 token 与 drive/gate 同源——`@astercosm/tokens` 的 D9 色板，
+  不设站内 tokens.css，不发明色值；代码块高亮色从 D9 蓝推导（hue 258–260 及近邻，
+  锚点取 dark `--primary`，见 `src/styles/global.css` 注释）。物料例外同 forge：
+  库/CLI 没有 UI，其原生物料是真实命令与 crate 目录，代码样例在
+  `src/i18n/code.ts`（事实源为 ACME 仓库 CLI README，token 手工标注）。
+  **状态分节口径学 gate**：用 Available / In development / Planned 三档进行时
+  列表陈述进展，不写"诚实边界"之类的元话语；能力清单与主仓库 README/changelog
+  保持一致，不得把规划写成已可用。
 
 ## 素材同步
 
@@ -112,11 +121,22 @@ AsterDrive 前端更新后 `bun run capture:scenes -- --binary /path/to/aster_dr
 | `apps/forge/src/i18n/ui.ts`        | crate 目录取自 `Cargo.toml` workspace members（32 个）；分组沿用 README 的 Areas 口径        |
 | `apps/forge/public/og.svg`、`.png` | 自绘：复用 `docs/public/favicon.svg` 的标识形状与品牌色，PNG 由 `rsvg-convert` 渲染 1200×630 |
 
+### apps/acme（来源：AsterACME 主仓库）
+
+| 本站路径                                  | 来源                                                                            |
+| ----------------------------------------- | ------------------------------------------------------------------------------- |
+| `apps/acme/public/favicon.svg`            | 自绘：挂锁标识（蓝锁体 + 亮蓝锁环与锁孔，D9 暖炭底），复用 packages/tokens 色板 |
+| `apps/acme/public/og.svg`、`.png`         | 自绘：复用 favicon 的标识形状与品牌色，PNG 由 `rsvg-convert` 渲染 1200×630      |
+| `apps/acme/src/i18n/code.ts`              | 仓库 CLI README 的真实命令示例（逐 token 手工标注，不跑高亮器）                 |
+| `apps/acme/src/i18n/ui.ts` 的 crates 列表 | `Cargo.toml` workspace members（6 个）；说明文案取自各 crate README             |
+| `apps/acme/src/i18n/ui.ts` 的 status 分节 | 主仓库 README/changelog 的已实现与路线图清单；改动产品能力时同步                |
+
 ## 部署
 
 `main` 推送 → GitHub Actions 构建全部站点 → `wrangler deploy` 到 Cloudflare Workers
 （`astercosm-www` → www.astercosm.com，`asterdrive-landing` → drive.astercosm.com，
-`astergate-landing` → gate.astercosm.com，`asterforge-landing` → forge.astercosm.com）。
+`astergate-landing` → gate.astercosm.com，`asterforge-landing` → forge.astercosm.com，
+`asteracme-landing` → acme.astercosm.com）。
 Worker 与自定义域名配置在各自 `wrangler.jsonc`，不手动编辑生成产物；DNS、zone 与
 Cloudflare 账号侧设置由仓库所有者管理。前置：GitHub secrets `CLOUDFLARE_API_TOKEN`
 （Account → Workers Scripts → Admin + Zone → DNS → Write + Workers Routes → Write）与

@@ -1,0 +1,62 @@
+---
+import { type Lang, TEST_NOTES_URL, t } from "@/i18n/ui";
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const m = t(lang);
+
+/* 三档状态 pill：已可用（蓝调）、构建中（中性深字）、规划中（中性灰字），
+   强度递减，与 gate 的两档（bg-primary/10、bg-muted）同构 */
+const stateStyles = {
+	available: "bg-primary/15 text-primary",
+	inDevelopment: "bg-muted text-foreground",
+	planned: "bg-muted text-muted-foreground",
+} as const;
+---
+
+<section id="status" data-reveal class="scroll-mt-16 bg-surface-2">
+	<div class="mx-auto max-w-6xl px-6 py-20 lg:py-24">
+		<div class="max-w-3xl">
+			<p class="font-mono text-sm text-primary">{m.status.kicker}</p>
+			<h2 class="mt-4 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+				{m.status.title}
+			</h2>
+			<p class="mt-5 leading-relaxed text-muted-foreground">{m.status.body}</p>
+		</div>
+
+		<ul class="reveal-stagger mt-10 grid gap-3 md:grid-cols-2">
+			{
+				m.status.items.map((item) => (
+					<li
+						data-reveal
+						class="flex items-center justify-between gap-4 rounded-lg bg-surface-3 px-5 py-4"
+					>
+						<span class="text-sm leading-relaxed">{item.label}</span>
+						<span
+							class={`shrink-0 rounded-full px-3 py-1 text-xs font-medium ${stateStyles[item.state]}`}
+						>
+							{item.state === "available"
+								? m.status.available
+								: item.state === "inDevelopment"
+									? m.status.inDevelopment
+									: m.status.planned}
+						</span>
+					</li>
+				))
+			}
+		</ul>
+
+		<a
+			href={TEST_NOTES_URL}
+			target="_blank"
+			rel="noopener noreferrer"
+			class="mt-8 inline-flex items-center gap-1.5 text-sm text-primary transition-opacity hover:opacity-80"
+		>
+			{m.status.cta}
+			<span aria-hidden="true">↗</span>
+		</a>
+	</div>
+</section>

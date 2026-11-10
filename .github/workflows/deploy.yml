@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        site: [www, drive, gate, forge]
+        site: [www, drive, gate, forge, acme]
     steps:
       - uses: actions/checkout@v6
 

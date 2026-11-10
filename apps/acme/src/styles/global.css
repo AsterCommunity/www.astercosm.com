@@ -1,0 +1,167 @@
+@import "tailwindcss";
+@import "@astercosm/tokens/css";
+@import "@fontsource-variable/geist";
+
+@custom-variant dark (&:is(.dark *));
+
+/* D9 token 映射与 apps/drive、apps/gate 同构（packages/tokens 为唯一色值事实源） */
+@theme inline {
+	--font-sans:
+		"Geist Variable", ui-sans-serif, system-ui, "PingFang SC",
+		"Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+
+	--color-surface-1: var(--surface-1);
+	--color-surface-2: var(--surface-2);
+	--color-surface-3: var(--surface-3);
+	--color-foreground: var(--foreground);
+	--color-muted: var(--muted);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-primary: var(--primary);
+	--color-primary-foreground: var(--primary-foreground);
+	--color-accent: var(--accent);
+	--color-accent-foreground: var(--accent-foreground);
+	--color-destructive: var(--destructive);
+	--color-border: var(--border);
+	--color-ring: var(--ring);
+
+	--radius-sm: calc(var(--radius) * 0.6);
+	--radius-md: calc(var(--radius) * 0.8);
+	--radius-lg: var(--radius);
+	--radius-xl: calc(var(--radius) * 1.4);
+	--radius-2xl: calc(var(--radius) * 1.8);
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+}
+
+body {
+	background-color: var(--surface-1);
+	color: var(--foreground);
+	font-family: var(--font-sans);
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+}
+
+::selection {
+	background-color: var(--primary);
+	color: var(--primary-foreground);
+}
+
+:focus-visible {
+	outline: 2px solid var(--ring);
+	outline-offset: 2px;
+}
+
+@keyframes hero-rise {
+	from {
+		opacity: 0;
+		transform: translateY(24px);
+	}
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.hero-rise {
+		animation: hero-rise 0.7s ease-out both;
+	}
+
+	/* 区块滚动入场：keyframe 动画而非 transition——transition 的属性/延时
+	   会泄漏到 hover 等后续状态变化（CSS 按 after-change 读 transition 配置），
+	   动画的 delay 与 hover 的 transition 互不干扰。只在 JS 可用时先隐藏，
+	   无 JS 直接可见（与另几站同款动效身份） */
+	.js [data-reveal]:not(.revealed) {
+		opacity: 0;
+	}
+
+	.js [data-reveal].revealed {
+		animation: reveal-in 0.55s ease-out both;
+	}
+
+	/* 卡片级 stagger：同一网格内子卡依次入场（延迟封顶，卡多时不拖沓） */
+	.js .reveal-stagger > [data-reveal]:nth-child(2) {
+		animation-delay: 70ms;
+	}
+	.js .reveal-stagger > [data-reveal]:nth-child(3) {
+		animation-delay: 140ms;
+	}
+	.js .reveal-stagger > [data-reveal]:nth-child(4) {
+		animation-delay: 210ms;
+	}
+	.js .reveal-stagger > [data-reveal]:nth-child(5) {
+		animation-delay: 280ms;
+	}
+	.js .reveal-stagger > [data-reveal]:nth-child(n + 6) {
+		animation-delay: 350ms;
+	}
+}
+
+@keyframes reveal-in {
+	from {
+		opacity: 0;
+		transform: translateY(14px);
+		filter: blur(4px);
+	}
+}
+
+/* 代码块：始终深底（终端语境）。浅色主题下深底与页面形成强对比；
+   深色主题下若还用同色底会整块融进页面，改用 surface-3 提亮一档，
+   保持「浮起的代码块」这一读法。 */
+.code-panel {
+	background-color: oklch(0.16 0.008 65); /* D9 dark surface-1（暖炭） */
+	border: 1px solid oklch(1 0 0 / 12%);
+}
+
+.dark .code-panel {
+	background-color: var(--surface-3);
+	border-color: oklch(1 0 0 / 16%);
+}
+
+/*
+ * 代码 token 配色：色相不发明，全部落在 D9 蓝（hue 258–260）及其近邻
+ * （字符串 220、数字 300）与 D9 暖炭中性（65–80），按明度/chroma 分层。
+ * 锚点：tok-key 取 packages/tokens 的 dark --primary 原值。
+ */
+
+/* 关键字：D9 dark primary */
+.code-panel .tok-key {
+	color: oklch(0.67 0.18 259.815);
+}
+
+/* 函数名·命令动词：primary 提亮一档 */
+.code-panel .tok-fn {
+	color: oklch(0.76 0.14 259);
+}
+
+/* 类型·包名：再提亮、降 chroma */
+.code-panel .tok-type {
+	color: oklch(0.84 0.08 258);
+}
+
+/* 字符串·参数值：蓝青近邻，与 type 再分一层 */
+.code-panel .tok-str {
+	color: oklch(0.78 0.09 220);
+}
+
+.code-panel .tok-num {
+	color: oklch(0.8 0.1 300);
+}
+
+.code-panel .tok-punct {
+	color: oklch(0.6 0.02 75);
+}
+
+.code-panel .tok-comment {
+	color: oklch(0.52 0.02 75);
+	font-style: italic;
+}
+
+/* 普通文本：D9 dark foreground 的弱化档 */
+.code-panel .tok-plain {
+	color: oklch(0.86 0.01 80);
+}
