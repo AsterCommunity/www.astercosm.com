@@ -123,13 +123,14 @@ AsterDrive 前端更新后 `bun run capture:scenes -- --binary /path/to/aster_dr
 
 ### apps/acme（来源：AsterACME 主仓库）
 
-| 本站路径                                  | 来源                                                                            |
-| ----------------------------------------- | ------------------------------------------------------------------------------- |
-| `apps/acme/public/favicon.svg`            | 自绘：挂锁标识（蓝锁体 + 亮蓝锁环与锁孔，D9 暖炭底），复用 packages/tokens 色板 |
-| `apps/acme/public/og.svg`、`.png`         | 自绘：复用 favicon 的标识形状与品牌色，PNG 由 `rsvg-convert` 渲染 1200×630      |
-| `apps/acme/src/i18n/code.ts`              | 仓库 CLI README 的真实命令示例（逐 token 手工标注，不跑高亮器）                 |
-| `apps/acme/src/i18n/ui.ts` 的 crates 列表 | `Cargo.toml` workspace members（6 个）；说明文案取自各 crate README             |
-| `apps/acme/src/i18n/ui.ts` 的 status 分节 | 主仓库 README/changelog 的已实现与路线图清单；改动产品能力时同步                |
+| 本站路径                                  | 来源                                                                                                                                                 |
+| ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `apps/acme/public/brand/`                 | 自绘：AsterACME wordmark 双版本（深墨 `#0E1424` / 白 `#F8FAFC` 透明底，`#3B82F6` 四芒星 + 顶点蓝点点睛；初稿 AI 生成后手工整理）。light 版不得带底板 |
+| `apps/acme/public/favicon.svg`            | 自绘：圆规 A + 盾形星轨 + 四芒星标识的**本地变体**（圆形→方形 rx=64，`#0E1424` 底）；源图标改版时需手工同步                                          |
+| `apps/acme/public/og.svg`、`.png`         | 自绘：复用 favicon 标识形状与品牌色（`#0E1424` 底 + `#3B82F6`），PNG 由 `rsvg-convert` 渲染 1200×630                                                 |
+| `apps/acme/src/i18n/code.ts`              | 仓库 CLI README 的真实命令示例（逐 token 手工标注，不跑高亮器）                                                                                      |
+| `apps/acme/src/i18n/ui.ts` 的 crates 列表 | `Cargo.toml` workspace members（6 个）；说明文案取自各 crate README                                                                                  |
+| `apps/acme/src/i18n/ui.ts` 的 status 分节 | 主仓库 README/changelog 的已实现与路线图清单；改动产品能力时同步                                                                                     |
 
 ## 部署
 

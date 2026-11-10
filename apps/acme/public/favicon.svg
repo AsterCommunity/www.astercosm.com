@@ -1,7 +1,39 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="AsterACME">
-  <rect width="64" height="64" rx="14" fill="#100d0a"/>
-  <path d="M21 29v-6a11 11 0 0 1 22 0v6" fill="none" stroke="#79b2ff" stroke-width="5"/>
-  <rect x="15" y="29" width="34" height="26" rx="6" fill="#4e92ff"/>
-  <circle cx="32" cy="38" r="4.5" fill="#100d0a"/>
-  <rect x="30.25" y="38" width="3.5" height="10" rx="1.75" fill="#79b2ff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="AsterACME">
+  <defs>
+    <!-- 处理前后穿插断口的遮罩 -->
+    <mask id="acme-interlock">
+      <rect width="512" height="512" fill="white" />
+      <!-- 护盾后半段被 A 字双腿遮挡的断口 -->
+      <line x1="256" y1="126" x2="118" y2="394" stroke="black" stroke-width="58" stroke-linecap="round" />
+      <line x1="256" y1="126" x2="394" y2="394" stroke="black" stroke-width="58" stroke-linecap="round" />
+      <!-- 顶点星芒外圈微断口 -->
+      <circle cx="256" cy="126" r="34" fill="black" />
+    </mask>
+
+    <mask id="a-legs-cutout">
+      <rect width="512" height="512" fill="white" />
+      <!-- 护盾前半段跨越 A 字双腿前方的断口预留 -->
+      <path d="M 108 286 C 145 358, 205 382, 256 398 C 307 382, 367 358, 404 286" fill="none" stroke="black" stroke-width="44" stroke-linecap="round" stroke-linejoin="round" />
+    </mask>
+  </defs>
+
+  <!-- 1. Deep Space Navy Square Badge（圆形 → 正方形的本地变体） -->
+  <rect width="512" height="512" rx="64" fill="#0E1424" />
+
+  <!-- 2. 护盾星轨后半层（位于 A 字后方） -->
+  <path d="M 108 286 C 140 232, 198 214, 256 214 C 314 214, 372 232, 404 286" fill="none" stroke="#3B82F6" stroke-width="26" stroke-linecap="round" mask="url(#acme-interlock)" />
+
+  <!-- 3. 白色 A 字主骨架（带前景穿插断口） -->
+  <g mask="url(#a-legs-cutout)">
+    <path d="M 118 394 L 256 126 L 394 394" fill="none" stroke="#F8FAFC" stroke-width="44" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+
+  <!-- 4. 中心 Aster 四芒星（核心能量与认证印记） -->
+  <path d="M 256 218 C 259 266, 274 281, 326 284 C 274 287, 259 302, 256 350 C 253 302, 238 287, 186 284 C 238 281, 253 266, 256 218 Z" fill="#3B82F6" />
+
+  <!-- 5. 护盾星轨前半层（V 型盾底环抱 A 字前方，ACME 安全与巅峰） -->
+  <path d="M 108 286 C 145 358, 205 382, 256 398 C 307 382, 367 358, 404 286" fill="none" stroke="#3B82F6" stroke-width="26" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- 6. 顶点 ACME 蓝点（Apex） -->
+  <circle cx="256" cy="126" r="22" fill="#3B82F6" />
 </svg>

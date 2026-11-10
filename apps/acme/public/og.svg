@@ -1,25 +1,25 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
   <title>AsterACME</title>
-  <rect width="1200" height="630" fill="#100d0a"/>
+  <rect width="1200" height="630" fill="#0E1424"/>
 
-  <!-- 双档蓝发丝线：D9 light primary + dark primary，与站内 D9 色板同源 -->
-  <rect x="0" y="0" width="600" height="4" fill="#1447e6"/>
-  <rect x="600" y="0" width="600" height="4" fill="#4e92ff"/>
+  <!-- 品牌蓝发丝线：与新标识同源（#3B82F6） -->
+  <rect x="0" y="0" width="1200" height="4" fill="#3B82F6"/>
 
-  <g transform="translate(80 92) scale(1.75)">
-    <rect width="64" height="64" rx="14" fill="#181410"/>
-    <path d="M21 29v-6a11 11 0 0 1 22 0v6" fill="none" stroke="#79b2ff" stroke-width="5"/>
-    <rect x="15" y="29" width="34" height="26" rx="6" fill="#4e92ff"/>
-    <circle cx="32" cy="38" r="4.5" fill="#181410"/>
-    <rect x="30.25" y="38" width="3.5" height="10" rx="1.75" fill="#79b2ff"/>
+  <!-- favicon 标识图形（底色同画布，仅取图形；512 画布 0.34 倍嵌入） -->
+  <g transform="translate(80 80) scale(0.34)">
+    <path d="M 108 286 C 140 232, 198 214, 256 214 C 314 214, 372 232, 404 286" fill="none" stroke="#3B82F6" stroke-width="26" stroke-linecap="round" stroke-opacity="0.55" />
+    <path d="M 118 394 L 256 126 L 394 394" fill="none" stroke="#F8FAFC" stroke-width="44" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M 256 218 C 259 266, 274 281, 326 284 C 274 287, 259 302, 256 350 C 253 302, 238 287, 186 284 C 238 281, 253 266, 256 218 Z" fill="#3B82F6" />
+    <path d="M 108 286 C 145 358, 205 382, 256 398 C 307 382, 367 358, 404 286" fill="none" stroke="#3B82F6" stroke-width="26" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="256" cy="126" r="22" fill="#3B82F6" />
   </g>
 
   <g font-family="Helvetica, Arial, sans-serif">
-    <text x="80" y="290" fill="#4e92ff" font-size="34" font-weight="700" letter-spacing="2">ASTERACME</text>
-    <text x="80" y="378" fill="#f1efeb" font-size="66" font-weight="700">The ACME client built</text>
-    <text x="80" y="456" fill="#f1efeb" font-size="66" font-weight="700">from the protocol up.</text>
-    <path d="M80 500H1120" stroke="#4e92ff" stroke-opacity="0.28"/>
-    <text x="80" y="556" fill="#aaa297" font-size="26">acme.astercosm.com</text>
-    <text x="1120" y="556" text-anchor="end" fill="#79b2ff" font-size="24">AsterCosmos</text>
+    <text x="80" y="290" fill="#3B82F6" font-size="34" font-weight="700" letter-spacing="2">ASTERACME</text>
+    <text x="80" y="378" fill="#F8FAFC" font-size="66" font-weight="700">The ACME client built</text>
+    <text x="80" y="456" fill="#F8FAFC" font-size="66" font-weight="700">from the protocol up.</text>
+    <path d="M80 500H1120" stroke="#3B82F6" stroke-opacity="0.28"/>
+    <text x="80" y="556" fill="#F8FAFC" fill-opacity="0.62" font-size="26">acme.astercosm.com</text>
+    <text x="1120" y="556" text-anchor="end" fill="#3B82F6" font-size="24">AsterCosmos</text>
   </g>
 </svg>
