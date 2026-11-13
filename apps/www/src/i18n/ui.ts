@@ -152,7 +152,7 @@ const en = {
 					{
 						name: "AsterACME",
 						tagline:
-							"Rust ACME client and CLI: the full account lifecycle against real CAs today; certificate issuance is on the way.",
+							"Rust ACME client and CLI: the full certificate lifecycle — issue, renew, deploy, revoke — against real CAs today.",
 						href: ASTERACME_URL,
 						site: ACME_URL,
 						tech: "Rust",
@@ -520,7 +520,7 @@ const zh: Messages = {
 					{
 						name: "AsterACME",
 						tagline:
-							"Rust ACME 客户端与 CLI：账户生命周期今天就能对接真实 CA，证书签发在路上",
+							"Rust ACME 客户端与 CLI：签发、续期、部署、吊销，证书全生命周期今天就能对接真实 CA",
 						href: ASTERACME_URL,
 						site: ACME_URL,
 						tech: "Rust",

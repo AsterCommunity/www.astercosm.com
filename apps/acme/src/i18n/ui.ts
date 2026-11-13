@@ -8,7 +8,7 @@ export const defaultLang: Lang = "en";
 
 export const GITHUB_URL = "https://github.com/AsterCommunity/AsterACME";
 export const WWW_URL = "https://www.astercosm.com";
-export const TEST_NOTES_URL = `${GITHUB_URL}/blob/main/docs/account-testing.md`;
+export const CHANGELOG_URL = `${GITHUB_URL}/blob/main/CHANGELOG.md`;
 export const CRATES_TREE_URL = `${GITHUB_URL}/tree/main/crates`;
 
 /** 站内语言切换目标路径 */
@@ -39,29 +39,29 @@ export const crates = [
 	{
 		name: "aster_acme",
 		body: {
-			en: "The client layer. Account orchestration, ES256 JWS, a nonce pool with bounded retries, and injectable solver and storage contracts.",
-			zh: "客户端层。账户编排、ES256 JWS、带限次重试的 nonce 池，以及可注入的 solver 与存储契约",
+			en: "The client layer. Account and certificate orchestration — issuance, renewal, ARI, revocation — ES256 JWS, and injectable solver and storage contracts.",
+			zh: "客户端层。账户与证书编排——签发、续期、ARI 与吊销——ES256 JWS，以及可注入的 solver 与存储契约",
 		},
 	},
 	{
-		name: "aster_acme_dns",
+		name: "aster_acme_validation",
 		body: {
-			en: "DNS-01 solver layer. Zone routing, delegation-aware lookups, and provider adapters on the client's solver contract.",
-			zh: "DNS-01 solver 层。zone 路由、感知委托的查询，以及架在客户端 solver 契约上的 provider 适配",
+			en: "Validation methods and readiness checks. DNS TXT visibility and advisory CAA/TXT prechecks — no DNS provider writes.",
+			zh: "验证方法与就绪检查层。DNS TXT 可见性检查与建议性 CAA/TXT 预检——不做 DNS provider 写入",
 		},
 	},
 	{
 		name: "aster_acme_cli_storage",
 		body: {
-			en: "Local file storage. PKCS#8 keys, versioned TOML metadata, atomic writes, and bounded locking — Unix today.",
-			zh: "本地文件存储。PKCS#8 密钥、带版本的 TOML 元数据、原子写入与有界锁定——当前支持 Unix",
+			en: "Local file storage. PKCS#8 keys, versioned TOML metadata, atomic writes, and bounded locking — Unix and Windows.",
+			zh: "本地文件存储。PKCS#8 密钥、带版本的 TOML 元数据、原子写入与有界锁定——覆盖 Unix 与 Windows",
 		},
 	},
 	{
 		name: "aster_acme_cli",
 		body: {
-			en: "The command line. Interactive or scripted account management with colored diagnostics and structured JSON output.",
-			zh: "命令行。交互式或脚本化的账户管理，彩色诊断与结构化 JSON 输出",
+			en: "The command line. Account and certificate lifecycle — issuance, renewal, deployment — with colored diagnostics and structured JSON output.",
+			zh: "命令行。账户与证书全生命周期——签发、续期、部署——彩色诊断与结构化 JSON 输出",
 		},
 	},
 ] as const;
@@ -70,7 +70,7 @@ const en = {
 	meta: {
 		title: "AsterACME — The Rust ACME client built from the protocol up",
 		description:
-			"AsterACME is an open-source Rust ACME client and CLI: a pure protocol state machine, typed wire contracts, and account management that works against real CAs today — with certificate issuance on its way.",
+			"AsterACME is an open-source Rust ACME client and CLI: a pure protocol state machine, typed wire contracts, and certificate issuance, renewal, and deployment that work against real CAs today.",
 	},
 	nav: {
 		crates: "Crates",
@@ -87,7 +87,7 @@ const en = {
 		status: "In active development",
 		title: "The ACME client built from the protocol up.",
 		subtitle:
-			"AsterACME is an open-source Rust ACME client and CLI: a pure protocol state machine, typed wire contracts, and account management that works against real CAs today. Certificate issuance is being built on top.",
+			"AsterACME is an open-source Rust ACME client and CLI: a pure protocol state machine, typed wire contracts, and certificate issuance, renewal, and deployment that work against real CAs today.",
 		primaryCta: "View on GitHub",
 		secondaryCta: "Browse crates",
 		note: "RFC 8555-compatible · MIT OR Apache-2.0",
@@ -104,46 +104,63 @@ const en = {
 	},
 	status: {
 		kicker: "Status",
-		title: "From accounts to issuance.",
-		body: "The account layer already works against real CAs. Certificate issuance, DNS-01, and renewal are being built on top of it, in the open.",
+		title: "The certificate lifecycle, working today.",
+		body: "The CLI issues, renews, deploys, and revokes certificates against real CAs — and keeps them fresh unattended. Automated DNS providers and the first release are in the works.",
 		available: "Available",
 		inDevelopment: "In development",
 		planned: "Planned",
 		items: [
 			{
 				label:
-					"ACME account lifecycle — register, recover, inspect, verify, deactivate",
+					"ACME account lifecycle — register, recover, rotate keys, deactivate",
 				state: "available",
 			},
 			{
 				label:
-					"Protocol layer — typed wire contracts, pure state machine, ES256 JWS",
+					"Certificate issuance — single-domain, SAN & wildcard via DNS-01, HTTP-01, TLS-ALPN-01",
+				state: "available",
+			},
+			{
+				label: "Renewal with ARI — single or batch, with retry backoff",
 				state: "available",
 			},
 			{
 				label:
-					"Command-line account management — colored diagnostics, JSON output",
+					"Deployment — named targets per certificate, automatic after renewal, bounded reload",
 				state: "available",
 			},
 			{
-				label: "Certificate issuance, renewal & revocation",
+				label: "Unattended maintenance — resident daemon and cron run-once",
+				state: "available",
+			},
+			{
+				label: "Revocation — account-signed, outcomes persisted locally",
+				state: "available",
+			},
+			{
+				label: "Advisory CAA/TXT/HTTP prechecks before new orders",
+				state: "available",
+			},
+			{
+				label:
+					"First release — publishing to crates.io, APIs and local formats stabilizing",
 				state: "inDevelopment",
 			},
 			{
-				label: "DNS-01 with reusable DNS provider integrations",
-				state: "planned",
+				label: "Automated DNS provider integrations — provider-side DNS writes",
+				state: "inDevelopment",
 			},
 			{
-				label: "HTTP-01 and ACME Renewal Information (RFC 9773)",
+				label: "Public-CA acceptance for DNS-PERSIST-01 (draft -02)",
 				state: "planned",
 			},
 		] as { label: string; state: "available" | "inDevelopment" | "planned" }[],
-		cta: "Read the account testing notes",
+		cta: "Read the changelog",
 	},
 	start: {
 		kicker: "Start here",
 		title: "Meet the CLI.",
-		body: "One binary manages accounts against public CAs. Library crates arrive as Git dependencies — nothing is published to crates.io yet.",
+		body: "One binary manages the certificate lifecycle against public CAs — issue, renew, deploy, revoke. Library crates arrive as Git dependencies — nothing is published to crates.io yet.",
 		step1: "Register and verify an account",
 		step2: "Or embed the library",
 		step2Body: "Depend on the crates you need directly from the repository.",
@@ -151,7 +168,7 @@ const en = {
 		apiCta: "Browse the crates",
 	},
 	cta: {
-		title: "Put the protocol layer to work.",
+		title: "Issue your first certificate.",
 		body: "Everything is open source, MIT or Apache-2.0 licensed, and growing in the open.",
 		primary: "View on GitHub",
 		secondary: "AsterCosmos",
@@ -168,7 +185,7 @@ const zh: Messages = {
 	meta: {
 		title: "AsterACME —— 协议优先的 Rust ACME 客户端",
 		description:
-			"AsterACME 是开源的 Rust ACME 客户端与 CLI：纯协议状态机、具名线上契约，账户管理今天就能对接真实 CA——证书签发正在路上",
+			"AsterACME 是开源的 Rust ACME 客户端与 CLI：纯协议状态机、具名线上契约，签发、续期与部署今天就能对接真实 CA",
 	},
 	nav: {
 		crates: "模块",
@@ -185,7 +202,7 @@ const zh: Messages = {
 		status: "正在构建中",
 		title: "协议优先的 ACME 客户端",
 		subtitle:
-			"AsterACME 是开源的 Rust ACME 客户端与 CLI：纯协议状态机、具名线上契约，账户管理今天就能对接真实 CA。证书签发正在这一层之上构建",
+			"AsterACME 是开源的 Rust ACME 客户端与 CLI：纯协议状态机、具名线上契约，签发、续期与部署今天就能对接真实 CA",
 		primaryCta: "在 GitHub 查看",
 		secondaryCta: "浏览模块",
 		note: "兼容 RFC 8555 协议 · MIT OR Apache-2.0",
@@ -202,43 +219,61 @@ const zh: Messages = {
 	},
 	status: {
 		kicker: "进展",
-		title: "从账户到签发，逐层做实",
-		body: "账户层今天就能对接真实 CA。证书签发、DNS-01 与续期正在这一层之上公开构建",
+		title: "证书全生命周期，今天就能用",
+		body: "CLI 今天就能对真实 CA 签发、续期、部署和吊销证书，并无人值守地保持更新。自动 DNS provider 与首个正式发布正在进行",
 		available: "已可用",
 		inDevelopment: "构建中",
 		planned: "规划中",
 		items: [
 			{
-				label: "ACME 账户生命周期——注册、找回、查看、验证、停用",
+				label: "ACME 账户生命周期——注册、找回、换钥、停用",
 				state: "available",
 			},
 			{
-				label: "协议层——具名线上契约、纯状态机、ES256 JWS",
+				label:
+					"证书签发——单域名、多 SAN 与通配符，DNS-01、HTTP-01、TLS-ALPN-01",
 				state: "available",
 			},
 			{
-				label: "命令行账户管理——彩色诊断、JSON 输出",
+				label: "续期与 ARI——单张或批量，失败退避重试",
 				state: "available",
 			},
 			{
-				label: "证书签发、续期与吊销",
+				label:
+					"证书部署——每张证书多个具名目标，续期后自动部署，reload 有界执行",
+				state: "available",
+			},
+			{
+				label: "无人值守维护——常驻 daemon 与 cron run-once",
+				state: "available",
+			},
+			{
+				label: "证书吊销——账户签名，结果本地独立持久化",
+				state: "available",
+			},
+			{
+				label: "签发前 CAA/TXT/HTTP 建议性预检",
+				state: "available",
+			},
+			{
+				label: "首个正式发布——crates.io 发布中，API 与本地格式仍在定型",
 				state: "inDevelopment",
 			},
 			{
-				label: "DNS-01 与可复用的 DNS provider 集成",
-				state: "planned",
+				label: "自动 DNS provider 集成——provider 侧 DNS 写入",
+				state: "inDevelopment",
 			},
 			{
-				label: "HTTP-01 与 ACME 续期信息（RFC 9773）",
+				label: "DNS-PERSIST-01（草案 -02）的公网 CA 验收",
 				state: "planned",
 			},
 		] as { label: string; state: "available" | "inDevelopment" | "planned" }[],
-		cta: "阅读账户测试记录",
+		cta: "查看更新日志",
 	},
 	start: {
 		kicker: "从这里开始",
 		title: "先认识 CLI",
-		body: "一个二进制，对接公开 CA 管理账户。库 crate 目前以 Git 依赖引入——还没有发布到 crates.io",
+		body: "一个二进制，对接公开 CA 管理证书全生命周期——签发、续期、部署、吊销。库 crate 目前以 Git 依赖引入——还没有发布到 crates.io",
 		step1: "注册并验证账户",
 		step2: "或者嵌入库",
 		step2Body: "直接从仓库依赖你需要的 crate",
@@ -246,7 +281,7 @@ const zh: Messages = {
 		apiCta: "浏览各 crate",
 	},
 	cta: {
-		title: "把协议层先用起来",
+		title: "签发你的第一张证书",
 		body: "全部开源，MIT OR Apache-2.0 授权，在公开开发中成长",
 		primary: "在 GitHub 查看",
 		secondary: "AsterCosmos",
