@@ -13,21 +13,8 @@ const m = t(lang);
 
 <section class="mx-auto max-w-6xl px-6 pt-20 pb-16 lg:pt-28 lg:pb-20">
 	<div class="mx-auto max-w-3xl text-center">
-		{/* gate 同款状态 pill：ping 动画点 + 进行时状态，不重复 subtitle 的信息 */}
-		<p
-			class="inline-flex items-center gap-2 rounded-full bg-surface-2 px-4 py-1.5 text-sm text-muted-foreground"
-		>
-			<span class="relative flex size-2" aria-hidden="true">
-				<span
-					class="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-60 motion-reduce:animate-none"
-				></span>
-				<span class="relative inline-flex size-2 rounded-full bg-primary"></span>
-			</span>
-			{m.hero.status}
-		</p>
-
 		<h1
-			class="mt-7 text-4xl leading-[1.08] font-semibold tracking-tight text-balance sm:text-5xl lg:text-6xl"
+			class="text-4xl leading-[1.08] font-semibold tracking-tight text-balance sm:text-5xl lg:text-6xl"
 		>
 			{m.hero.title}
 		</h1>

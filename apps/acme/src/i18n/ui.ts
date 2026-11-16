@@ -17,9 +17,10 @@ export function localizedPath(lang: Lang): string {
 }
 
 /**
- * crate 目录。事实源：AsterACME 仓库 Cargo.toml workspace members（6 个，
- * 2026-11 快照），与 crates/<name>/README.md 一一对应；顺序按依赖方向，
- * 内核在底、CLI 在边缘。
+ * crate 目录。事实源：AsterACME 仓库 Cargo.toml workspace members（10 个，
+ * 0.1.0-alpha.1 快照，2026-11），与 crates/<name>/README.md 一一对应；顺序按
+ * 依赖方向，内核在底、CLI 在边缘，DNS 契约层（dns/dns_adpp/dns_resolver/process）
+ * 依次排在验证层之后。
  */
 export const crates = [
 	{
@@ -51,6 +52,34 @@ export const crates = [
 		},
 	},
 	{
+		name: "aster_acme_dns",
+		body: {
+			en: "Protocol-neutral DNS publication contracts. Records, receipts, CNAME routing, and propagation policy shared by provider adapters.",
+			zh: "协议无关的 DNS 发布契约。记录、回执、CNAME 路由与传播策略，供 provider adapter 共用",
+		},
+	},
+	{
+		name: "aster_acme_dns_adpp",
+		body: {
+			en: "External-process adapter for the AsterACME DNS Provider Protocol. One bounded JSON exchange per invocation; credentials never logged.",
+			zh: "AsterACME DNS Provider Protocol 的外部进程适配器。每次调用一次有界 JSON 交换，凭据绝不进日志",
+		},
+	},
+	{
+		name: "aster_acme_dns_resolver",
+		body: {
+			en: "Read-only Hickory adapter for DNS observations. CNAME and TXT lookups preserve resolver stages; never mutates DNS.",
+			zh: "只读 Hickory 解析适配器。保留解析器阶段的 CNAME 与 TXT 观察，不改动 DNS",
+		},
+	},
+	{
+		name: "aster_acme_process",
+		body: {
+			en: "Bounded child-process lifecycle. Reload commands and external DNS providers share process-tree ownership on Unix and Windows.",
+			zh: "有界的子进程生命周期。reload 命令与外部 DNS provider 共用进程树所有权，覆盖 Unix 与 Windows",
+		},
+	},
+	{
 		name: "aster_acme_cli_storage",
 		body: {
 			en: "Local file storage. PKCS#8 keys, versioned TOML metadata, atomic writes, and bounded locking — Unix and Windows.",
@@ -60,8 +89,8 @@ export const crates = [
 	{
 		name: "aster_acme_cli",
 		body: {
-			en: "The command line. Account and certificate lifecycle — issuance, renewal, deployment — with colored diagnostics and structured JSON output.",
-			zh: "命令行。账户与证书全生命周期——签发、续期、部署——彩色诊断与结构化 JSON 输出",
+			en: "The command line. Accounts, certificates, deployment, daemon maintenance, and DNS provider profiles — colored diagnostics and structured JSON output.",
+			zh: "命令行。账户、证书、部署、daemon 维护与 DNS provider 档案——彩色诊断与结构化 JSON 输出",
 		},
 	},
 ] as const;
@@ -84,7 +113,6 @@ const en = {
 		skipToContent: "Skip to content",
 	},
 	hero: {
-		status: "In active development",
 		title: "The ACME client built from the protocol up.",
 		subtitle:
 			"AsterACME is an open-source Rust ACME client and CLI: a pure protocol state machine, typed wire contracts, and certificate issuance, renewal, and deployment that work against real CAs today.",
@@ -95,17 +123,17 @@ const en = {
 	code: {
 		label: "Register an account",
 		caption:
-			"A real command against a real CA. The CLI keeps the key local, finds or creates the account, and reports structured JSON.",
+			"A real command against a real CA, straight from the README. The key stays local; the CLI finds or creates the account.",
 	},
 	cratesSection: {
 		kicker: "What is in the box",
-		title: "Six crates, layered by ownership.",
+		title: "Ten crates, layered by ownership.",
 		docsCta: "Browse the repository",
 	},
 	status: {
 		kicker: "Status",
 		title: "The certificate lifecycle, working today.",
-		body: "The CLI issues, renews, deploys, and revokes certificates against real CAs — and keeps them fresh unattended. Automated DNS providers and the first release are in the works.",
+		body: "The CLI issues, renews, deploys, and revokes certificates against real CAs — and keeps them fresh unattended. The first release is on crates.io; external DNS automation ships today.",
 		available: "Available",
 		inDevelopment: "In development",
 		planned: "Planned",
@@ -118,6 +146,16 @@ const en = {
 			{
 				label:
 					"Certificate issuance — single-domain, SAN & wildcard via DNS-01, HTTP-01, TLS-ALPN-01",
+				state: "available",
+			},
+			{
+				label:
+					"DNS-PERSIST-01 (draft -02) — persistent TXT records, reused across renewals",
+				state: "available",
+			},
+			{
+				label:
+					"External DNS-01 automation — ADPP provider profiles, provider-side DNS writes",
 				state: "available",
 			},
 			{
@@ -134,7 +172,8 @@ const en = {
 				state: "available",
 			},
 			{
-				label: "Revocation — account-signed, outcomes persisted locally",
+				label:
+					"Revocation — account or certificate-key signing, outcomes persisted locally",
 				state: "available",
 			},
 			{
@@ -142,17 +181,8 @@ const en = {
 				state: "available",
 			},
 			{
-				label:
-					"First release — publishing to crates.io, APIs and local formats stabilizing",
+				label: "Out-of-the-box DNS integrations — built-in provider adapters",
 				state: "inDevelopment",
-			},
-			{
-				label: "Automated DNS provider integrations — provider-side DNS writes",
-				state: "inDevelopment",
-			},
-			{
-				label: "Public-CA acceptance for DNS-PERSIST-01 (draft -02)",
-				state: "planned",
 			},
 		] as { label: string; state: "available" | "inDevelopment" | "planned" }[],
 		cta: "Read the changelog",
@@ -160,10 +190,11 @@ const en = {
 	start: {
 		kicker: "Start here",
 		title: "Meet the CLI.",
-		body: "One binary manages the certificate lifecycle against public CAs — issue, renew, deploy, revoke. Library crates arrive as Git dependencies — nothing is published to crates.io yet.",
-		step1: "Register and verify an account",
+		body: "One binary manages the certificate lifecycle against public CAs — issue, renew, deploy, revoke. Install the published CLI from crates.io, or embed the library crates directly.",
+		step1: "Install the CLI and register an account",
 		step2: "Or embed the library",
-		step2Body: "Depend on the crates you need directly from the repository.",
+		step2Body:
+			"The library crates are published too — depend on the ones you need.",
 		docsCta: "Read the README",
 		apiCta: "Browse the crates",
 	},
@@ -199,7 +230,6 @@ const zh: Messages = {
 		skipToContent: "跳到正文",
 	},
 	hero: {
-		status: "正在构建中",
 		title: "协议优先的 ACME 客户端",
 		subtitle:
 			"AsterACME 是开源的 Rust ACME 客户端与 CLI：纯协议状态机、具名线上契约，签发、续期与部署今天就能对接真实 CA",
@@ -210,17 +240,17 @@ const zh: Messages = {
 	code: {
 		label: "注册一个账户",
 		caption:
-			"对着真实 CA 跑的真实命令。密钥保存在本地，查找或创建账户，返回结构化 JSON",
+			"对着真实 CA 跑的真实命令，直接来自 README。密钥保存在本地，CLI 查找或创建账户",
 	},
 	cratesSection: {
 		kicker: "里面有什么",
-		title: "六个 crate，按所有权分层",
+		title: "十个 crate，按所有权分层",
 		docsCta: "浏览仓库",
 	},
 	status: {
 		kicker: "进展",
 		title: "证书全生命周期，今天就能用",
-		body: "CLI 今天就能对真实 CA 签发、续期、部署和吊销证书，并无人值守地保持更新。自动 DNS provider 与首个正式发布正在进行",
+		body: "CLI 今天就能对真实 CA 签发、续期、部署和吊销证书，并无人值守地保持更新。首个版本已上 crates.io，外部 DNS 自动化今天可用",
 		available: "已可用",
 		inDevelopment: "构建中",
 		planned: "规划中",
@@ -232,6 +262,14 @@ const zh: Messages = {
 			{
 				label:
 					"证书签发——单域名、多 SAN 与通配符，DNS-01、HTTP-01、TLS-ALPN-01",
+				state: "available",
+			},
+			{
+				label: "DNS-PERSIST-01（草案 -02）——长期 TXT 记录一次配置，续期复用",
+				state: "available",
+			},
+			{
+				label: "外部 DNS-01 自动化——ADPP provider 档案，provider 侧 DNS 写入",
 				state: "available",
 			},
 			{
@@ -248,7 +286,7 @@ const zh: Messages = {
 				state: "available",
 			},
 			{
-				label: "证书吊销——账户签名，结果本地独立持久化",
+				label: "证书吊销——账户或证书私钥签名，结果本地独立持久化",
 				state: "available",
 			},
 			{
@@ -256,16 +294,8 @@ const zh: Messages = {
 				state: "available",
 			},
 			{
-				label: "首个正式发布——crates.io 发布中，API 与本地格式仍在定型",
+				label: "开箱即用的 DNS 集成——内置云厂商 adapter",
 				state: "inDevelopment",
-			},
-			{
-				label: "自动 DNS provider 集成——provider 侧 DNS 写入",
-				state: "inDevelopment",
-			},
-			{
-				label: "DNS-PERSIST-01（草案 -02）的公网 CA 验收",
-				state: "planned",
 			},
 		] as { label: string; state: "available" | "inDevelopment" | "planned" }[],
 		cta: "查看更新日志",
@@ -273,10 +303,10 @@ const zh: Messages = {
 	start: {
 		kicker: "从这里开始",
 		title: "先认识 CLI",
-		body: "一个二进制，对接公开 CA 管理证书全生命周期——签发、续期、部署、吊销。库 crate 目前以 Git 依赖引入——还没有发布到 crates.io",
-		step1: "注册并验证账户",
+		body: "一个二进制，对接公开 CA 管理证书全生命周期——签发、续期、部署、吊销。CLI 已发布到 crates.io，库 crate 也可直接嵌入",
+		step1: "安装 CLI 并注册账户",
 		step2: "或者嵌入库",
-		step2Body: "直接从仓库依赖你需要的 crate",
+		step2Body: "库 crate 同样已发布，直接依赖需要的即可",
 		docsCta: "阅读 README",
 		apiCta: "浏览各 crate",
 	},
