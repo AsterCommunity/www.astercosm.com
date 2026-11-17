@@ -194,11 +194,6 @@ const en = {
 					"More built-in DNS vendors — additional backends on the provider registry",
 				state: "inDevelopment",
 			},
-			{
-				label:
-					"Live DNS and public-CA acceptance for the new provider backends",
-				state: "planned",
-			},
 		] as { label: string; state: "available" | "inDevelopment" | "planned" }[],
 		cta: "Read the changelog",
 	},
@@ -312,10 +307,6 @@ const zh: Messages = {
 			{
 				label: "更多内置 DNS 厂商——provider registry 上的新 backend",
 				state: "inDevelopment",
-			},
-			{
-				label: "新 provider backend 的真实 DNS 与公共 CA 验收",
-				state: "planned",
 			},
 		] as { label: string; state: "available" | "inDevelopment" | "planned" }[],
 		cta: "查看更新日志",
