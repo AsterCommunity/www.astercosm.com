@@ -17,10 +17,12 @@ export function localizedPath(lang: Lang): string {
 }
 
 /**
- * crate 目录。事实源：AsterACME 仓库 Cargo.toml workspace members（10 个，
- * 0.1.0-alpha.1 快照，2026-11），与 crates/<name>/README.md 一一对应；顺序按
- * 依赖方向，内核在底、CLI 在边缘，DNS 契约层（dns/dns_adpp/dns_resolver/process）
- * 依次排在验证层之后。
+ * crate 目录。事实源：AsterACME 仓库 Cargo.toml workspace members（11 个，
+ * 0.1.0-alpha.2 快照，2026-11），与 crates/<name>/README.md 一一对应；顺序按
+ * 依赖方向，内核在底、CLI 在边缘，DNS 层依次排在验证层之后：契约（dns）→
+ * host 侧 HTTP 执行（dns_http）→ 内置 vendor 状态机（dns_builtin）→ 外部
+ * 进程适配器（dns_adpp）→ 只读解析（dns_resolver）。原 aster_acme_process
+ * 已在 alpha.2 移除，进程生命周期改用已发布的 aster_forge_process。
  */
 export const crates = [
 	{
@@ -59,6 +61,20 @@ export const crates = [
 		},
 	},
 	{
+		name: "aster_acme_dns_http",
+		body: {
+			en: "Declarative HTTP DNS provider engine. Validates trusted recipes, prepares bounded requests, reconciles exact DNS record ownership, and uses Forge's shared sender.",
+			zh: "声明式 HTTP DNS provider 引擎。校验可信定义、准备有界请求、核对精确 DNS 记录所有权，并复用 Forge sender",
+		},
+	},
+	{
+		name: "aster_acme_dns_builtin",
+		body: {
+			en: "Provider-owned DNS state machines. Vendor backends such as Cloudflare behind a validated registry — no raw HTTP client, no private state files.",
+			zh: "Provider 侧 DNS 状态机。Cloudflare 等 vendor backend 挂在统一校验的 registry 上——不碰裸 HTTP client，不自己写状态文件",
+		},
+	},
+	{
 		name: "aster_acme_dns_adpp",
 		body: {
 			en: "External-process adapter for the AsterACME DNS Provider Protocol. One bounded JSON exchange per invocation; credentials never logged.",
@@ -70,13 +86,6 @@ export const crates = [
 		body: {
 			en: "Read-only Hickory adapter for DNS observations. CNAME and TXT lookups preserve resolver stages; never mutates DNS.",
 			zh: "只读 Hickory 解析适配器。保留解析器阶段的 CNAME 与 TXT 观察，不改动 DNS",
-		},
-	},
-	{
-		name: "aster_acme_process",
-		body: {
-			en: "Bounded child-process lifecycle. Reload commands and external DNS providers share process-tree ownership on Unix and Windows.",
-			zh: "有界的子进程生命周期。reload 命令与外部 DNS provider 共用进程树所有权，覆盖 Unix 与 Windows",
 		},
 	},
 	{
@@ -127,13 +136,13 @@ const en = {
 	},
 	cratesSection: {
 		kicker: "What is in the box",
-		title: "Ten crates, layered by ownership.",
+		title: "Eleven crates, layered by ownership.",
 		docsCta: "Browse the repository",
 	},
 	status: {
 		kicker: "Status",
 		title: "The certificate lifecycle, working today.",
-		body: "The CLI issues, renews, deploys, and revokes certificates against real CAs — and keeps them fresh unattended. The first release is on crates.io; external DNS automation ships today.",
+		body: "The CLI issues, renews, deploys, and revokes certificates against real CAs — and keeps them fresh unattended. Pre-release crates are on crates.io, with built-in Cloudflare and external ADPP DNS automation shipping today.",
 		available: "Available",
 		inDevelopment: "In development",
 		planned: "Planned",
@@ -155,7 +164,7 @@ const en = {
 			},
 			{
 				label:
-					"External DNS-01 automation — ADPP provider profiles, provider-side DNS writes",
+					"DNS-01 automation — built-in Cloudflare or external ADPP providers, one unified profile",
 				state: "available",
 			},
 			{
@@ -181,8 +190,14 @@ const en = {
 				state: "available",
 			},
 			{
-				label: "Out-of-the-box DNS integrations — built-in provider adapters",
+				label:
+					"More built-in DNS vendors — additional backends on the provider registry",
 				state: "inDevelopment",
+			},
+			{
+				label:
+					"Live DNS and public-CA acceptance for the new provider backends",
+				state: "planned",
 			},
 		] as { label: string; state: "available" | "inDevelopment" | "planned" }[],
 		cta: "Read the changelog",
@@ -244,13 +259,13 @@ const zh: Messages = {
 	},
 	cratesSection: {
 		kicker: "里面有什么",
-		title: "十个 crate，按所有权分层",
+		title: "十一个 crate，按所有权分层",
 		docsCta: "浏览仓库",
 	},
 	status: {
 		kicker: "进展",
 		title: "证书全生命周期，今天就能用",
-		body: "CLI 今天就能对真实 CA 签发、续期、部署和吊销证书，并无人值守地保持更新。首个版本已上 crates.io，外部 DNS 自动化今天可用",
+		body: "CLI 今天就能对真实 CA 签发、续期、部署和吊销证书，并无人值守地保持更新。预发布 crate 已上 crates.io，内置 Cloudflare 与外部 ADPP 的 DNS 自动化今天可用",
 		available: "已可用",
 		inDevelopment: "构建中",
 		planned: "规划中",
@@ -269,7 +284,8 @@ const zh: Messages = {
 				state: "available",
 			},
 			{
-				label: "外部 DNS-01 自动化——ADPP provider 档案，provider 侧 DNS 写入",
+				label:
+					"DNS-01 自动化——内置 Cloudflare 或外部 ADPP provider，统一档案配置",
 				state: "available",
 			},
 			{
@@ -294,8 +310,12 @@ const zh: Messages = {
 				state: "available",
 			},
 			{
-				label: "开箱即用的 DNS 集成——内置云厂商 adapter",
+				label: "更多内置 DNS 厂商——provider registry 上的新 backend",
 				state: "inDevelopment",
+			},
+			{
+				label: "新 provider backend 的真实 DNS 与公共 CA 验收",
+				state: "planned",
 			},
 		] as { label: string; state: "available" | "inDevelopment" | "planned" }[],
 		cta: "查看更新日志",

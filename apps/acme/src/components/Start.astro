@@ -1,11 +1,6 @@
 ---
 import CodeBlock from "@/components/CodeBlock.astro";
-import {
-	addCrateLines,
-	installLines,
-	registerLines,
-	showVerifyLines,
-} from "@/i18n/code";
+import { addCrateLines, installLines, registerLines } from "@/i18n/code";
 import { CRATES_TREE_URL, GITHUB_URL, type Lang, t } from "@/i18n/ui";
 
 interface Props {
@@ -37,7 +32,6 @@ const m = t(lang);
 				<div class="mt-3 space-y-4">
 					<CodeBlock lines={installLines} label={m.start.step1} />
 					<CodeBlock lines={registerLines} label={m.start.step1} />
-					<CodeBlock lines={showVerifyLines} label={`${m.start.step1} — verify`} />
 				</div>
 			</div>
 

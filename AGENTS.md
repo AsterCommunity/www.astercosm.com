@@ -129,7 +129,7 @@ AsterDrive 前端更新后 `bun run capture:scenes -- --binary /path/to/aster_dr
 | `apps/acme/public/favicon.svg`            | 自绘：圆规 A + 盾形星轨 + 四芒星标识的**本地变体**（圆形→方形 rx=64，`#0E1424` 底）；源图标改版时需手工同步                                          |
 | `apps/acme/public/og.svg`、`.png`         | 自绘：复用 favicon 标识形状与品牌色（`#0E1424` 底 + `#3B82F6`），PNG 由 `rsvg-convert` 渲染 1200×630                                                 |
 | `apps/acme/src/i18n/code.ts`              | 仓库 CLI README 的真实命令示例（逐 token 手工标注，不跑高亮器）                                                                                      |
-| `apps/acme/src/i18n/ui.ts` 的 crates 列表 | `Cargo.toml` workspace members（6 个）；说明文案取自各 crate README                                                                                  |
+| `apps/acme/src/i18n/ui.ts` 的 crates 列表 | `Cargo.toml` workspace members（11 个）；说明文案取自各 crate README                                                                                 |
 | `apps/acme/src/i18n/ui.ts` 的 status 分节 | 主仓库 README/changelog 的已实现与路线图清单；改动产品能力时同步                                                                                     |
 
 ## 部署
