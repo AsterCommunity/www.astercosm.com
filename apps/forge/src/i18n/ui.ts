@@ -26,13 +26,16 @@ export function docsUrl(lang: Lang, path = ""): string {
 
 /**
  * crate 目录。事实源：AsterForge 仓库 Cargo.toml 的 workspace members
- * （32 个，2026-10 快照），与 docs/crates/*.md 的 crate 页面一一对应。
+ * （34 个，2026-11 快照），与 docs/crates/*.md 的 crate 页面一一对应。
  * 分组沿用 README 的 Areas 口径；events 归入数据与协调，test 归入工具与测试。
+ * 2026-11 新增：aster_forge_process（Runtime kernel，AsterACME alpha.2 已复用）
+ * 与 aster_forge_macros（Utilities）。
  */
 export const crateGroups = {
 	runtime: {
 		items: [
 			{ name: "aster_forge_runtime", doc: "/crates/aster_forge_runtime" },
+			{ name: "aster_forge_process", doc: "/crates/aster_forge_process" },
 			{ name: "aster_forge_config", doc: "/crates/aster_forge_config" },
 			{ name: "aster_forge_logging", doc: "/crates/aster_forge_logging" },
 			{ name: "aster_forge_metrics", doc: "/crates/aster_forge_metrics" },
@@ -104,6 +107,7 @@ export const crateGroups = {
 	},
 	utilities: {
 		items: [
+			{ name: "aster_forge_macros", doc: "/crates/aster_forge_macros" },
 			{ name: "aster_forge_crypto", doc: "/crates/aster_forge_crypto" },
 			{ name: "aster_forge_utils", doc: "/crates/aster_forge_utils" },
 			{ name: "aster_forge_validation", doc: "/crates/aster_forge_validation" },
@@ -149,7 +153,7 @@ const en = {
 	},
 	crates: {
 		kicker: "What is in the box",
-		title: "Thirty-two crates, each with one job.",
+		title: "Thirty-four crates, each with one job.",
 		body: "Every crate is product-neutral. Take the runtime first, then add only the pieces your service actually needs.",
 		groups: {
 			runtime: "Runtime kernel",
@@ -266,7 +270,7 @@ const zh: Messages = {
 	},
 	crates: {
 		kicker: "里面有什么",
-		title: "三十二个 crate，各司其职",
+		title: "三十四个 crate，各司其职",
 		body: "每个 crate 都与具体产品无关。先接运行时，再按需补上你这个服务真正需要的部分",
 		groups: {
 			runtime: "运行时内核",

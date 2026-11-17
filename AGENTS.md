@@ -118,7 +118,7 @@ AsterDrive 前端更新后 `bun run capture:scenes -- --binary /path/to/aster_dr
 | `apps/forge/public/favicon.svg`    | `docs/public/favicon.svg`（Forge 自有标识：青 + 琥珀，墨绿黑底）                             |
 | `apps/forge/src/styles/tokens.css` | `docs/.vitepress/theme/custom.css` 的品牌色板（hex→oklch 换算，文件头保留原值）              |
 | `apps/forge/src/i18n/code.ts`      | 仓库 README 的入口示例与 `cargo generate` 命令（逐 token 手工标注）                          |
-| `apps/forge/src/i18n/ui.ts`        | crate 目录取自 `Cargo.toml` workspace members（32 个）；分组沿用 README 的 Areas 口径        |
+| `apps/forge/src/i18n/ui.ts`        | crate 目录取自 `Cargo.toml` workspace members（34 个）；分组沿用 README 的 Areas 口径        |
 | `apps/forge/public/og.svg`、`.png` | 自绘：复用 `docs/public/favicon.svg` 的标识形状与品牌色，PNG 由 `rsvg-convert` 渲染 1200×630 |
 
 ### apps/acme（来源：AsterACME 主仓库）
