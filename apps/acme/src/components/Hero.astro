@@ -1,7 +1,7 @@
 ---
 import CodeBlock from "@/components/CodeBlock.astro";
 import { registerLines } from "@/i18n/code";
-import { GITHUB_URL, type Lang, t } from "@/i18n/ui";
+import { docsUrl, GITHUB_URL, type Lang, t } from "@/i18n/ui";
 
 interface Props {
 	lang: Lang;
@@ -24,16 +24,15 @@ const m = t(lang);
 
 		<div class="mt-9 flex flex-wrap items-center justify-center gap-3">
 			<a
+				href={docsUrl(lang, "/start/quick-start/")}
+				class="inline-flex h-11 items-center rounded-lg bg-primary px-6 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+			>
+				{m.hero.primaryCta}
+			</a>
+			<a
 				href={GITHUB_URL}
 				target="_blank"
 				rel="noopener noreferrer"
-				class="inline-flex h-11 items-center gap-2 rounded-lg bg-primary px-6 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
-			>
-				{m.hero.primaryCta}
-				<span aria-hidden="true">↗</span>
-			</a>
-			<a
-				href="#crates"
 				class="inline-flex h-11 items-center rounded-lg bg-surface-2 px-6 text-sm font-medium text-foreground transition-colors hover:bg-muted"
 			>
 				{m.hero.secondaryCta}

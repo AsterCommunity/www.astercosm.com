@@ -1,5 +1,5 @@
 ---
-import { CRATES_TREE_URL, crates, type Lang, t } from "@/i18n/ui";
+import { CRATES_TREE_URL, crates, DOCS_RS_URL, type Lang, t } from "@/i18n/ui";
 
 interface Props {
 	lang: Lang;
@@ -33,7 +33,7 @@ const m = t(lang);
 			{
 				crates.map((crate) => (
 					<a
-						href={`${CRATES_TREE_URL}/${crate.name}`}
+						href={`${DOCS_RS_URL}/${crate.name}`}
 						target="_blank"
 						rel="noopener noreferrer"
 						data-reveal

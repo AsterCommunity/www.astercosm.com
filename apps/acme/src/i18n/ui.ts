@@ -10,6 +10,13 @@ export const GITHUB_URL = "https://github.com/AsterCommunity/AsterACME";
 export const WWW_URL = "https://www.astercosm.com";
 export const CHANGELOG_URL = `${GITHUB_URL}/blob/main/CHANGELOG.md`;
 export const CRATES_TREE_URL = `${GITHUB_URL}/tree/main/crates`;
+export const DOCS_RS_URL = "https://docs.rs";
+
+/** docs 站 zh 在根、en 在 /en/ 前缀下 */
+export function docsUrl(lang: Lang, path: string): string {
+	const prefix = lang === "zh" ? "" : "/en";
+	return `https://acme.docs.astercosm.com${prefix}${path}`;
+}
 
 /** 站内语言切换目标路径 */
 export function localizedPath(lang: Lang): string {
@@ -125,8 +132,8 @@ const en = {
 		title: "The ACME client built from the protocol up.",
 		subtitle:
 			"AsterACME is an open-source Rust ACME client and CLI: a pure protocol state machine, typed wire contracts, and certificate issuance, renewal, and deployment that work against real CAs today.",
-		primaryCta: "View on GitHub",
-		secondaryCta: "Browse crates",
+		primaryCta: "Quick start",
+		secondaryCta: "Star on GitHub",
 		note: "RFC 8555-compatible · MIT OR Apache-2.0",
 	},
 	code: {
@@ -243,8 +250,8 @@ const zh: Messages = {
 		title: "协议优先的 ACME 客户端",
 		subtitle:
 			"AsterACME 是开源的 Rust ACME 客户端与 CLI：纯协议状态机、具名线上契约，签发、续期与部署今天就能对接真实 CA",
-		primaryCta: "在 GitHub 查看",
-		secondaryCta: "浏览模块",
+		primaryCta: "快速开始",
+		secondaryCta: "GitHub 加星",
 		note: "兼容 RFC 8555 协议 · MIT OR Apache-2.0",
 	},
 	code: {
