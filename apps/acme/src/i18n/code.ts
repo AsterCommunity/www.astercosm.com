@@ -2,7 +2,7 @@
  * 首屏与快速开始代码样例。
  *
  * 事实源：AsterACME 仓库 README Quick start 与 crates/aster_acme_cli/README.md
- * （0.1.0-alpha.2，2026-11 快照）。逐 token 手工标注而非运行高亮器：样例总量小，
+ * （0.1.0-alpha.3，2026-11 快照）。逐 token 手工标注而非运行高亮器：样例总量小，
  * 手写换来与品牌色板严格一致的配色，且不引入构建期高亮依赖。token 语义沿用
  * CLI help 的三色角色：命令动词 = 绿、包名 = 黄、参数值 = 青。
  *
@@ -38,7 +38,7 @@ export const installLines: CodeLine[] = [
 			t("plain", " install "),
 			t("type", "aster_acme_cli"),
 			t("plain", " --version "),
-			t("str", "0.1.0-alpha.2"),
+			t("str", "0.1.0-alpha.3"),
 		],
 	},
 ];

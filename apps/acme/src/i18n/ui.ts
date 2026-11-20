@@ -25,7 +25,7 @@ export function localizedPath(lang: Lang): string {
 
 /**
  * crate 目录。事实源：AsterACME 仓库 Cargo.toml workspace members（11 个，
- * 0.1.0-alpha.2 快照，2026-11），与 crates/<name>/README.md 一一对应；顺序按
+ * 0.1.0-alpha.3 快照，2026-11），与 crates/<name>/README.md 一一对应；顺序按
  * 依赖方向，内核在底、CLI 在边缘，DNS 层依次排在验证层之后：契约（dns）→
  * host 侧 HTTP 执行（dns_http）→ 内置 vendor 状态机（dns_builtin）→ 外部
  * 进程适配器（dns_adpp）→ 只读解析（dns_resolver）。原 aster_acme_process
@@ -149,7 +149,7 @@ const en = {
 	status: {
 		kicker: "Status",
 		title: "The certificate lifecycle, working today.",
-		body: "The CLI issues, renews, deploys, and revokes certificates against real CAs — and keeps them fresh unattended. Pre-release crates are on crates.io, with built-in Cloudflare and external ADPP DNS automation shipping today.",
+		body: "The CLI issues, renews, deploys, and revokes certificates for DNS names and IP addresses against real CAs — and keeps them fresh unattended. Pre-release crates are on crates.io, with built-in DNS automation for Cloudflare, Alibaba Cloud, Tencent Cloud, and Huawei Cloud shipping today.",
 		available: "Available",
 		inDevelopment: "In development",
 		planned: "Planned",
@@ -166,12 +166,22 @@ const en = {
 			},
 			{
 				label:
+					"IP identifier certificates (RFC 8738) — IPv4 & IPv6 addresses via HTTP-01 or TLS-ALPN-01",
+				state: "available",
+			},
+			{
+				label:
+					"ACME certificate profiles — CA-advertised selection per order, account-level defaults (draft-ietf-acme-profiles)",
+				state: "available",
+			},
+			{
+				label:
 					"DNS-PERSIST-01 (draft -02) — persistent TXT records, reused across renewals",
 				state: "available",
 			},
 			{
 				label:
-					"DNS-01 automation — built-in Cloudflare or external ADPP providers, one unified profile",
+					"DNS-01 automation — built-in Cloudflare, Alibaba Cloud, Tencent Cloud & Huawei Cloud, plus external ADPP providers",
 				state: "available",
 			},
 			{
@@ -195,11 +205,6 @@ const en = {
 			{
 				label: "Advisory CAA/TXT/HTTP prechecks before new orders",
 				state: "available",
-			},
-			{
-				label:
-					"More built-in DNS vendors — additional backends on the provider registry",
-				state: "inDevelopment",
 			},
 		] as { label: string; state: "available" | "inDevelopment" | "planned" }[],
 		cta: "Read the changelog",
@@ -267,7 +272,7 @@ const zh: Messages = {
 	status: {
 		kicker: "进展",
 		title: "证书全生命周期，今天就能用",
-		body: "CLI 今天就能对真实 CA 签发、续期、部署和吊销证书，并无人值守地保持更新。预发布 crate 已上 crates.io，内置 Cloudflare 与外部 ADPP 的 DNS 自动化今天可用",
+		body: "CLI 今天就能对真实 CA 的域名与 IP 地址签发、续期、部署和吊销证书，并无人值守地保持更新。预发布 crate 已上 crates.io，内置 Cloudflare、阿里云、腾讯云与华为云的 DNS 自动化今天可用",
 		available: "已可用",
 		inDevelopment: "构建中",
 		planned: "规划中",
@@ -282,12 +287,22 @@ const zh: Messages = {
 				state: "available",
 			},
 			{
+				label:
+					"IP 标识符证书（RFC 8738）——IPv4 与 IPv6 地址，HTTP-01 或 TLS-ALPN-01 验证",
+				state: "available",
+			},
+			{
+				label:
+					"ACME 证书 profiles——按 CA 公告逐单选择，支持账户级默认（draft-ietf-acme-profiles）",
+				state: "available",
+			},
+			{
 				label: "DNS-PERSIST-01（草案 -02）——长期 TXT 记录一次配置，续期复用",
 				state: "available",
 			},
 			{
 				label:
-					"DNS-01 自动化——内置 Cloudflare 或外部 ADPP provider，统一档案配置",
+					"DNS-01 自动化——内置 Cloudflare、阿里云、腾讯云与华为云，外加外部 ADPP provider",
 				state: "available",
 			},
 			{
@@ -310,10 +325,6 @@ const zh: Messages = {
 			{
 				label: "签发前 CAA/TXT/HTTP 建议性预检",
 				state: "available",
-			},
-			{
-				label: "更多内置 DNS 厂商——provider registry 上的新 backend",
-				state: "inDevelopment",
 			},
 		] as { label: string; state: "available" | "inDevelopment" | "planned" }[],
 		cta: "查看更新日志",
