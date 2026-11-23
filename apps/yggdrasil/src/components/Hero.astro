@@ -1,0 +1,146 @@
+---
+import CodeBlock from "@/components/CodeBlock.astro";
+import { runLines } from "@/i18n/code";
+import { docsUrl, GITHUB_URL, type Lang, t } from "@/i18n/ui";
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const m = t(lang);
+---
+
+<section class="mx-auto max-w-6xl px-6 pt-16 pb-16 lg:pt-24 lg:pb-20">
+	<div class="grid items-center gap-12 lg:grid-cols-12 lg:gap-8">
+		{/* 左:文案 */}
+		<div class="lg:col-span-7">
+			<h1
+				class="text-4xl leading-[1.08] font-semibold tracking-tight text-balance sm:text-5xl lg:text-6xl"
+			>
+				{m.hero.title}
+			</h1>
+			<p class="mt-6 max-w-xl leading-relaxed text-muted-foreground sm:text-lg">
+				{m.hero.subtitle}
+			</p>
+
+			<div class="mt-9 flex flex-wrap items-center gap-3">
+				<a
+					href={docsUrl(lang, "/guide/getting-started")}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="flex h-11 items-center gap-2 rounded-lg bg-primary px-6 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+				>
+					{m.hero.primaryCta}
+				</a>
+				<a
+					href={GITHUB_URL}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="flex h-11 items-center gap-2 rounded-lg bg-surface-3 border border-border px-6 text-sm font-medium text-foreground transition-colors hover:bg-muted"
+				>
+					{m.hero.secondaryCta}
+				</a>
+			</div>
+
+			<p class="mt-8 font-mono text-xs text-muted-foreground">{m.hero.note}</p>
+		</div>
+
+		{/* 右:等距草方块品牌图形(favicon 同款语言放大,自绘品牌元素)。
+		    float 动效只润色,reduced-motion 时静止 */}
+		<div class="lg:col-span-5 flex justify-center lg:justify-end">
+			<svg
+				class="cube-float w-full max-w-75"
+				viewBox="0 0 340 280"
+				fill="none"
+				role="img"
+				aria-label="AsterYggdrasil grass block mark"
+			>
+				<defs>
+					<filter id="cube-glow" x="-50%" y="-50%" width="200%" height="200%">
+						<feGaussianBlur stdDeviation="4" result="blur" />
+						<feComponentTransfer in="blur" result="glow">
+							<feFuncA type="linear" slope="0.6" />
+						</feComponentTransfer>
+						<feMerge>
+							<feMergeNode in="glow" />
+							<feMergeNode in="SourceGraphic" />
+						</feMerge>
+					</filter>
+				</defs>
+
+				<!-- favicon 的仿射复刻(x*1.3125+2, y*1.3125-10.5):
+				     zinc 土身 + emerald 顶面 + 方波锯齿草沿 + 根系电路 -->
+				<polygon points="65,105 170,158 170,263 65,210" fill="#27272a" />
+				<polygon points="170,158 275,105 275,210 170,263" fill="#18181b" />
+
+				<polygon
+					points="65,105 170,158 170,179 149,168 149,189 128,178 128,158 107,147 107,178 86,168 86,147 65,136"
+					fill="#059669"
+				/>
+				<polygon
+					points="170,158 275,105 275,136 254,147 254,168 233,158 233,147 212,158 212,178 191,189 191,168 170,179"
+					fill="#047857"
+				/>
+
+				<path d="M 170 53 L 275 105 L 170 158 L 65 105 Z" fill="#10b981" />
+				<path
+					d="M 170 58 L 264 105 L 170 152 L 76 105"
+					fill="none"
+					stroke="#34d399"
+					stroke-width="2"
+					opacity="0.6"
+				/>
+				<path
+					d="M 65 105 L 170 158 L 275 105"
+					fill="none"
+					stroke="#34d399"
+					stroke-width="2"
+					opacity="0.8"
+				/>
+
+				<g
+					stroke="#34d399"
+					stroke-width="3"
+					fill="none"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					filter="url(#cube-glow)"
+				>
+					<path d="M 86 168 L 86 212 L 107 210 L 107 231" />
+					<path d="M 128 178 L 128 212 L 149 210 L 149 252" />
+					<path d="M 191 189 L 191 231 L 212 220 L 212 242" />
+					<path d="M 233 178 L 233 212 L 254 189 L 254 220" />
+				</g>
+
+				<g transform="translate(170,105) scale(2,1)">
+					<path
+						d="M 0 -16 Q 0 0 16 0 Q 0 0 0 16 Q 0 0 -16 0 Q 0 0 0 -16 Z"
+						fill="#d1fae5"
+						filter="url(#cube-glow)"
+					/>
+					<circle cx="0" cy="0" r="3" fill="#ffffff" />
+				</g>
+
+				<g filter="url(#cube-glow)">
+					<rect x="48" y="50" width="7" height="7" fill="#a7f3d0" />
+					<rect x="285" y="35" width="5" height="5" fill="#34d399" />
+					<rect x="295" y="130" width="7" height="7" fill="#6ee7b7" />
+					<rect x="28" y="135" width="5" height="5" fill="#10b981" />
+					<rect x="255" y="15" width="7" height="7" fill="#10b981" />
+				</g>
+			</svg>
+		</div>
+	</div>
+
+	{/* 命令块:README Quick start 原样(clone + cargo run) */}
+	<div class="hero-rise mt-14 lg:mt-16">
+		<div class="mx-auto w-fit max-w-full">
+			<div class="mb-3 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+				<p class="font-mono text-xs text-muted-foreground">{m.code.label}</p>
+				<p class="text-xs text-muted-foreground">{m.code.caption}</p>
+			</div>
+			<CodeBlock lines={runLines} label={m.code.label} />
+		</div>
+	</div>
+</section>

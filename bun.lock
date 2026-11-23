@@ -94,6 +94,21 @@
         "typescript": "^6.0.3",
       },
     },
+    "apps/yggdrasil": {
+      "name": "@astercosm/yggdrasil",
+      "version": "0.1.0",
+      "dependencies": {
+        "@astrojs/sitemap": "^3.7.4",
+        "astro": "^7.4.2",
+      },
+      "devDependencies": {
+        "@astrojs/check": "^0.9.12",
+        "@fontsource-variable/geist": "^5.3.0",
+        "@tailwindcss/vite": "^4.3.3",
+        "tailwindcss": "^4.3.3",
+        "typescript": "^6.0.3",
+      },
+    },
     "packages/tokens": {
       "name": "@astercosm/tokens",
       "version": "0.1.0",
@@ -114,6 +129,8 @@
     "@astercosm/tokens": ["@astercosm/tokens@workspace:packages/tokens"],
 
     "@astercosm/www": ["@astercosm/www@workspace:apps/www"],
+
+    "@astercosm/yggdrasil": ["@astercosm/yggdrasil@workspace:apps/yggdrasil"],
 
     "@astrojs/astro2tsx": ["@astrojs/astro2tsx@0.1.3", "", { "dependencies": { "@emnapi/core": "1.11.3", "@napi-rs/wasm-runtime": "1.2.4" } }, "sha512-GMDC7Eo0myBUA/QLBl0u+OcegJ8LiBhccmNZR34KmprQNP8gQUJlWlOOZWUsxNA2rNS6GuPYcGDyLoPnjmn4/Q=="],
 

@@ -1,0 +1,55 @@
+---
+import { type Lang, protocolGroups, t } from "@/i18n/ui";
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const m = t(lang);
+---
+
+<section id="protocol" class="scroll-mt-16 bg-surface-2">
+	<div class="mx-auto max-w-6xl px-6 py-20 lg:py-24">
+		<div class="max-w-2xl">
+			<p class="font-mono text-sm text-primary">{m.protocol.kicker}</p>
+			<h2 class="mt-4 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+				{m.protocol.title}
+			</h2>
+			<p class="mt-5 leading-relaxed text-muted-foreground">{m.protocol.body}</p>
+		</div>
+
+		{/* 端点组:三列网格。method 用 mono 方形 tag,path 逐条对照真实路由 */}
+		<div class="reveal-stagger mt-12 grid gap-6 md:grid-cols-3">
+			{
+				protocolGroups.map((group) => (
+					<div
+						data-reveal
+						class="rounded-lg border border-transparent bg-surface-3 p-6 transition-colors duration-200 hover:border-primary/40"
+					>
+						<h3 class="font-mono text-sm font-semibold text-foreground">
+							{group.name[lang]}
+						</h3>
+						<p class="mt-1.5 text-xs leading-relaxed text-muted-foreground">
+							{group.note[lang]}
+						</p>
+						<ul class="mt-4 space-y-2">
+							{
+								group.endpoints.map((ep) => (
+									<li class="flex items-center gap-2 font-mono text-xs">
+										<span class="w-10 shrink-0 text-primary/80">
+											{ep.method}
+										</span>
+										<span class="break-all text-muted-foreground">
+											{ep.path}
+										</span>
+									</li>
+								))
+							}
+						</ul>
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>

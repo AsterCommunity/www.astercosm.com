@@ -1,0 +1,60 @@
+---
+import { CHANGELOG_URL, type Lang, t } from "@/i18n/ui";
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const m = t(lang);
+
+/* 两档状态 pill：已可用（emerald 调）、构建中（中性灰字）。
+   方形化：本站 radius 全局收紧到 0.375rem，pill 用 rounded-sm 近方角，
+   点缀一律小方块。 */
+const stateStyles = {
+	available: "bg-primary/15 text-primary",
+	inDevelopment: "bg-muted text-muted-foreground",
+} as const;
+---
+
+<section id="status" data-reveal class="scroll-mt-16 bg-surface-2">
+	<div class="mx-auto max-w-6xl px-6 py-20 lg:py-24">
+		<div class="max-w-3xl">
+			<p class="font-mono text-sm text-primary">{m.status.kicker}</p>
+			<h2 class="mt-4 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+				{m.status.title}
+			</h2>
+			<p class="mt-5 leading-relaxed text-muted-foreground">{m.status.body}</p>
+		</div>
+
+		<ul class="reveal-stagger mt-10 grid gap-3 md:grid-cols-2">
+			{
+				m.status.items.map((item) => (
+					<li
+						data-reveal
+						class="flex items-center justify-between gap-4 rounded-lg bg-surface-3 px-5 py-4"
+					>
+						<span class="text-sm leading-relaxed">{item.label}</span>
+						<span
+							class={`shrink-0 rounded-sm px-2 py-1 font-mono text-[11px] font-medium ${stateStyles[item.state]}`}
+						>
+							{item.state === "available"
+								? m.status.available
+								: m.status.inDevelopment}
+						</span>
+					</li>
+				))
+			}
+		</ul>
+
+		<a
+			href={CHANGELOG_URL}
+			target="_blank"
+			rel="noopener noreferrer"
+			class="mt-8 inline-flex items-center gap-1.5 text-sm text-primary transition-opacity hover:opacity-80"
+		>
+			{m.status.cta}
+			<span aria-hidden="true">↗</span>
+		</a>
+	</div>
+</section>

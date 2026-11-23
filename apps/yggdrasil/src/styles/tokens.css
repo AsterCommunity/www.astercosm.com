@@ -1,0 +1,81 @@
+/**
+ * AsterYggdrasil 落地页设计 token。
+ *
+ * 事实源：AsterYggdrasil 主仓库 docs/public/favicon.svg 的品牌色板（2026-11 快照）。
+ * 标识语言是「深 zinc 底上的发光 emerald 草方块」——顶面 #10b981、高光 #34d399、
+ * 深草 #059669 / #047857、孢子 #a7f3d0 / #6ee7b7，底与土面全部落在 zinc
+ * （#09090b / #18181b / #27272a）。本文件所有色相都取自这张色板，不发明新色相。
+ *
+ * 与另几站的关系：
+ * - 不共用 @astercosm/tokens 的 D9 蓝（hue 258）——那是 AsterDrive 系的色板；
+ * - 不与 apps/forge 的 teal（hue 186，墨绿黑底）混色——teal 与 emerald（hue 163）
+ *   是不同色相，混用会打架；
+ * - zinc 中性（hue 286）是 favicon 自己的底色系，与 forge 的墨绿中性也无关。
+ *
+ * 独有视觉签名：favicon 的世界是方块——孢子是正方形 rect、根系是直角电路走线。
+ * 因此本站 --radius 全站收紧到 0.375rem（另几站 0.75rem），pill/徽章一律近方，
+ * 点缀一律小方块，不用圆点。这是「像素世界」的 token 表达，改动前想清楚。
+ *
+ * 层级命名（surface-1/2/3、foreground、muted-foreground、border、ring、radius）
+ * 与另几站同构，组件写法可以互相参照。
+ *
+ * 色值换算：favicon 用十六进制，本文件统一转 oklch，注释保留原始 hex 便于回溯。
+ */
+
+:root {
+	color-scheme: light;
+
+	/* 中性层：纯 zinc，不带绿倾向——草绿只属于「长在方块上的部分」 */
+	--surface-1: oklch(0.985 0 0); /* #fafafa zinc-50 */
+	--surface-2: oklch(0.967 0.001 286.4); /* #f4f4f5 zinc-100 */
+	--surface-3: oklch(1 0 0); /* #ffffff */
+
+	--foreground: oklch(0.21 0.006 285.9); /* #18181b zinc-900 */
+	--muted: oklch(0.967 0.001 286.4); /* #f4f4f5 zinc-100 */
+	--muted-foreground: oklch(0.442 0.017 285.8); /* #52525b zinc-600 */
+	--faint-foreground: oklch(0.552 0.016 285.9); /* #71717a zinc-500 */
+
+	/* 品牌主色：emerald。浅底用 600 做文本/按钮（500 在白底上对比度不够） */
+	--primary: oklch(0.596 0.145 163.2); /* #059669 emerald-600 */
+	--primary-hover: oklch(0.696 0.17 162.5); /* #10b981 emerald-500 */
+	--primary-strong: oklch(0.508 0.118 165.6); /* #047857 emerald-700 */
+	--primary-foreground: oklch(1 0 0); /* #ffffff */
+
+	/* 点缀：favicon 的 EXP 孢子色，只做小面积提亮，不做大面积背景 */
+	--accent: oklch(0.841 0.111 163.5); /* #6ee7b7 emerald-300 */
+
+	--destructive: oklch(0.577 0.245 27.325);
+
+	--border: oklch(0.92 0.004 286.3); /* #e4e4e7 zinc-200 */
+	--ring: oklch(0.596 0.145 163.2); /* emerald-600 */
+
+	/* 方形语言：全站收紧到 0.375rem（另几站 0.75rem）。方块世界的圆角 */
+	--radius: 0.375rem;
+}
+
+.dark {
+	color-scheme: dark;
+
+	/* zinc 黑：直接取 favicon 的底板渐变端点，浅绿标识浮在深 zinc 上 */
+	--surface-1: oklch(0.141 0.005 285.8); /* #09090b zinc-950 */
+	--surface-2: oklch(0.21 0.006 285.9); /* #18181b zinc-900 */
+	--surface-3: oklch(0.274 0.006 286); /* #27272a zinc-800 */
+
+	--foreground: oklch(0.985 0 0); /* #fafafa zinc-50 */
+	--muted: oklch(0.274 0.006 286);
+	--muted-foreground: oklch(0.705 0.015 286.1); /* #a1a1aa zinc-400 */
+	--faint-foreground: oklch(0.552 0.016 285.9); /* #71717a zinc-500 */
+
+	/* 深底上主色提亮到 favicon 的顶面高光档 */
+	--primary: oklch(0.765 0.127 163.2); /* #34d399 emerald-400 */
+	--primary-hover: oklch(0.841 0.111 163.5); /* #6ee7b7 emerald-300 */
+	--primary-strong: oklch(0.905 0.093 164.1); /* #a7f3d0 emerald-200 */
+	--primary-foreground: oklch(
+		0.141 0.005 285.8
+	); /* #09090b 深字压在亮绿按钮上 */
+
+	--accent: oklch(0.765 0.127 163.2); /* #34d399 emerald-400 */
+
+	--border: oklch(0.274 0.006 286); /* zinc-800 */
+	--ring: oklch(0.765 0.127 163.2); /* emerald-400 */
+}

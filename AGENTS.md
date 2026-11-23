@@ -16,6 +16,7 @@ apps/drive/         @astercosm/drive — drive.astercosm.com 产品落地页（R
 apps/gate/          @astercosm/gate — gate.astercosm.com AsterGate 预告页（无 JS 框架运行时）
 apps/forge/         @astercosm/forge — forge.astercosm.com AsterForge 落地页（无 JS 框架运行时）
 apps/acme/          @astercosm/acme — acme.astercosm.com AsterACME 落地页（无 JS 框架运行时）
+apps/yggdrasil/     @astercosm/yggdrasil — yggdrasil.astercosm.com AsterYggdrasil 落地页（无 JS 框架运行时）
 packages/tokens/    @astercosm/tokens — AsterDrive D9 设计 token 事实源在 AsterDrive（drive、gate、acme 依赖）
 ```
 
@@ -23,8 +24,8 @@ packages/tokens/    @astercosm/tokens — AsterDrive D9 设计 token 事实源�
 
 ```bash
 bun install
-bun run dev                   # 五站并行：www 4321 / drive 4322 / gate 4323 / forge 4324 / acme 4325
-bun run dev:www / dev:drive / dev:gate / dev:forge / dev:acme   # 单独拉起某一站
+bun run dev                   # 六站并行：www 4321 / drive 4322 / gate 4323 / forge 4324 / acme 4325 / yggdrasil 4326
+bun run dev:www / dev:drive / dev:gate / dev:forge / dev:acme / dev:yggdrasil   # 单独拉起某一站
 bun run build                 # 构建全部站点
 bun run check                 # biome + 全部 app 的 astro check（必须全绿才算完）
 bun run capture:esap          # www 的 ESAP 实拍管线（见 README）
@@ -84,6 +85,21 @@ app 差异：
   **状态分节口径学 gate**：用 Available / In development / Planned 三档进行时
   列表陈述进展，不写"诚实边界"之类的元话语；能力清单与主仓库 README/changelog
   保持一致，不得把规划写成已可用。
+- **apps/yggdrasil**：视觉 token 唯一事实源 `src/styles/tokens.css`，取自
+  AsterYggdrasil 主仓库 `docs/public/favicon.svg` 色板（emerald 绿 + zinc 黑，
+  hex→oklch 换算，文件头保留原值）。**不共用 D9 蓝（hue 258）也不混 forge 的
+  teal（hue 186）**——emerald（hue 163）是 favicon 自己的色相。独有视觉签名
+  来自 favicon 的方块世界：`--radius` 全站收紧到 0.375rem（另几站 0.75rem）、
+  pill/徽章近方角、点缀一律小方块（favicon 的孢子就是 rect）、卡片 hover 用
+  边框点亮而非阴影浮起。**主题默认浅色**（1547 指定，不跟随系统），Nav 切换为
+  明暗两档；中文文案不用末尾句号，逗号/冒号/括号用全角。物料口径：服务没有
+  截图管线，原生物料是真实协议端点（`src/i18n/data.ts`，事实源为主仓库
+  `src/api/routes/yggdrasil.rs`）与真实命令（`src/i18n/code.ts`，事实源为
+  README Quick start，默认端口 3000 取自 config.example.toml）；hero 的等距
+  草方块与 og 图形是 favicon path 的仿射复刻（系数写在文件头注释）。不设
+  crates 节——crate 未发布、受众是服务器主不是库用户（1547 拍板）。
+  **状态分节口径同 acme**（Available / In development 两档，无 Planned 就不
+  渲染该档），能力清单与主仓库 README/changelog 保持一致。
 
 ## 素材同步
 
@@ -132,17 +148,32 @@ AsterDrive 前端更新后 `bun run capture:scenes -- --binary /path/to/aster_dr
 | `apps/acme/src/i18n/ui.ts` 的 crates 列表 | `Cargo.toml` workspace members（11 个）；说明文案取自各 crate README                                                                                 |
 | `apps/acme/src/i18n/ui.ts` 的 status 分节 | 主仓库 README/changelog 的已实现与路线图清单；改动产品能力时同步                                                                                     |
 
+### apps/yggdrasil（来源：AsterYggdrasil 主仓库）
+
+| 本站路径                               | 来源                                                                                                                  |
+| -------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `apps/yggdrasil/public/favicon.svg`    | `docs/public/favicon.svg` 原样复制（品牌标识：zinc 黑底 + emerald 草方块 + 赛博根系，2026-11 快照）                   |
+| `apps/yggdrasil/public/og.svg`、`.png` | 自绘：favicon 方块几何的仿射复刻（x×1.875+90、y×1.875+125，系数写在 SVG 内注释），PNG 由 `rsvg-convert` 渲染 1200×630 |
+| `apps/yggdrasil/src/styles/tokens.css` | favicon 色板 hex→oklch 换算，文件头保留原值                                                                           |
+| `apps/yggdrasil/src/i18n/data.ts`      | 主仓库 `src/api/routes/yggdrasil.rs` 的真实协议端点（0.1.0-beta.1 快照）；产品能力变化时同步                          |
+| `apps/yggdrasil/src/i18n/code.ts`      | 仓库 README Quick start 的真实命令；端口 3000 取自 `config.example.toml`                                              |
+
 ## 部署
 
 `main` 推送 → GitHub Actions 构建全部站点 → `wrangler deploy` 到 Cloudflare Workers
 （`astercosm-www` → www.astercosm.com，`asterdrive-landing` → drive.astercosm.com，
 `astergate-landing` → gate.astercosm.com，`asterforge-landing` → forge.astercosm.com，
-`asteracme-landing` → acme.astercosm.com）。
+`asteracme-landing` → acme.astercosm.com，`asteryggdrasil-landing` → yggdrasil.astercosm.com）。
 Worker 与自定义域名配置在各自 `wrangler.jsonc`，不手动编辑生成产物；DNS、zone 与
 Cloudflare 账号侧设置由仓库所有者管理。前置：GitHub secrets `CLOUDFLARE_API_TOKEN`
 （Account → Workers Scripts → Admin + Zone → DNS → Write + Workers Routes → Write）与
 `CLOUDFLARE_ACCOUNT_ID`。接入新站点：新建 `apps/<name>/`（Astro 站点 + `wrangler.jsonc`），
 在 `deploy.yml` 加一个部署步骤即可。
+
+**yggdrasil 域名口径**：AsterYggdrasil 文档站已在 `yggdrasil.docs.astercosm.com`
+（VitePress，同 `forge.docs.astercosm.com` 先例），主域 `yggdrasil.astercosm.com`
+归本仓 landing 的 Worker（`asteryggdrasil-landing`，已入 `deploy.yml` matrix）。
+主仓库 README 里的 docs badge 若仍指向主域，属于对方仓库的待同步项。
 
 `forge.astercosm.com` 此前承载 AsterForge 文档站（GitHub Pages），文档已于 Forge 仓库
 `fd06ec4` 迁至 `forge.docs.astercosm.com`。因此旧文档书签路径（`/guide`、`/crates`、

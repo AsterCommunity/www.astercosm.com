@@ -1,0 +1,39 @@
+---
+import type { CodeLine } from "@/i18n/code";
+
+interface Props {
+	lines: CodeLine[];
+	label?: string;
+	class?: string;
+}
+
+const { lines, label, class: className } = Astro.props;
+
+const escapeHtml = (s: string) =>
+	s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+/**
+ * 整块 HTML 在 frontmatter 里拼好再 set:html 输出。
+ * <pre> 默认 white-space: pre，模板里 span 之间的换行与缩进会被原样保留，
+ * 渲染成多余空行；用字符串拼接可以精确控制每行内容，行间只放一个 \n。
+ */
+const html = lines
+	.map((line) =>
+		line.tokens
+			.map(
+				(token) =>
+					`<span class="tok-${token.kind}">${escapeHtml(token.text)}</span>`,
+			)
+			.join(""),
+	)
+	.join("\n");
+---
+
+<pre
+	class:list={[
+		"code-panel overflow-x-auto rounded-xl p-5 font-mono text-[13px] leading-relaxed",
+		className,
+	]}
+	tabindex="0"
+	aria-label={label}
+><code set:html={html} /></pre>
